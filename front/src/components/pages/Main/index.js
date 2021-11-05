@@ -41,7 +41,7 @@ function Main() {
                     <button>전시 열기</button>
                 </Buttons>
             </div>
-            <Img />
+            <Img>예시이미지</Img>
         </Contents>
         </>
     )
