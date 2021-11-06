@@ -1,5 +1,6 @@
 import React from 'react';
 import Main from './components/pages/Main';
+import Exhibition from './components/pages/Exhibition';
 import styled from 'styled-components';
 
 const Box = styled.div`
