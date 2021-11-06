@@ -5,6 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom'; // * BrowserRouter 불러오기
 
+
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
