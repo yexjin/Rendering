@@ -1,4 +1,5 @@
 import React from 'react';
+import { Routes, Route } from 'react-router-dom';
 import Main from './components/pages/Main';
 import Exhibition from './components/pages/Exhibition';
 import styled from 'styled-components';
@@ -12,7 +13,10 @@ width: 1244px;
 function App() {
   return (
     <Box>
-      <Main />
+      <Routes>
+        <Route path="/" exact={true} element={<Main/>} />
+        <Route path="/exhibition" element={<Exhibition/>} />
+      </Routes>
     </Box>
   );
 }

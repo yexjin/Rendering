@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const Head = styled.div`
     display: flex;
@@ -22,6 +23,7 @@ display: flex;
 `
 
 const Menu = styled.div`
+text-decoration-line: none;
 top: 89px;
 left: 400px;
 /* UI Properties */
@@ -64,10 +66,16 @@ function Header() {
     return (
         <Head>
             <Menus>
-                <Logo />
-                <Menu>HOME</Menu>
-                <Menu>EXHIBITION</Menu>
-                <Menu>HOSTINH</Menu>
+                <Link to='/' style={{textDecoration: 'none'}}>
+                    <Logo />
+                </Link>
+                <Link to='/' style={{textDecoration: 'none'}}>
+                    <Menu>HOME</Menu>
+                </Link>
+                <Link to='/exhibition' style={{textDecoration: 'none'}}>
+                    <Menu>EXHIBITION</Menu>
+                </Link>
+                <Menu>HOSTING</Menu>
                 <Menu>CONTACT</Menu>
             </Menus>
             <Buttons>
