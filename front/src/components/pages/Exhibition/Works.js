@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import React from 'react'
 import styled from 'styled-components';
 import ExamImg1 from '../../../styles/images/yosigo.jpg';
 import ExamImg2 from '../../../styles/images/yosigo2.jpg';
-import About from './About';
+import Architectures from '../Exhibition/Architectures';
+import { Link } from 'react-router-dom';
 
 
 const AboutText = styled.div`
@@ -32,19 +33,19 @@ const TopText = styled.div`
 `
 
 const TopImg = styled.div`
-display: flex;
-justify-content: center;
-align-items: center;
-width: 1280px;
-height: 940px;
-img{
-    width: 100%;
-    height: 100%;
-    
-    ${TopText}{
-        z-index: 3;
-        }
-}
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 1280px;
+    height: 940px;
+    img{
+        width: 100%;
+        height: 100%;
+        
+        ${TopText}{
+            z-index: 3;
+            }
+    }
 `
 
 const BackgroundText = styled.div`
@@ -60,6 +61,7 @@ const BackgroundText = styled.div`
 `
 
 const BackgroundImg = styled.div`
+position: absolute;
 display: flex;
 justify-content: center;
 align-items: center;
@@ -73,42 +75,34 @@ img{
 
         
     ${BackgroundText}{
-        z-index: 3;
+        z-index: 2;
     }
+
 }
 `
 
 
 function Works() {
 
-    const [Modal, setModalOpen] = useState(false);
-
-    const ModalOpen = () => {
-        setModalOpen(true);
-      };
-    
-    const ModalClose = () => {
-        setModalOpen(false);
-    };
-
     return (
         <>
-        <AboutText onClick={ModalOpen}>About</AboutText>
-
-        <About
-            open={Modal}
-            close = {ModalClose}
-        />
+        <Link to='/About'>
+        <AboutText>About</AboutText>
+        </Link>
 
         <TopImg>
             <img src={ExamImg1}/>
             <TopText>YOSIGO</TopText>
         </TopImg>
 
+
         <BackgroundImg>
             <img src={ExamImg2}/>
             <BackgroundText>Architecture</BackgroundText>
         </BackgroundImg>
+
+
+        <Architectures />
         </>
     )
 }
