@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const Box = styled.div`
 width: 1280px;
@@ -48,7 +49,9 @@ function Open({pamp, onToggle}) {
             내용내용내용내용내용내용내용내용내용내용내용내용내용내용<br />
             내용내용내용내용내용내용내용내용내용내용내용내용내용내용<br />
             <EntranceDiv>
-                <Entrance>Entrance</Entrance>
+                <Link to='/works'>
+                    <Entrance>Entrance</Entrance>
+                </Link>
             </EntranceDiv>
         </Box>
     )
