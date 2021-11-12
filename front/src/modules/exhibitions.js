@@ -17,12 +17,16 @@ const GET_EXHIBITION = 'GET_EXHIBITION';
 const GET_EXHIBITION_SUCCESS = 'GET_EXHIBITION_SUCCESS';
 const GET_EXHIBITION_ERROR = 'GET_EXHIBITION_ERROR';
 
+// Exhibition 비우기
+const CLEAR_EXHIBITION = 'CLEAR_POST';
+
 // thunk 를 사용 할 때, 꼭 모든 액션들에 대하여 액션 생성함수를 만들 필요는 없습니다.
 // 그냥 thunk 함수에서 바로 액션 객체를 만들어주어도 괜찮습니다.
 // 아주 쉽게 thunk 함수를 만들 수 있게 되었습니다.
 export const getExhibitions = createPromiseThunk(GET_EXHIBITIONS, exhibitionsAPI.getExhibitions);
 export const getExhibition = createPromiseThunk(GET_EXHIBITION, exhibitionsAPI.getExhibitionById);
 
+export const clearExhibition = () => ({ type: CLEAR_EXHIBITION });
 
 const initialState = {
   exhibitions: reducerUtils.initial(),
@@ -39,6 +43,11 @@ export default function exhibitions(state = initialState, action) {
     case GET_EXHIBITION_SUCCESS:
     case GET_EXHIBITION_ERROR:
       return handleAsyncActions(GET_EXHIBITION, 'exhibition')(state, action);
+    case CLEAR_EXHIBITION:
+    return {
+      ...state,
+      exhibition: reducerUtils.initial()
+    };
     default:
       return state;
   }

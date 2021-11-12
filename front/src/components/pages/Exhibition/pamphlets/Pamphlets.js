@@ -38,44 +38,9 @@ display: flex;
 justify-content: center;
 `
 
-const pamphlets = [
-      {
-        id: 1,
-        name: '요시고사진전',
-        date: '11/11',
-        open: false,
-      },
-      {
-        id: 2,
-        name: '정의진사진전',
-        date: '11/11',
-        open: false,
-      },
-      {
-        id: 3,
-        name: '정의진바보',
-        date: '11/11',
-        open: false,
-      },
-      {
-        id: 4,
-        name: '정의진멍청잉',
-        date: '11/11',
-        open: false,
-      },
-      {
-        id: 5,
-        name: '정의진깔깔',
-        date: '11/11',
-        open: false,
-      }
-    ];
-
-
 function Pamphlets({ exhibitions }) {
 
     const [sort, setSort] = useState(true);
-    // const [pamphlet, setPamphlet] = useState(pamphlets);
 
     const toSlide = () => {
         setSort(true);
@@ -84,17 +49,6 @@ function Pamphlets({ exhibitions }) {
     const toTile = () => {
         setSort(false);
     }
-
-    console.log(sort);
-
-    // const onToggle = id => {
-    //   setPamphlet(
-    //     pamphlet.map(data =>
-    //       data.id === id ? { ...data, open: !data.open } : data
-    //     )
-    //   );
-    // };
-
 
     return (
         <Contents>
