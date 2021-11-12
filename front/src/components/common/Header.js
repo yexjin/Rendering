@@ -80,7 +80,9 @@ function Header() {
             </Menus>
             <Buttons>
                 <Search>검색</Search>
-                <Mypage>마이페이지</Mypage>
+                <Link to='/login' style={{textDecoration: 'none', color: 'black'}}>
+                    <Mypage>마이페이지</Mypage>
+                </Link>
             </Buttons>
         </Head>
     )
