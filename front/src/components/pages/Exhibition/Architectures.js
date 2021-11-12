@@ -13,13 +13,11 @@ height: 1300px;
 
 overflow-y: auto;
 overflow-x: hidden;
-
 `;
 
 const RowImgs = styled.div`
 width: 560px;
 height: 370px;
-
 margin-top: 60px;
 img{
     width: 100%;
