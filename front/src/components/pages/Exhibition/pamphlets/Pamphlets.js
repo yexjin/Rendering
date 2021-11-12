@@ -15,8 +15,8 @@ margin: 0 auto;
 const Slide = styled.div`
 width: 20px;
 height: 20px;
-background: #74747480 0% 0% no-repeat padding-box;
 border-radius: 15px;
+background: #74747480 0% 0% no-repeat padding-box;
 opacity: 1;
 margin-right: 10px;
 `
@@ -32,7 +32,6 @@ margin-right: 30px;
 
 const Pamphls = styled.div`
 height: 600px;
-background-color: gray;
 margin-top: 32px;
 display: flex;
 justify-content: center;
@@ -62,7 +61,7 @@ function Pamphlets({ exhibitions }) {
                 </Pamphls>
             ):(
                 <PampTile exhibitions={exhibitions}/>
-            )};
+            )}
         </Contents>
     )
 }
