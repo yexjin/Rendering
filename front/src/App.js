@@ -1,6 +1,7 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Main from './components/pages/Main';
+import Welcome from './components/pages/Main/Welcome';
 import Exhibition from './components/pages/Exhibition';
 import Works from './components/pages/Exhibition/Works';
 import About from './components/pages/Exhibition/About';
@@ -20,6 +21,7 @@ const App = () => {
     <Box>
       <Routes>
         <Route path="/" exact element={<Main/>} />
+        <Route path="/welcome" element={<Welcome />} />
         <Route path="/exhibition" element={<Exhibition/>} />
         <Route path='/exhibition/:id' element={<OpenPage/>} />
         <Route path="/works" element={<Works/>} />

@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom';
 import Header from '../../common/Header';
 import styled from 'styled-components';
 
@@ -48,6 +49,7 @@ width: 181px;
 height: 48px;
 border: 1px solid #999999;
 opacity: 1;
+cursor: pointer;
 `
 
 const ErrMessage = styled.div`
@@ -181,7 +183,9 @@ function Register() {
             {data.errName=="ok" && data.errMessage && (
               <>{}</>
             )}
+            <Link to='/welcome'>
             <SubmitButton>확인</SubmitButton>
+            </Link>
         </RegisterBox>
         </>
     )

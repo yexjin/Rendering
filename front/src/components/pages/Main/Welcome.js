@@ -1,7 +1,6 @@
 import React from 'react'
 import Header from '../../common/Header';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 
 const Contents = styled.div`
 display: flex;
@@ -50,7 +49,6 @@ border-radius: 50%;
 `
 
 const Button = styled.button`
-    cursor: pointer;
     font-family: Noto Sans Bold;
     font-size: 24px;
     text-align: left;
@@ -73,18 +71,15 @@ function Main() {
         <Contents>
             <div>
                 <BigText>
-                    Express yourself
+                    Welcome Render
                 </BigText>
                 <SmallText>
-                렌더링은 코로나19로 인해 제한된 오프라인 활동으로 자신의 작품을 전시하거나 홍보하는데 어려움을 격고 있는 모든 창작자를 위한 온라인 전시회 호스팅 서비스입니다.
+                렌더링에 가입해주셔서 감사합니다:)
                 </SmallText>
                 <Buttons>
-                    <Link to='/exhibition' style={{textDecoration: 'none'}}>
-                        <Button>
-                            전시 보러가기
-                        </Button>
-                    </Link>
-                    <br />
+                    <Button>
+                        전시 보러가기
+                    </Button>
                     <Button>
                         전시 열기
                     </Button>
