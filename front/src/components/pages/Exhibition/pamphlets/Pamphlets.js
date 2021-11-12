@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components';
 import PamphlRow from './PamphlRow';
 import PampTile from './PampTile';
@@ -72,10 +72,10 @@ const pamphlets = [
     ];
 
 
-function Pamphlets() {
+function Pamphlets({ exhibitions }) {
 
     const [sort, setSort] = useState(true);
-    const [pamphlet, setPamphlet] = useState(pamphlets);
+    // const [pamphlet, setPamphlet] = useState(pamphlets);
 
     const toSlide = () => {
         setSort(true);
@@ -87,13 +87,13 @@ function Pamphlets() {
 
     console.log(sort);
 
-    const onToggle = id => {
-      setPamphlet(
-        pamphlet.map(data =>
-          data.id === id ? { ...data, open: !data.open } : data
-        )
-      );
-    };
+    // const onToggle = id => {
+    //   setPamphlet(
+    //     pamphlet.map(data =>
+    //       data.id === id ? { ...data, open: !data.open } : data
+    //     )
+    //   );
+    // };
 
 
     return (
@@ -104,10 +104,10 @@ function Pamphlets() {
             </Exams>
             {sort === true ? (
                 <Pamphls>
-                    <PamphlRow pamphlets={pamphlet} onToggle={onToggle}/>
+                    <PamphlRow exhibitions={exhibitions}/>
                 </Pamphls>
             ):(
-                <PampTile pamphlets={pamphlets}/>
+                <PampTile exhibitions={exhibitions}/>
             )};
         </Contents>
     )

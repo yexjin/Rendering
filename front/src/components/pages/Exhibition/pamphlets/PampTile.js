@@ -4,6 +4,7 @@ import styled from 'styled-components';
 const Pamps = styled.div`
 height: 700px;
 overflow: auto;
+overflow-x: hidden;
 margin-top: 27px;
 `
 
@@ -14,13 +15,13 @@ height: 600px;
 background-color: #C3CACE;
 `
 
-function PampTile({pamphlets}) {
+function PampTile({exhibitions}) {
     return (
         <Pamps>
-        {pamphlets.map((data)=>
+        {exhibitions.map((exhibition)=>
                 <Pamp>
-                    {data.name}
-                    {data.date}
+                    {exhibition.title}
+                    {exhibition.subtitle}
                 </Pamp>
         )};
         </Pamps>
