@@ -4,16 +4,16 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const StyledLink = styled(Link)`
-background: #D9CCC1;
 width: 200px;
 height: 600px;
-border: 1px solid #E5DFD8;
+text-decoration: none;
+background-color: #C3AB99;
 &:hover{
-    position: absolute;
     width: 400px;   
     height: 600px;  
     z-index: 10;
     cursor: pointer;
+    transition: all 2s;
 }
 
 `

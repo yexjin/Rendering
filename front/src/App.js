@@ -3,8 +3,8 @@ import { Routes, Route } from 'react-router-dom';
 import Main from './components/pages/Main';
 import Welcome from './components/pages/Main/Welcome';
 import Exhibition from './components/pages/Exhibition';
-import Works from './components/pages/Exhibition/Works';
-import About from './components/pages/Exhibition/About';
+import Entrance from './components/pages/Exhibition/Entrance';
+import About from './components/pages/Exhibition/Entrance/About';
 import OpenPage from './components/pages/Exhibition/pamphlets/OpenPage';
 import Login from './components/pages/Login';
 import Register from './components/pages/Register';
@@ -24,7 +24,7 @@ const App = () => {
         <Route path="/welcome" element={<Welcome />} />
         <Route path="/exhibition" element={<Exhibition/>} />
         <Route path='/exhibition/:id' element={<OpenPage/>} />
-        <Route path="/works" element={<Works/>} />
+        <Route path="/entrance" element={<Entrance/>} />
         <Route path="/about" element={<About/>} />
         <Route path="/login" element={<Login/>} />
         <Route path="/register" element={<Register/>} />

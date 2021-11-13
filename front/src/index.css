@@ -23,3 +23,13 @@ code {
   font-family: "Noto Sans Bold"; 
   src: url("./styles/fonts/NotoSansKR-Bold.ttf"); 
 }
+
+@font-face {
+  font-family: "NanumMyeongjo Regular";
+  src: url("./styles/fonts/NanumMyeongjo-Regular.ttf");
+}
+
+@font-face {
+  font-family: "Noto Sans Thin";
+  src: url("./styles/fonts//NotoSansKR-Thin.ttf")
+}

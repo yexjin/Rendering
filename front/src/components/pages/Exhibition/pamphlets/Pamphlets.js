@@ -32,9 +32,11 @@ margin-right: 30px;
 
 const Pamphls = styled.div`
 height: 600px;
+width: 1244px;
 margin-top: 32px;
 display: flex;
 justify-content: center;
+overflow: hidden;
 `
 
 function Pamphlets({ exhibitions }) {
