@@ -62,7 +62,7 @@ const exhibitions = [
     content2: '여행 감성을 자극하는 따뜻한 휴일의 기록',
     startDate: '06.23',
     endDate: '12.25',
-  },
+  }
 ];
 
 // 포스트 목록을 가져오는 비동기 함수

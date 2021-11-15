@@ -2,21 +2,31 @@ import React from 'react'
 import img1 from '../../../../styles/images/e1.jpg';
 import img2 from '../../../../styles/images/e2.jpg';
 import styled from 'styled-components';
+import ExamImg2 from '../../../../styles/images/backgroundImg.png';
 import { Link } from 'react-router-dom';
 
 const Things = styled.div`
 position: absolute;
 margin-top: 30px;
-
-z-index: 1000;
 width: 1280px;
-height: 1300px;
+height:auto;
 
-overflow-y: auto;
-overflow-x: hidden;
+justify-content: center;
+align-items: center;
+img{
+    display: flex;
+    position: sticky;
+    top: 25%;
+    height: 340px;
+    width: 780px;
+    margin: 0 auto;
+
+}
+
 `;
 
 const RowImgs = styled.div`
+z-index:5;
 width: 560px;
 height: 370px;
 margin-top: 60px;
@@ -56,11 +66,25 @@ function Architectures() {
     return (
         <>
         <Things>
+            <img src={ExamImg2}/>
+
             <Link to='/detail'>
             <RowImgs>
                 <img src={img1}/>
             </RowImgs>
             </Link>
+            <ColImgs>
+                <img src={img2}/>
+            </ColImgs>
+            <RowImgs>
+                <img src={img1}/>
+            </RowImgs>
+            <ColImgs>
+                <img src={img2}/>
+            </ColImgs>
+            <RowImgs>
+                <img src={img1}/>
+            </RowImgs>
             <ColImgs>
                 <img src={img2}/>
             </ColImgs>
