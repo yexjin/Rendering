@@ -1,18 +1,10 @@
 import React from 'react'
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 const Pamp = styled.div`
-background-color: #C3AB99;
-width: 200px;
+background-color: ${(props) => props.color};
+width: 400px;
 height: 600px;
-&:hover{
-    position: absolute;
-    width: 400px;   
-    height: 600px;  
-    z-index: 100;
-    cursor: pointer;
-    transition: all 0.5s;
-}
 `
 
 const Title = styled.div`
@@ -62,27 +54,26 @@ letter-spacing: 1.28px;
 color: #FFFFFF;
 opacity: 1;
 `
-
-function Pamps({ pamp }) {
-    return(
-    <>
-        <Pamp>
+function Sample({ color }) {
+    return (
+        <>
+        <Pamp color={color}>
             <Title>
-                {pamp.title}
+                Your Title
             </Title>
             <SubTitle1>
-                {pamp.subtitle1}
+                SubTitle1               
             </SubTitle1>
             <SubTitle2>
-                {pamp.subtitle2}
+                SubTitle2
             </SubTitle2>
             <DateBox>
-                <Date>{pamp.startDate}</Date>
-                <Date>{pamp.endDate}</Date>
+                <Date>01.23</Date> 
+                <Date>01.23</Date>
             </DateBox>
         </Pamp>     
         </>
     )
 }
 
-export default Pamps
+export default Sample

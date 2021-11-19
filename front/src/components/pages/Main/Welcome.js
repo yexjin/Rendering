@@ -1,10 +1,19 @@
 import React from 'react'
 import Header from '../../common/Header';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const Contents = styled.div`
 display: flex;
-margin-top: 185px;
+margin-top: 185px;animation: fadein 1s;
+@keyframes fadein {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
 `
 
 const BigText = styled.div`
@@ -77,12 +86,16 @@ function Main() {
                 렌더링에 가입해주셔서 감사합니다:)
                 </SmallText>
                 <Buttons>
-                    <Button>
-                        전시 보러가기
-                    </Button>
-                    <Button>
-                        전시 열기
-                    </Button>
+                <Link to='/exhibition' style={{textDecoration: 'none'}}>
+                        <Button>
+                            전시 보러가기
+                        </Button>
+                    </Link>
+                    <Link to='/hosting' style={{textDecoration: 'none'}}>
+                        <Button>
+                            전시 열기
+                        </Button>
+                    </Link>
                 </Buttons>
             </div>
             <Img />

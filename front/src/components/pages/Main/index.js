@@ -6,6 +6,15 @@ import { Link } from 'react-router-dom';
 const Contents = styled.div`
 display: flex;
 margin-top: 185px;
+animation: fadein 1s;
+@keyframes fadein {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
 `
 
 const BigText = styled.div`
@@ -85,9 +94,11 @@ function Main() {
                         </Button>
                     </Link>
                     <br />
-                    <Button>
-                        전시 열기
-                    </Button>
+                    <Link to='/hosting' style={{textDecoration: 'none'}}>
+                        <Button>
+                            전시 열기
+                        </Button>
+                    </Link>
                 </Buttons>
             </div>
             <Img />

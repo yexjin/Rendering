@@ -1,21 +1,22 @@
 import React from 'react'
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import LogoImg from '../../styles/icons/Logo.png'
 
 const Head = styled.div`
     display: flex;
     justify-content: space-between;
 `
 
-const Logo = styled.div`
+const Logo = styled.img`
 top: 80px;
 left: 330px;
 width: 40px;
 height: 40px;
-background: #74747480 0% 0% no-repeat padding-box;
 border-radius: 15px;
 opacity: 1;
 margin-right: 30px;
+margin-top: 2px;
 `
 
 const Menus = styled.div`
@@ -67,7 +68,8 @@ function Header() {
         <Head>
             <Menus>
                 <Link to='/' style={{textDecoration: 'none'}}>
-                    <Logo />
+                    <Logo src={LogoImg}>
+                    </Logo>
                 </Link>
                 <Link to='/' style={{textDecoration: 'none'}}>
                     <Menu>HOME</Menu>
@@ -75,7 +77,9 @@ function Header() {
                 <Link to='/exhibition' style={{textDecoration: 'none'}}>
                     <Menu>EXHIBITION</Menu>
                 </Link>
-                <Menu>HOSTING</Menu>
+                <Link to='/hosting' style={{textDecoration: 'none'}}>
+                    <Menu>HOSTING</Menu>
+                </Link>
                 <Menu>CONTACT</Menu>
             </Menus>
             <Buttons>

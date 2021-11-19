@@ -5,6 +5,15 @@ import PampTile from './PampTile';
 
 const Contents = styled.div`
 margin-top: 131px;
+animation: fadein 1s;
+@keyframes fadein {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
 `
 
 const Exams = styled.div`
