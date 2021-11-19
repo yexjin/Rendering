@@ -12,7 +12,22 @@ import Register from './components/pages/Register';
 import Hosting from './components/pages/Hosting';
 import styled from 'styled-components';
 
-const Box = styled.div`
+const LowColor = styled.div`
+margin: 0 auto;
+margin-top: 80px;
+width: 1244px;
+animation: fadein 1s;
+@keyframes fadein {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+`
+
+const BrightColor = styled.div`
 margin: 0 auto;
 margin-top: 80px;
 width: 1244px;
@@ -29,20 +44,26 @@ animation: fadein 1s;
 
 const App = () => {
   return (
-    <Box>
-      <Routes>
-        <Route path="/" exact element={<Main/>} />
-        <Route path="/welcome" element={<Welcome />} />
-        <Route path="/exhibition" element={<Exhibition/>} />
-        <Route path='/hosting' element={<Hosting />} />
-        <Route path='/exhibition/:id' element={<OpenPage/>} />
-        <Route path="/entrance" element={<Entrance/>} />
-        <Route path="/detail" element={<Detail />} /> 
-        <Route path="/about" element={<About/>} />
-        <Route path="/login" element={<Login/>} />
-        <Route path="/register" element={<Register/>} />
-      </Routes>
-    </Box>
+    <>
+      <LowColor>
+        <Routes>
+          <Route path="/" exact element={<Main/>} />
+          <Route path="/welcome" element={<Welcome />} />
+        </Routes>
+      </LowColor>
+      <BrightColor>
+        <Routes>
+          <Route path="/exhibition" element={<Exhibition/>} />
+          <Route path='/hosting' element={<Hosting />} />
+          <Route path='/exhibition/:id' element={<OpenPage/>} />
+          <Route path="/entrance" element={<Entrance/>} />
+          <Route path="/detail" element={<Detail />} /> 
+          <Route path="/about" element={<About/>} />
+          <Route path="/login" element={<Login/>} />
+          <Route path="/register" element={<Register/>} />
+        </Routes>
+      </BrightColor>
+    </>
   );
 }
 

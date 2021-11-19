@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import LogoImg from '../../styles/icons/Logo.png'
+import SearchImg from '../../styles/icons/search.png'
+import UserImg from '../../styles/icons/user.png'
 
 const Head = styled.div`
     display: flex;
@@ -37,24 +39,22 @@ margin-right: 30px;
 padding-top: 8px;
 `
 
-const Search = styled.div`
+const Search = styled.img`
 top: 86px;
 left: 1469px;
 width: 30px;
 height: 30px;
-
-background: transparent url('img/search.png') 0% 0% no-repeat padding-box;
 opacity: 1;
+cursor: pointer;
 `
 
-const Mypage = styled.div`
-margin-left: 30px;
+const Mypage = styled.img`
+margin-left: 45px;
 top: 86px;
 left: 1544px;
 width: 30px;
 height: 30px;
-/* UI Properties */
-background: transparent url('img/user.png') 0% 0% no-repeat padding-box;
+cursor: pointer;
 opacity: 1;
 `
 
@@ -83,9 +83,9 @@ function Header() {
                 <Menu>CONTACT</Menu>
             </Menus>
             <Buttons>
-                <Search>검색</Search>
+                <Search src={SearchImg}/>
                 <Link to='/login' style={{textDecoration: 'none', color: 'black'}}>
-                    <Mypage>마이페이지</Mypage>
+                    <Mypage src={UserImg}/>  
                 </Link>
             </Buttons>
         </Head>

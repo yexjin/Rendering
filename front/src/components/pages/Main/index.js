@@ -2,6 +2,7 @@ import React from 'react'
 import Header from '../../common/Header';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import HoverImg from '../../../styles/icons/back2.png';
 
 const Contents = styled.div`
 display: flex;
@@ -70,8 +71,15 @@ const Button = styled.button`
     outline: 0;
     background-color: transparent;
     margin-bottom: 15px;
-    &:hover {
-        
+    img{
+        display: none;
+    }
+    :hover{
+        img{
+            display: inline-block;
+            margin-left: 20.5px;
+            margin-bottom: 8px;
+        }
     }
 `
 
@@ -89,14 +97,16 @@ function Main() {
                 </SmallText>
                 <Buttons>
                     <Link to='/exhibition' style={{textDecoration: 'none'}}>
-                        <Button>
+                        <Button >
                             전시 보러가기
+                            <img src={HoverImg}/>
                         </Button>
                     </Link>
                     <br />
                     <Link to='/hosting' style={{textDecoration: 'none'}}>
                         <Button>
                             전시 열기
+                            <img src={HoverImg}/>
                         </Button>
                     </Link>
                 </Buttons>

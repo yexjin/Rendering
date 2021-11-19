@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components';
 import Img from '../../../../styles/images/yosigo3.png';
 import { Link } from 'react-router-dom';
+import BackImg from '../../../../styles/icons/back.png';
 
 const AboutBox = styled.div`
 animation: fadein 1s;
@@ -15,8 +16,7 @@ animation: fadein 1s;
 }
 `
 
-const CloseButton = styled.div`
-color: black;
+const CloseButton = styled.img`
 position: absolute;
 font-size: 32px;
 
@@ -104,7 +104,7 @@ function About() {
     return (
         <AboutBox>
             <Link to='/entrance'>
-                <CloseButton>x</CloseButton>
+                <CloseButton src={BackImg}/>
             </Link>
             <AboutContents>
                 <AboutImg>

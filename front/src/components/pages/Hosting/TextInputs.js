@@ -8,6 +8,8 @@ overflow-y: scroll;
 ::-webkit-scrollbar { 
     display: none;
 }
+/* overflow-y: auto;
+overflow-x: hidden; */
 `
 const LabelwithInput = styled.div`
 margin-bottom: 20px;
