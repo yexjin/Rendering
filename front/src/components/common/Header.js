@@ -8,6 +8,7 @@ import UserImg from '../../styles/icons/user.png'
 const Head = styled.div`
     display: flex;
     justify-content: space-between;
+    margin-top: 80px;
 `
 
 const Logo = styled.img`

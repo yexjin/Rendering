@@ -10,11 +10,11 @@ import OpenPage from './components/pages/Exhibition/pamphlets/OpenPage';
 import Login from './components/pages/Login';
 import Register from './components/pages/Register';
 import Hosting from './components/pages/Hosting';
+import Mypage from './components/pages/Mypage';
 import styled from 'styled-components';
 
 const LowColor = styled.div`
 margin: 0 auto;
-margin-top: 80px;
 width: 1244px;
 animation: fadein 1s;
 @keyframes fadein {
@@ -29,7 +29,6 @@ animation: fadein 1s;
 
 const BrightColor = styled.div`
 margin: 0 auto;
-margin-top: 80px;
 width: 1244px;
 animation: fadein 1s;
 @keyframes fadein {
@@ -61,6 +60,7 @@ const App = () => {
           <Route path="/about" element={<About/>} />
           <Route path="/login" element={<Login/>} />
           <Route path="/register" element={<Register/>} />
+          <Route path="/mypage" element={<Mypage />} /> 
         </Routes>
       </BrightColor>
     </>

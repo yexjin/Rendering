@@ -1,10 +1,9 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getExhibitions } from '../modules/exhibitions';
-import Pamphlets from '../components/pages/Exhibition/pamphlets/Pamphlets';
-import OpenPage from '../components/pages/Exhibition/pamphlets/OpenPage';
+import Progress from '../components/pages/Mypage/SideBar/Progress';
 
-function ExhibitionsContainer() {
+function ProjectsContainer() {
   const { data, loading, error } = useSelector(state => state.exhibitions.exhibitions);
   const dispatch = useDispatch();
 
@@ -19,10 +18,9 @@ function ExhibitionsContainer() {
   if (!data) return null;
   return (
     <>
-      <Pamphlets exhibitions={data} />
-      <OpenPage exhibitions={data} />
+      <Progress projects={data} />
     </>
     );
 }
 
-export default ExhibitionsContainer;
+export default ProjectsContainer;

@@ -1,5 +1,5 @@
 // n 밀리세컨드동안 기다리는 프로미스를 만들어주는 함수
-const sleep = n => new Promise(resolve => setTimeout(resolve, n));
+// const sleep = n => new Promise(resolve => setTimeout(resolve, n));
 
 // 가짜 exhibitions 목록 데이터
 const exhibitions = [
