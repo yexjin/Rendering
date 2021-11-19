@@ -12,6 +12,7 @@ margin-bottom: 103px;
 `
 
 const Page = styled.div`
+margin-top: 70px;
 animation: fadein 1s;
 @keyframes fadein {
     from {

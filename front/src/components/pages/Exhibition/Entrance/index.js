@@ -7,6 +7,7 @@ import LoveW from '../../../../styles/icons/love(w).png';
 import CommentW from '../../../../styles/icons/comment(w).png';
 
 const Exhibits = styled.div`
+margin-top: 70px;
 animation: fadein 1s;
 @keyframes fadein {
     from {

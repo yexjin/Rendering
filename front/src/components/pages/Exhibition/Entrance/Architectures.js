@@ -48,6 +48,7 @@ width: 370px;
 height: 600px;
 float: right;
 margin-top: 40px;
+margin-left: 40px;
 
 background: #ffffff;
 img{

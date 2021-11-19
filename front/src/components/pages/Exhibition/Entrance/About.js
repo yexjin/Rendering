@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import BackImg from '../../../../styles/icons/back.png';
 
 const AboutBox = styled.div`
+margin-top: 80px;
 animation: fadein 1s;
 @keyframes fadein {
     from {

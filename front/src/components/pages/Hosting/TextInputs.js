@@ -35,14 +35,19 @@ border-radius: 10px;
 opacity: 1;
 width: 457px;
 height: 50px;
+background-color: #F9F9F9;
+font-size: 20px;
 `
-const InputBig = styled.input`
+const InputBig = styled.textarea`
 background: #FFFFFF 0% 0% no-repeat padding-box;
 border: 1px solid #707070;
 border-radius: 10px;
 opacity: 1;
 width: 457px;
 height: 242px;
+background-color: #F9F9F9;
+font-size: 20px;
+padding: 15px 15px 15px 15px;
 `
 
 function TextInputs() {
@@ -68,7 +73,7 @@ function TextInputs() {
             <Label>전시명</Label> <Input></Input>
         </LabelwithInput>
         <LabelwithInput>
-            <Label>전시 설명</Label> <InputBig></InputBig>
+            <Label>전시 설명</Label> <InputBig ></InputBig>
         </LabelwithInput>
         <LabelwithInput>
             <Label>시작 날짜</Label> <Input></Input>
