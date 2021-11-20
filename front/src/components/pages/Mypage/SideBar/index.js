@@ -7,7 +7,7 @@ import Progress from './Progress'
 const Bar = styled.div`
 background-color: #A5988F;
 width: 350px;
-height: 1844px;
+
 `
 
 const Logo = styled.img`
