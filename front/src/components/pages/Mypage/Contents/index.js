@@ -1,24 +1,18 @@
 import React from 'react'
+import TopBox from './TopBox'
+import BottomBox from './BottomBox'
 import styled from 'styled-components'
 
-const TopBox = styled.div`
-
+const Box = styled.div`
 `
 
-const ContentBox = styled.div`
-
-`
-
-const Title = styled.div`
-
-`
 
 function Contents() {
     return (
-        <>
-        <TopBox />
-        <ContentBox />
-        </>
+        <Box>
+            <TopBox />
+            <BottomBox />
+        </Box> 
     )
 }
 
