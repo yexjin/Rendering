@@ -20,6 +20,25 @@ height: 45px;
 cursor: pointer;
 `
 
+const Submit = styled.div`
+margin-top: 70px;
+background-color: #ffffff;
+font: normal normal normal 18px/27px Noto Sans CJK KR;
+letter-spacing: 0px;
+color: #191919;
+opacity: 1;
+width: 181px;
+height: 48px;
+border: 1px solid #999999;
+opacity: 1;
+border-radius: 5px;
+text-align: center;
+padding-top: 10px;
+cursor: pointer;
+float: right;
+margin-right: 120px;
+`
+
 function MakeBox() {
     return (
         <>
@@ -28,6 +47,7 @@ function MakeBox() {
             <NextButton src={Next}/>
             <SelectColor />
         </Box>
+        <Submit>확인</Submit>
         </>
     )
 }
