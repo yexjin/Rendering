@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import TextInputs from './TextInputs';
 import SelectColor from './SelectColor';
 import Next from '../../../styles/icons/next.png';
+import Back from '../../../styles/icons/next2.png';
+import { Link } from 'react-router-dom';
 
 const Box = styled.div`
 display: flex;
@@ -18,6 +20,14 @@ margin-top: 275px;
 width: 45px;
 height: 45px;
 cursor: pointer;
+`
+
+const BackButton = styled.img`
+width: 68px;
+height: 45px;
+cursor: pointer;
+float: right;
+margin-top: 30px;
 `
 
 const Submit = styled.div`
@@ -42,6 +52,9 @@ margin-right: 120px;
 function MakeBox() {
     return (
         <>
+        <Link to="/">
+        <BackButton src={Back}/>
+        </Link>
         <Box>
             <TextInputs />
             <NextButton src={Next}/>
