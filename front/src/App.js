@@ -13,21 +13,7 @@ import Hosting from './components/pages/Hosting';
 import Mypage from './components/pages/Mypage';
 import styled from 'styled-components';
 
-const LowColor = styled.div`
-margin: 0 auto;
-width: 1244px;
-animation: fadein 1s;
-@keyframes fadein {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
-`
-
-const BrightColor = styled.div`
+const Box = styled.div`
 margin: 0 auto;
 width: 1244px;
 animation: fadein 1s;
@@ -44,14 +30,10 @@ animation: fadein 1s;
 const App = () => {
   return (
     <>
-      <LowColor>
+      <Box>
         <Routes>
           <Route path="/" exact element={<Main/>} />
           <Route path="/welcome" element={<Welcome />} />
-        </Routes>
-      </LowColor>
-      <BrightColor>
-        <Routes>
           <Route path="/exhibition" element={<Exhibition/>} />
           <Route path='/hosting' element={<Hosting />} />
           <Route path='/exhibition/:id' element={<OpenPage/>} />
@@ -62,7 +44,7 @@ const App = () => {
           <Route path="/register" element={<Register/>} />
           <Route path="/mypage" element={<Mypage />} /> 
         </Routes>
-      </BrightColor>
+      </Box>
     </>
   );
 }

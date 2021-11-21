@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import LogoImg from '../../styles/icons/Logo.png'
 import SearchImg from '../../styles/icons/search.png'
 import UserImg from '../../styles/icons/user.png'
+import CancelIcon from '../../styles/icons/back.png'
 
 const Head = styled.div`
     display: flex;
@@ -64,31 +65,70 @@ float: right;
 display: flex;
 `
 
+const SearchBox = styled.div`
+width: 940px;
+display: flex;
+margin:0 auto;
+justify-content: space-between;
+`
+
+const Cancel = styled.img`
+width: 22px;
+height: 22px;
+float: right;
+cursor: pointer;
+`
+
+const SearchInput = styled.input`
+width: 800px;
+border: none;
+height: 30px;
+margin-top: -2px;
+`
+
 function Header() {
+
+    const [toggle, setToggle] = useState(false);
+
+    const onClick = () =>{
+        setToggle((toggle)=>!toggle);
+    }
+
+    console.log(toggle)
+
     return (
         <Head>
-            <Menus>
-                <Link to='/' style={{textDecoration: 'none'}}>
-                    <Logo src={LogoImg}>
-                    </Logo>
-                </Link>
-                <Link to='/' style={{textDecoration: 'none'}}>
-                    <Menu>HOME</Menu>
-                </Link>
-                <Link to='/exhibition' style={{textDecoration: 'none'}}>
-                    <Menu>EXHIBITION</Menu>
-                </Link>
-                <Link to='/hosting' style={{textDecoration: 'none'}}>
-                    <Menu>HOSTING</Menu>
-                </Link>
-                <Menu>CONTACT</Menu>
-            </Menus>
-            <Buttons>
+            {(toggle==false)?(
+            <>
+                <Menus>
+                    <Link to='/' style={{textDecoration: 'none'}}>
+                        <Logo src={LogoImg}>
+                        </Logo>
+                    </Link>
+                    <Link to='/' style={{textDecoration: 'none'}}>
+                        <Menu>HOME</Menu>
+                    </Link>
+                    <Link to='/exhibition' style={{textDecoration: 'none'}}>
+                        <Menu>EXHIBITION</Menu>
+                    </Link>
+                    <Link to='/hosting' style={{textDecoration: 'none'}}>
+                        <Menu>HOSTING</Menu>
+                    </Link>
+                    <Menu>CONTACT</Menu>
+                </Menus>
+                <Buttons>
+                    <Search src={SearchImg} onClick={onClick}/>
+                    <Link to='/login' style={{textDecoration: 'none', color: 'black'}}>
+                        <Mypage src={UserImg}/>  
+                    </Link>
+                </Buttons>
+            </>
+            ):(
+                <SearchBox>
                 <Search src={SearchImg}/>
-                <Link to='/login' style={{textDecoration: 'none', color: 'black'}}>
-                    <Mypage src={UserImg}/>  
-                </Link>
-            </Buttons>
+                    <SearchInput type="text" autoFocus />
+                <Cancel src={CancelIcon} onClick={onClick}/>
+            </SearchBox>)}
         </Head>
     )
 }

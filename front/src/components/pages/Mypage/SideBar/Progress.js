@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { useSelector, useDispatch } from 'react-redux';
 import { getExhibitions } from '../../../../modules/exhibitions';
 import Card from './Card'
+import { Link } from 'react-router-dom'
 
 const Title = styled.div`
 text-align: left;
@@ -47,7 +48,9 @@ const { data, loading, error } = useSelector(state => state.exhibitions.exhibiti
     return (
         <>
         <Title>In progress</Title>
+        <Link to="/hosting">
         <NewButton>New Project</NewButton>
+        </Link>
         <Card projects={data} />
         </>
     )

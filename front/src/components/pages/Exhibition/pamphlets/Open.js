@@ -85,7 +85,7 @@ font-family: "Noto Serif Display";
 font-weight: 900;
 `
 const ContentBox = styled.div`
-    width: 387px;
+    width: 600px;
     height: 600px;
     padding-left: 70px;
     padding-top: 75px;
@@ -135,7 +135,7 @@ opacity: 1;
 const EntranceDiv = styled.div`
 vertical-align: bottom;
 margin-top: 30px;
-margin-right: 42px;
+margin-right: 50px;
 `
 const Entrance = styled.button`
 background-color: transparent;

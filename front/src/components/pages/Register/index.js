@@ -8,7 +8,6 @@ const RegisterBox = styled.div`
     margin-top: 167px;
     width: 473px;
     height: 891px;
-    background-color: #F9F9F9;
     margin-bottom: 280px;
 `
 const RegisterText = styled.div`
@@ -27,7 +26,6 @@ color: #767676;
 opacity: 1;
 `
 const Input = styled.input`
-background-color: #F9F9F9;
 width: 473px;
 border:0;
 border-bottom: 1px solid #000000;
@@ -39,7 +37,7 @@ margin-bottom: 40px;
 `
 const SubmitButton = styled.button`
 float: right;
-background-color: #F9F9F9;
+background-color: white;
 margin-top: 30px;
 font: normal normal normal 18px/27px Noto Sans CJK KR;
 letter-spacing: 0px;
