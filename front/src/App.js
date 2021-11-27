@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import Main from './components/pages/Main';
 import Welcome from './components/pages/Main/Welcome';
 import Exhibition from './components/pages/Exhibition';
+import Comment from './components/pages/Exhibition/Comment';
 import Entrance from './components/pages/Exhibition/Entrance';
 import About from './components/pages/Exhibition/Entrance/About';
 import Detail from './components/pages/Exhibition/Entrance/Detail';
@@ -43,6 +44,7 @@ const App = () => {
           <Route path="/login" element={<Login/>} />
           <Route path="/register" element={<Register/>} />
           <Route path="/mypage" element={<Mypage />} /> 
+          <Route path="/comment" element={<Comment />} />
         </Routes>
       </Box>
     </>
