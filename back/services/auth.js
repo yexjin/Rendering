@@ -12,10 +12,8 @@ export class AuthService {
     async SignIn(email, password) {
         const user =  await this.userModel.findByEmail(email);
         if(!user) throw new CustomError('InvaildParameterError', 401, 'User not found');
-        console.log("user.password : " + user.password);
-        console.log("password : " + password);
-        // const result = await bcrypt.compare(password, user.password);
-        // if (result) {
+        const result = await bcrypt.compare(password, user.password);
+        if (result) {
             // Access Token, Refresh Token 발급
             const id = user.id;
             const name = user.name;
@@ -23,7 +21,7 @@ export class AuthService {
             const accessToken = await user.generateAccessToken();
             const refreshToken = await user.generateRefreshToken();
             return { id, email, name, job, accessToken, refreshToken };
-        // } else throw new CustomError('InvaildParameterError', 402, 'Password is incorrect');
+        } else throw new CustomError('InvaildParameterError', 402, 'Password is incorrect');
     }
 
     // 로그아웃 시 사용자 정보를 조회하고 Token을 삭제한다.

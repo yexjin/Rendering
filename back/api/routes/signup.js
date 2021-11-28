@@ -14,18 +14,19 @@ export default (app) => {
 
     route.post('/', emailDuplicationCheck, asyncErrorWrapper(async (req, res, next) => {
         const { name, job, password, email } = req.body;
-        const hash = await bcrypt.hash(password, 12);
+        const salt = await bcrypt.genSalt(12); // 기본이 10번이고 숫자가 올라갈수록 연산 시간과 보안이 높아진다.
+        const hash = await bcrypt.hash(password, salt);
         console.log("hash : " + hash);
         let user = await userModel.create({
             name,
-            password : hash,
+            password: hash,
             job,
             email,
         });
         
         // Refresh Token, AccessToken
-        let AuthServiceInstance = new AuthService({userModel});
-        const { id, accessToken, refreshToken } = await AuthServiceInstance.SignIn(user.email, user.password);
+        let AuthServiceInstance = new AuthService({ userModel });
+        const { id, accessToken, refreshToken } = await AuthServiceInstance.SignIn(user.email, password);
 
         res.cookie("R_AUTH", refreshToken, {
             sameSite: 'none',
