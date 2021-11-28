@@ -9,7 +9,7 @@ const route = Router();
 
 export default (app) => {
     /*
-    권한에 관련된 Router를 정의한다. 
+    권한(AccessToken)에 관련된 Router를 정의한다. 
     */
     app.use('/auth', route);
 
@@ -18,11 +18,11 @@ export default (app) => {
         if(!req.cookies.R_AUTH) {
             throw new CustomError('RefreshTokenError', 401, 'Refresh token not found'); // 사용자가 로그아웃 상태
         }
+
         let AuthServiceInstance = new AuthService({ userModel });
         const { decodeSuccess, id, name, email, job, accessToken } = await AuthServiceInstance.reissueAccessToken(req.cookies.R_AUTH);
-        // Refresh Token가 유효하지 않을 경우
-        if(!decodeSuccess) {
-            throw new CustomError('RefreshTokenError', 401, 'Invalid refresh token'); // 토큰 유효기간 만료 (재로그인)
+        if(!decodeSuccess) { // Refresh Token 유효기간 만료 (재로그인)
+            throw new CustomError('RefreshTokenError', 401, 'Invalid refresh token');
         }
         else {
             return res.status(200).json({
