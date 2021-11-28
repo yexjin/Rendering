@@ -38,13 +38,13 @@ export class AuthService {
         try {
             decodeRefreshToken = jwt.verify(
                 refreshToken,
-                config.jwtSecretKey
+                config.jwtSecretKey,
             );
             const user = await this.userModel.findByEmail(decodeRefreshToken.email);
             if(!user) throw new CustomError('InvaildParameterError', 401, 'User not found');
-            const { name, job, email } = user;
+            const { id, name, job, email } = user;
             const accessToken = await user.generateAccessToken();
-            return { decodeSuccess, name, job, email, accessToken };
+            return { decodeSuccess, id, name, job, email, accessToken };
         } 
         catch(err) {
             decodeSuccess = false;

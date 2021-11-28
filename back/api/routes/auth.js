@@ -15,18 +15,18 @@ export default (app) => {
 
     // Refresh Token을 이용해 Access Token(1h) 발급
     route.get('/', asyncErrorWrapper(async (req, res, next) => {
-        if(!req.cookies.R_AUTH) { // 쿠키에 R_AUTH(Refresh token)을 넣어서 요청!
-            throw new CustomError('RefreshTokenError', 401, 'Refresh token not found');
+        if(!req.cookies.R_AUTH) {
+            throw new CustomError('RefreshTokenError', 401, 'Refresh token not found'); // 사용자가 로그아웃 상태
         }
         let AuthServiceInstance = new AuthService({ userModel });
-        const { decodeSuccess, _id, name, email, job, accessToken } = await AuthServiceInstance.reissueAccessToken(req.cookies.R_AUTH);
+        const { decodeSuccess, id, name, email, job, accessToken } = await AuthServiceInstance.reissueAccessToken(req.cookies.R_AUTH);
         // Refresh Token가 유효하지 않을 경우
         if(!decodeSuccess) {
-            throw new CustomError('RefreshTokenError', 401, 'Invalid refresh token'); // 다시 로그인!
+            throw new CustomError('RefreshTokenError', 401, 'Invalid refresh token'); // 토큰 유효기간 만료 (재로그인)
         }
         else {
             return res.status(200).json({
-                _id,
+                id,
                 name,
                 email,
                 job,
