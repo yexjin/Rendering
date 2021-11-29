@@ -1,0 +1,25 @@
+{
+  "name": "rendering",
+  "version": "0.0.1",
+  "description": "RESTful API for Online Exhibition Hosting Service",
+  "scripts": {
+    "start": "nodemon ./app.js"
+  },
+  "author": "uijin",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mysql2": "^2.3.3",
+    "nodemon": "^2.0.15",
+    "sequelize": "^6.9.0",
+    "sequelize-cli": "^6.3.0",
+    "winston": "^3.3.3",
+    "winston-daily-rotate-file": "^4.5.5"
+  },
+  "type": "module"
+}
