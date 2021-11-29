@@ -3,42 +3,45 @@ import config from "../config/index.js";
 import { CustomError } from "../CustomError.js";
 
 export class UserService {
-  constructor({ userModel }) {
+  constructor({ userModel, exhibitionModel, commentModel }) {
     this.userModel = userModel;
+    this.exhibitionModel = exhibitionModel;
+    this.commentModel = commentModel;
   }
 
-  // email를 이용하여 사용자 정보를 조회
+  // email를 이용하여 사용자 정보 조회
   async findByEmail(email) {
-    const users = await this.userModel.findByEmail(email);
-    return users;
+    const user = await this.userModel.findByEmail(email);
+    return user;
   }
 
-  // 사용자 정보를 수정한다.
-  async modifyUser(id, user) {
-    const userRecord = await this.userModel.modifyUser(id, user);
+  // 사용자 정보 수정
+  async modifyUser(id, data) {
+    const userRecord = await this.userModel.modifyUser(id, data);
     return { userRecord };
   }
 
+  // 사용자 제거
   async deleteUser(id) {
-    // 사용자가 호스팅한 전시회 제거 (N)
-    await this.studyModel.deleteMany({ "author": id});
-
-    // 사용자가 작성한 코멘트 제거 (N)
-    await this.studyModel.findOneAndUpdate({ comments: {$elemMatch: { author : id }}},
-      { $pull: { comments: { author: id } } });
-    
+    const user = await this.userModel.findById(id);
+  
+    await user.removeExhibitions(); // 사용자 전시회 제거
+    await user.removeComments(); // 사용자 댓글 제거
+    await this.userModel.deleteUser(user.id); // 사용자 제거
   }
 
-  // 사용자가 호스팅한 전시회 리스트를 조회한다. (N)
-  async findUserLikes(id) {
-    const userLikes = await this.userModel.findById(id)
-    .populate({
-      path: 'likeStudies',
-      match: { isDeleted: false},
-      options: { sort: { createdAt: -1 } }
-    })
-    .select('likeStudies')
-    return userLikes;
+  // 사용자가 호스팅한 전시회 리스트 조회
+  async findUserExhibition(id) {
+    const user = await this.userModel.findById(id);
+  
+    return await user.getExhibitions();
+  }
+
+  // 사용자가 작성한 코멘트 리스트 조회
+  async findUserExhibition(id) {
+    const user = await this.userModel.findById(id);
+  
+    return await user.getComments();
   }
 
   // S3 Pre-Sign Url을 발급한다.

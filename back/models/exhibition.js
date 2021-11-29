@@ -31,6 +31,11 @@ export default class Exhibition extends Sequelize.Model {
                 type: Sequelize.STRING(200),
                 allowNull: true,
             },
+            likes: {
+                type: Sequelize.INTEGER,
+                allowNull: true,
+                defaultValue: 0
+            }
         }, { // 테이블 자체에 대한 설정
             sequelize,
             timestamps: false,             // createdTime, updatedTime 추가할지!
@@ -48,5 +53,31 @@ export default class Exhibition extends Sequelize.Model {
         db.Exhibition.belongsTo(db.User, {foreignKey: 'manager', targetkey: 'id'}) // Exhibition(N) : User(1)
         db.Exhibition.hasMany(db.Work, {foreignKey: 'exhibition', sourcekey: 'id'}); // Exhibition(1) : Work(N)
         db.Exhibition.hasMany(db.Comment, {foreignKey: 'exhibition', sourcekey: 'id'}); // Exhibition(1) : Comment(N)
+    }
+
+    // Exhibition 관련 데이터 처리 함수
+    static async findById(id) {
+        return await Exhibition.findOne({where:{id}});
+    }
+
+    static async findAll() {
+        return await Exhibition.findAll();
+    }
+
+    static async findByUserId(userId) {
+        return await Exhibition.findAll({where:{manager: userId}});
+    }
+
+    static async searchExhibition(keyword) {
+        return await Exhibition.findAll({where : {exhibition_name : {[Sequelize.Op.like] : "%" + keyword + "%"}}});
+    }
+
+    async modifyExhibition(id, data) {
+        const exhibitionRecord = await Exhibition.update(data, {where:{id}});
+        return exhibitionRecord;
+    }
+
+    async deleteExhibition(id) {
+        await Exhibition.destroy({where:{id}});
     }
 };

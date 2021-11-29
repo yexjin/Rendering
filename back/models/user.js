@@ -49,17 +49,17 @@ export default class User extends Sequelize.Model {
     }
 
     static async findByEmail(email) {
-        return await User.findOne({where:{ email }});
+        return await User.findOne({where:{email}});
     }
 
     static async findByToken(token) {
         return await User.findOne({where:{token}});
     }
 
-     async modifyUser(id, user) {
-        const userRecord = await User.update(user,{where:{id}})
+    static async modifyUser(id, data) {
+        const userRecord = await User.update(data, {where:{id}});
         return userRecord;
-    } // 실험 중...
+    }
 
     static async deleteUser(id) {
         await User.destroy({where:{id}});

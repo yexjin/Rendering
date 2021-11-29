@@ -27,7 +27,7 @@ export class AuthService {
     // 로그아웃 시 사용자 정보를 조회하고 Token을 삭제한다.
     async Logout(id) {
         const user =  await this.userModel.findById(id);
-        user.modifyUser(id, {token: null});
+        user.modifyUser({token: null});
         return true;
     }
 
