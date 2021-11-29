@@ -35,7 +35,6 @@ border-radius: 10px;
 opacity: 1;
 width: 457px;
 height: 50px;
-background-color: #F9F9F9;
 font-size: 20px;
 `
 const InputBig = styled.textarea`
@@ -45,7 +44,6 @@ border-radius: 10px;
 opacity: 1;
 width: 457px;
 height: 242px;
-background-color: #F9F9F9;
 font-size: 20px;
 padding: 15px 15px 15px 15px;
 `
