@@ -1,5 +1,5 @@
 import React from 'react'
-import Header from '../../common/Header';
+import HeaderLogin from '../../common/HeaderLogin';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import HoverImg from '../../../styles/icons/back2.png';
@@ -86,11 +86,11 @@ const Button = styled.button`
 function MainUser() {
     return (
         <>
-        <Header />
+        <HeaderLogin />
         <Contents>
             <div>
                 <BigText>
-                    Express yourself(로그인됨)
+                    Express yourself
                 </BigText>
                 <SmallText>
                 렌더링은 코로나19로 인해 제한된 오프라인 활동으로 자신의 작품을 전시하거나 홍보하는데 어려움을 격고 있는 모든 창작자를 위한 온라인 전시회 호스팅 서비스입니다.

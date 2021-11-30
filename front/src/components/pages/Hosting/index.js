@@ -27,7 +27,7 @@ animation: fadein 1s;
 function Hosting() {
     return (
         <Page>
-        <Link to='/'>
+        <Link to='/user/main'>
             <BackButton></BackButton>
         </Link>
         <MakeBox />
