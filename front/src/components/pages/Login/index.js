@@ -86,7 +86,7 @@ function Login() {
         try {
           const request = {
             email: data.email,
-            password: data.password,
+            password: data.pw,
           };
     
           const response = await loginApi(request);
