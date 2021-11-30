@@ -25,7 +25,7 @@ export default class Exhibition extends Sequelize.Model {
             },
             main_image: {
                 type: Sequelize.STRING(200),
-                allowNull: false,
+                allowNull: true,
             },
             sub_image: {
                 type: Sequelize.STRING(200),
@@ -58,10 +58,6 @@ export default class Exhibition extends Sequelize.Model {
     // Exhibition 관련 데이터 처리 함수
     static async findById(id) {
         return await Exhibition.findOne({where:{id}});
-    }
-
-    static async findAll() {
-        return await Exhibition.findAll();
     }
 
     static async findByUserId(userId) {

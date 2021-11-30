@@ -16,7 +16,7 @@ const isAccessTokenValid = asyncErrorWrapper(async function(req, res, next) {
         }
         else{
             req.user = {
-                _id: user.id,
+                id: user.id,
                 email: user.email
             };
         }

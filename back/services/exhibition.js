@@ -11,9 +11,25 @@ export class ExhibitionService {
     this.commentModel = commentModel;
   }
 
-  // email를 이용하여 전시회 정보 조회 (no)
-  async findByEmail(email) {
-    const user = await this.userModel.findByEmail(email);
+  // 전시회 등록!
+  async registerExhibition(id, exhibitionDTO) {
+    const { exhibition_name, description, host_name, start_date, end_date, main_image, sub_image } = exhibitionDTO;
+    let exhibition = await this.exhibitionModel.create({
+      manager: id,
+      exhibition_name,
+      description,
+      host_name,
+      start_date,
+      end_date,
+      main_image,
+      sub_image
+    });
+    return exhibition;
+  }
+
+  // id를 이용하여 전시회 정보 조회 (no)
+  async findById(id) {
+    const exhibition = await this.exhibitionModel.findById(id);
     return user;
   }
 

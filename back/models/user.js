@@ -1,6 +1,7 @@
 import Sequelize from 'sequelize';
 import jwt from 'jsonwebtoken'
 import config from '../config/index.js';
+import Exhibition from './exhibition.js';
 
 export default class User extends Sequelize.Model {
     static init(sequelize) {
@@ -65,6 +66,17 @@ export default class User extends Sequelize.Model {
         await User.destroy({where:{id}});
     }
 
+    static async findeUserExhibitions(id) {
+        const user = await User.findOne({
+            include: [{
+                model: Exhibition,
+                where: {id}
+            }]
+        });
+        const exhibitions = await user.getExhibitions();
+        return exhibitions;
+    }
+
     async generateRefreshToken() {
         console.log("generateRefreshToken() 호출!")
         const user = this;
@@ -79,8 +91,7 @@ export default class User extends Sequelize.Model {
           }
         );
         user.token = refreshToken;
-        console.log("RefreshToken: "+ refreshToken)
-        user.update({token: refreshToken},{where:{id: user.id}})
+        user.update({token: refreshToken},{where:{id: user.id}});
         return refreshToken;
     }
 

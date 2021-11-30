@@ -9,6 +9,12 @@ export class UserService {
     this.commentModel = commentModel;
   }
 
+  // id를 이용하여 사용자 정보 조회
+  async findById(id) {
+    const user = await this.userModel.findById(id);
+    return user;
+  }
+
   // email를 이용하여 사용자 정보 조회
   async findByEmail(email) {
     const user = await this.userModel.findByEmail(email);
@@ -18,7 +24,7 @@ export class UserService {
   // 사용자 정보 수정
   async modifyUser(id, data) {
     const userRecord = await this.userModel.modifyUser(id, data);
-    return { userRecord };
+    return userRecord;
   }
 
   // 사용자 제거
@@ -31,14 +37,14 @@ export class UserService {
   }
 
   // 사용자가 호스팅한 전시회 리스트 조회
-  async findUserExhibition(id) {
-    const user = await this.userModel.findById(id);
-  
-    return await user.getExhibitions();
+  async findUserExhibitions(id) {
+    const exhibitions = await this.userModel.findeUserExhibitions(id);
+
+    return exhibitions;
   }
 
   // 사용자가 작성한 코멘트 리스트 조회
-  async findUserExhibition(id) {
+  async findUserComments(id) {
     const user = await this.userModel.findById(id);
   
     return await user.getComments();
