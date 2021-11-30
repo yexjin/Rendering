@@ -1,5 +1,5 @@
 const urls = {
-    user: "/api/signup"
+    user: "/api"
   };
   
   export default urls;

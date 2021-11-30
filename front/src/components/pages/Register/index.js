@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom';
 import Header from '../../common/Header';
 import styled from 'styled-components';
+
+import { useUser } from '../../../components';
+import {  useNavigate } from 'react-router-dom';
 
 const RegisterBox = styled.div`
     margin: 0 auto;
@@ -49,7 +51,6 @@ border: 1px solid #999999;
 opacity: 1;
 cursor: pointer;
 `
-
 const ErrMessage = styled.div`
 text-align: left;
 font: normal normal normal 16px/24px Noto Sans CJK KR;
@@ -59,6 +60,9 @@ opacity: 1;
 `
 
 function Register() {
+
+  const { signupApi } = useUser();
+  const navigate =  useNavigate();
 
     const [data, setData] = useState({
         name: "",
@@ -74,9 +78,6 @@ function Register() {
         if (name === "pwCheck") {
           if (data.pw !== value) {
             return { errName: "pwCheck", errMessage: "비밀번호가 일치하지 않습니다."}
-          }
-          else{
-            return { errName: "ok", errMessage: ""}
           }
         } 
         return {
@@ -99,26 +100,25 @@ function Register() {
         });
       }
 
-    //   const onSubmitHandler = async (e) => {
-    //     if (!data.errName && !data.errMessage  ) {
-    //       const body = {
-    //         email: data.email,
-    //         name: data.name,
-    //         password: data.pw,
-    //         mobile: data.mobile,
-    //         birthDate: data.birth,
-    //         type:"P",
-    //       };
-    
-    //       try {
-    //         await signupApi(body);
-    //         alert("가입이 정상적으로 완료되었습니다.");
-    //         history.push("/login");
-    //       } catch(e) {
-    //         alert(e)
-    //       }
-    //     }
-    //   }
+      const onSubmitHandler = async (e) => {
+        if (!data.errName && !data.errMessage  ) {
+          const body = {
+            email: data.email,
+            name: data.name,
+            password: data.pw,
+            job: data.job,
+          };
+
+          try {
+            alert("가입이 정상적으로 완료되었습니다.");
+            navigate("/welcome");
+            await signupApi(body);
+          } catch(e) {
+            alert(e)
+          }
+        }
+      }
+      
 
     return (
         <>
@@ -127,63 +127,64 @@ function Register() {
             <RegisterText>
                 Create Account
             </RegisterText>
-            <Label>
-                Name
-            </Label>
-            <Input 
-                type="name"
-                name="name"
-                value={data.name}
-                onChange={handleChange}
-            />
-            <Label>
-                Job
-            </Label>
-            <Input 
-                name="job"
-                value={data.job}
-                onChange={handleChange}
-            />
+            <form onSubmit={onSubmitHandler}>
+              <Label>
+                  Name
+              </Label>
+              <Input 
+                  type="name"
+                  name="name"
+                  value={data.name}
+                  onChange={handleChange}
+              />
+              <Label>
+                  Job
+              </Label>
+              <Input 
+                  name="job"
+                  type="job"
+                  value={data.job}
+                  onChange={handleChange}
+              />
 
-            <Label>
-                Email
-            </Label>
-            <Input 
-                type="email"
-                name="email"
-                value={data.email}
-                onChange={handleChange}
-            >
-            </Input>
-            <Label>
-                Password
-            </Label>
-            <Input 
-                type="password"
-                name="pw"
-                value={data.pw}
-                onChange={handleChange}
-            >
-            </Input>
+              <Label>
+                  Email
+              </Label>
+              <Input 
+                  type="email"
+                  name="email"
+                  value={data.email}
+                  onChange={handleChange}
+              >
+              </Input>
+              <Label>
+                  Password
+              </Label>
+              <Input 
+                  type="password"
+                  name="pw"
+                  value={data.pw}
+                  onChange={handleChange}
+              >
+              </Input>
 
-            <Label>
-                Password Check
-            </Label>
-            <Input 
-                type="password"
-                name="pwCheck"
-                value={data.pwC}
-                onChange={handleChange}
-            >
-            </Input>
-            {data.errName=="pwCheck" && data.errMessage && (
-              <ErrMessage>{data.errMessage}</ErrMessage>)}
-            {data.errName=="ok" && data.errMessage && (
-              <>{}</>
-            )}
-            <Link to='/welcome'>
-            <SubmitButton>확인</SubmitButton>
-            </Link>
+              <Label>
+                  Password Check
+              </Label>
+              <Input 
+                  type="password"
+                  name="pwCheck"
+                  value={data.pwC}
+                  onChange={handleChange}
+              >
+              </Input>
+              {data.errName=="pwCheck" && data.errMessage && (
+                <ErrMessage>{data.errMessage}</ErrMessage>)}
+              {data.errName=="ok" && data.errMessage && (
+                <>{}</>
+              )}
+              <SubmitButton onClick={onSubmitHandler}>확인</SubmitButton>
+            </form>
         </RegisterBox>
         </>
     )
