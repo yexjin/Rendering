@@ -2,7 +2,6 @@ import React from 'react'
 import styled from 'styled-components';
 import TextInputs from './TextInputs';
 import SelectColor from './SelectColor';
-import Next from '../../../styles/icons/next.png';
 import Back from '../../../styles/icons/next2.png';
 import { Link } from 'react-router-dom';
 
@@ -13,14 +12,6 @@ height: 600px;
 margin:0 auto;
 `
 
-const NextButton = styled.img`
-margin-left: 59px;
-margin-right: 59px;
-margin-top: 275px;
-width: 45px;
-height: 45px;
-cursor: pointer;
-`
 
 const BackButton = styled.img`
 width: 68px;
@@ -57,8 +48,6 @@ function MakeBox() {
         </Link>
         <Box>
             <TextInputs />
-            <NextButton src={Next}/>
-            <SelectColor />
         </Box>
         <Submit>확인</Submit>
         </>
