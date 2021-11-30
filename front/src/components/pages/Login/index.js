@@ -95,7 +95,7 @@ function Login() {
             saveDataToStorage(response.data);
           }
     
-          navigate("/main");
+          navigate("/user/main");
         } catch (e) {
           alert(e);
         }
