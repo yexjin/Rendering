@@ -52,7 +52,7 @@ margin-right: 120px;
 function MakeBox() {
     return (
         <>
-        <Link to="/">
+        <Link to="/user/main">
         <BackButton src={Back}/>
         </Link>
         <Box>

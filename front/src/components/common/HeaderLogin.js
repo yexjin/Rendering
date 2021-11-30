@@ -111,11 +111,11 @@ function Header() {
             {(toggle==false)?(
             <>
                 <Menus>
-                    <Link to='/' style={{textDecoration: 'none'}}>
+                    <Link to='/user/main' style={{textDecoration: 'none'}}>
                         <Logo src={LogoImg}>
                         </Logo>
                     </Link>
-                    <Link to='/' style={{textDecoration: 'none'}}>
+                    <Link to='/user/main' style={{textDecoration: 'none'}}>
                         <Menu>HOME</Menu>
                     </Link>
                     <Link to='/exhibition' style={{textDecoration: 'none'}}>
