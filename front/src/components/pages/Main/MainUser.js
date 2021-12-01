@@ -3,6 +3,7 @@ import HeaderLogin from '../../common/HeaderLogin';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import HoverImg from '../../../styles/icons/back2.png';
+import {getDataFromStorage} from '../../../utils/storage';
 
 const Contents = styled.div`
 display: flex;
@@ -84,6 +85,7 @@ const Button = styled.button`
 `
 
 function MainUser() {
+    
     return (
         <>
         <HeaderLogin />

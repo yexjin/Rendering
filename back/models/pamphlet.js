@@ -1,4 +1,5 @@
 import Sequelize from 'sequelize';
+import Exhibition from './exhibition.js';
 
 export default class Pamphlet extends Sequelize.Model {
     static init(sequelize) {
@@ -40,6 +41,47 @@ export default class Pamphlet extends Sequelize.Model {
     }
 
     static associate(db) {
-        db.Pamphlet.belongsTo(db.Exhibition, { foreignKey: 'exhibition', targetKey: 'id'}) // Pamphlet(1) : Exhibition(1)
+        db.Pamphlet.belongsTo(db.Exhibition, { foreignKey: 'exhibition',  onDelete: 'CASCADE' }) // Pamphlet(1) : Exhibition(1)
     }
-};
+
+    /**
+        팜플랫 조회 (Read)
+     */
+    static async findPamphletById(id) {
+        return await Pamphlet.findOne({where:{id}});
+    }
+
+    static async findByExhibitionId(id) {
+        return await Pamphlet.findOne({where:{exhibition: id}});
+    }
+
+    static async findOngoingPamphlets() {
+        const pamphlets = await Pamphlet.findAll({
+            include: [{
+                model: Exhibition,
+                where: {
+                    [Op.and]: {
+                        start_date: {[Op.lte]: new Date()}, // start_date <= 오늘
+                        end_date: {[Op.gte]: new Date()}, // end_date >= 오늘
+                    }
+                },
+                order: sequelize.col('start_date'), // start_date 기준으로 오름차순 정렬
+            }],
+        }); // 현재 진행 중인 전시와 연결된 팜플랫을 가져와!
+        return pamphlets;
+    }
+
+    /**
+        팜플랫 수정 (Update)
+    */
+    static async modifyPamphlet(id, data) {
+        return await Pamphlet.update(data, {where:{id}});;
+    }
+
+    /**
+        팜플랫 삭제 (Delete)
+    */
+    static async deletePamphlet(id) {
+        return await Pamphlet.destroy({where:{id}});
+    }
+}

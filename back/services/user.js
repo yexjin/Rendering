@@ -1,65 +1,48 @@
-import config from "../config/index.js";
-// import AWS from "aws-sdk";
+import { default as userModel} from '../models/user.js';
 import { CustomError } from "../CustomError.js";
 
 export class UserService {
-  constructor({ userModel, exhibitionModel, commentModel }) {
-    this.userModel = userModel;
-    this.exhibitionModel = exhibitionModel;
-    this.commentModel = commentModel;
-  }
 
-  // email를 이용하여 사용자 정보 조회
-  async findByEmail(email) {
-    const user = await this.userModel.findByEmail(email);
+  /**
+   *  사용자 생성
+   */
+   static async createUser(userDTO) {
+    const { name, job, password, email } = userDTO;
+    const user = await userModel.create({
+      name,
+      password,
+      job,
+      email,
+  });
+    
     return user;
   }
 
-  // 사용자 정보 수정
-  async modifyUser(id, data) {
-    const userRecord = await this.userModel.modifyUser(id, data);
-    return { userRecord };
+  /**
+   *  사용자 정보 조회(By Id)
+   */
+  static async findUserById(userId) {
+    const user = await userModel.findById(userId);
+    return user;
   }
 
-  // 사용자 제거
-  async deleteUser(id) {
-    const user = await this.userModel.findById(id);
-  
-    await user.removeExhibitions(); // 사용자 전시회 제거
-    await user.removeComments(); // 사용자 댓글 제거
-    await this.userModel.deleteUser(user.id); // 사용자 제거
+  static async findUserByEmail(email) {
+    const user = await userModel.findByEmail(email);
+    return user;
   }
 
-  // 사용자가 호스팅한 전시회 리스트 조회
-  async findUserExhibition(id) {
-    const user = await this.userModel.findById(id);
-  
-    return await user.getExhibitions();
+  /**
+   *  사용자 정보 수정
+   */
+  static async modifyUser(userId, userDTO) {
+    return await userModel.modifyUser(userId, userDTO);
   }
 
-  // 사용자가 작성한 코멘트 리스트 조회
-  async findUserExhibition(id) {
-    const user = await this.userModel.findById(id);
-  
-    return await user.getComments();
+  /**
+   *  사용자 제거
+   */
+  static async deleteUser(userId) {
+    return await userModel.deleteUser(userId);
   }
-
-  // S3 Pre-Sign Url을 발급한다.
-//   async getPreSignUrl(fileName) {
-//     const s3 = new AWS.S3({
-//       accessKeyId: config.S3AccessKeyId,
-//       secretAccessKey: config.S3SecretAccessKey,
-//       region: config.S3BucketRegion,
-//     });
-
-//     const params = {
-//       Bucket: config.S3BucketName,
-//       Key: fileName,
-//       Expires: 60 * 60 * 3,
-//     };
-
-//     const signedUrlPut = await s3.getSignedUrlPromise("putObject", params);
-//     return signedUrlPut;
-//   }
 
 }

@@ -1,7 +1,6 @@
 import { Router } from 'express'; 
 import { AuthService } from '../../services/index.js';
 import { asyncErrorWrapper } from '../../asyncErrorWrapper.js';
-import { default as userModel} from '../../models/user.js';
 
 const route = Router();
 
@@ -15,10 +14,8 @@ export default (app) => {
     // 로그아웃(Refresh Token 삭제)
     route.post('/:id', asyncErrorWrapper( async (req, res, next) => {
         res.clearCookie('R_AUTH');
-        const _id = parseInt(req.params.id, 10);
-        console.log("/logout")
-        let AuthServiceInstance = new AuthService({ userModel });
-        const result = await AuthServiceInstance.Logout(_id);
+        const userId = req.params.id;
+        const result = await AuthService.logout(userId);
         if(result) {
             return res.status(204).json();
         }

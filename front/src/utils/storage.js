@@ -6,7 +6,7 @@ const saveDataToStorage = (data) => {
 
 const getDataFromStorage = (name = "USER") => {
   const response = storage.getItem(name);
-
+  
   return JSON.parse(response);
 };
 

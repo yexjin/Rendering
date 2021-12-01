@@ -1,38 +1,38 @@
+import { default as userModel} from '../models/user.js';
+import { CustomError } from "../CustomError.js";
 import config from '../config/index.js';
 import jwt from 'jsonwebtoken';
-import { CustomError } from "../CustomError.js";
 import bcrypt from 'bcrypt';
 
 export class AuthService {
-    constructor({ userModel }) {
-        this.userModel = userModel;
-    }
 
-    // 로그인 시 사용자 정보를 조회하고 Token을 생성한다.
-    async SignIn(email, password) {
-        const user =  await this.userModel.findByEmail(email);
+    /**
+        로그인 - 사용자 정보를 조회하고 Token(Access, Refresh)을 생성
+    */
+    static async login(email, password) {
+        const user =  await userModel.findByEmail(email);
         if(!user) throw new CustomError('InvaildParameterError', 401, 'User not found');
         const result = await bcrypt.compare(password, user.password);
         if (result) {
-            // Access Token, Refresh Token 발급
-            const id = user.id;
-            const name = user.name;
-            const job = user.job;
+            // 로그인 성공! Access Token, Refresh Token 발급
             const accessToken = await user.generateAccessToken();
             const refreshToken = await user.generateRefreshToken();
-            return { id, email, name, job, accessToken, refreshToken };
+            
+            return { user, accessToken, refreshToken };
         } else throw new CustomError('InvaildParameterError', 402, 'Password is incorrect');
     }
 
-    // 로그아웃 시 사용자 정보를 조회하고 Token을 삭제한다.
-    async Logout(id) {
-        const user =  await this.userModel.findById(id);
-        user.modifyUser({token: null});
-        return true;
+    /**
+        로그아웃 - 사용자 정보를 조회하고 DB에 있는 Refresh Token을 삭제
+    */
+    static async logout(userId) {
+        return await userModel.modifyUser(userId, {token: null});
     }
 
-    // Refresh Token을 이용하여 Access Token 재발급한다.
-    async reissueAccessToken(refreshToken) {
+    /**
+        Access Token 재발급 (Refresh Token을 이용하여)
+    */
+    static async reissueAccessToken(refreshToken) {
         let decodeSuccess = true;
         let decodeRefreshToken = '';
         try {
@@ -40,7 +40,7 @@ export class AuthService {
                 refreshToken,
                 config.jwtSecretKey,
             );
-            const user = await this.userModel.findByEmail(decodeRefreshToken.email);
+            const user = await userModel.findById(decodeRefreshToken.id);
             if(!user) throw new CustomError('InvaildParameterError', 401, 'User not found');
             const { id, name, job, email } = user;
             const accessToken = await user.generateAccessToken();
