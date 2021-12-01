@@ -4,7 +4,9 @@ import Next from '../../../styles/icons/next.png';
 import SelectColor2 from './SelectColor2';
 import SelectColor from './SelectColor';
 import { useExhibitions } from '../../use';
+import { usePamphlets } from '../../use';
 import { useNavigate } from 'react-router';
+import { PamphletsApi } from '../../../remote';
 
 const Inputs = styled.div`
 width: 560px;
@@ -88,6 +90,7 @@ margin:0 auto;
 const TextInputs = () => {
 
     const { createExhibitionApi } = useExhibitions();
+    const { createPamphletApi } = usePamphlets();
 
     const navigate = useNavigate();
     
@@ -139,9 +142,20 @@ const TextInputs = () => {
         ExhibitionFormData.append("start_date", data.start_date);
         ExhibitionFormData.append("end_date", data.end_date);
         ExhibitionFormData.append("main_image", main_image);
+
+        const PamphletData = {
+            title: data.exhibition_name,
+            subtitle: "",
+            side_text: "",
+            emphasis_text: "",
+            text: data.description,
+            color : "",
+            exhibition: "",
+        }
     
         try {
-          createExhibitionApi(ExhibitionFormData);
+          await createExhibitionApi(ExhibitionFormData);
+        //   await createPamphletApi(PamphletData);
           navigate('/user/main');
           alert('등록이 완료되었습니다. 마이페이지에서 세부내용을 작성해주세요!')
         } catch (e) {
