@@ -1,4 +1,7 @@
 import Sequelize from 'sequelize';
+import Work from './work.js'
+
+const Op = Sequelize.Op;
 
 export default class Exhibition extends Sequelize.Model {
     static init(sequelize) {
@@ -16,11 +19,11 @@ export default class Exhibition extends Sequelize.Model {
                 allowNull: true,
             },
             start_date: {
-                type: Sequelize.DATE,
+                type: Sequelize.DATEONLY,
                 allowNull: false,
             },
             end_date: {
-                type: Sequelize.DATE,
+                type: Sequelize.DATEONLY,
                 allowNull: false,
             },
             main_image: {
@@ -49,31 +52,62 @@ export default class Exhibition extends Sequelize.Model {
     }
 
     static associate(db) {
-        db.Exhibition.hasOne(db.Pamphlet, {foreignKey: 'exhibition', targetkey: 'id'}) // Exhibition(1) : Pamphlet(1)
-        db.Exhibition.belongsTo(db.User, {foreignKey: 'manager', targetkey: 'id'}) // Exhibition(N) : User(1)
-        db.Exhibition.hasMany(db.Work, {foreignKey: 'exhibition', sourcekey: 'id'}); // Exhibition(1) : Work(N)
-        db.Exhibition.hasMany(db.Comment, {foreignKey: 'exhibition', sourcekey: 'id'}); // Exhibition(1) : Comment(N)
+        db.Exhibition.hasOne(db.Pamphlet, { foreignKey: 'exhibition' })   // Exhibition(1) : Pamphlet(1)
+        db.Exhibition.belongsTo(db.User, { foreignKey: 'manager' })       // Exhibition(N) : User(1)
+        db.Exhibition.hasMany(db.Work, { foreignKey: 'exhibition' });     // Exhibition(1) : Work(N)
+        db.Exhibition.hasMany(db.Comment, { foreignKey: 'exhibition' });  // Exhibition(1) : Comment(N)
     }
 
-    // Exhibition 관련 데이터 처리 함수
-    static async findById(id) {
-        return await Exhibition.findOne({where:{id}});
+    /**
+     *  전시 조회 (Read)
+     */
+    static async findExhibitionById(id) {
+        return await Exhibition.findOne({
+            include:[{ model: Work }],
+            where:{id}});
     }
 
-    static async findByUserId(userId) {
-        return await Exhibition.findAll({where:{manager: userId}});
+    static async findExhibitionByUserId(userId) {
+        return await Exhibition.findAll({
+            include:[{ model: Work }],
+            where:{manager: userId}});
     }
 
-    static async searchExhibition(keyword) {
-        return await Exhibition.findAll({where : {exhibition_name : {[Sequelize.Op.like] : "%" + keyword + "%"}}});
+    static async findOngoingExhibitions() {
+        const today = new Date(+new Date() + 3240 * 10000).toISOString().split("T")[0];
+        console.log(`오늘은 : ${today}`)
+        const exhibitions = await Exhibition.findAll({
+            where: {
+                [Op.and]: [
+                    {start_date: {[Op.lte]: today}}, // start_date <= today
+                    {end_date: {[Op.gte]: today}} // end_date >= today
+                ]
+            },
+            order: Sequelize.col('start_date'), // start_date 기준으로 오름차순 정렬
+        });
+        return exhibitions;
     }
 
-    async modifyExhibition(id, data) {
-        const exhibitionRecord = await Exhibition.update(data, {where:{id}});
-        return exhibitionRecord;
+    /**
+     *  전시 검색
+     */
+    static async searchExhibitions(keyword) {
+        return await Exhibition.findAll({
+            where : {exhibition_name : {[Op.like] : "%" + keyword + "%"}}
+        });
     }
 
-    async deleteExhibition(id) {
+    /**
+     *  전시 수정 (Update)
+     */
+     static async modifyExhibition(id, data) {
+        return await Exhibition.update(data, {where:{id}});
+    }
+
+    /**
+     *  전시 삭제 (Delete)
+     */
+     static async deleteExhibition(id) {
         await Exhibition.destroy({where:{id}});
     }
 };

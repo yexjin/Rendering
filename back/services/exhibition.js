@@ -1,21 +1,13 @@
-import config from "../config/index.js";
-// import AWS from "aws-sdk";
+import { default as exhibitionModel} from '../models/exhibition.js';
 import { CustomError } from "../CustomError.js";
 
 export class ExhibitionService {
-  constructor({ exhibitionModel, workModel, pamphletModel, userModel, commentModel }) {
-    this.exhibitionModel = exhibitionModel;
-    this.workModel = workModel;
-    this.pamphletModel = pamphletModel;
-    this.userModel = userModel;
-    this.commentModel = commentModel;
-  }
 
   // 전시회 등록!
-  async registerExhibition(id, exhibitionDTO) {
+  static async registerExhibition(userId, exhibitionDTO) {
     const { exhibition_name, description, host_name, start_date, end_date, main_image, sub_image } = exhibitionDTO;
-    let exhibition = await this.exhibitionModel.create({
-      manager: id,
+    let exhibition = await exhibitionModel.create({
+      manager: userId,
       exhibition_name,
       description,
       host_name,
@@ -24,49 +16,44 @@ export class ExhibitionService {
       main_image,
       sub_image
     });
+
     return exhibition;
   }
 
-  // id를 이용하여 전시회 정보 조회 (no)
-  async findById(id) {
-    const exhibition = await this.exhibitionModel.findById(id);
-    return user;
+  // id를 이용하여 전시회 정보 조회
+  static async findExhibitionById(id) {
+    return await exhibitionModel.findExhibitionById(id);
   }
 
-  // 전시회 정보 수정 (no)
-  async modifyUser(id, data) {
-    const userRecord = await this.userModel.modifyUser(id, data);
-    return { userRecord };
+  // 진행 중인 전시회 조회
+  static async findOngoingExhibitions() {
+    return await exhibitionModel.findOngoingExhibitions();
   }
 
-  // 전시회 제거 (no)
-  async deleteUser(id) {
-    const user = await this.userModel.findById(id);
-  
-    await user.removeExhibitions(); // 사용자 전시회 제거
-    await user.removeComments(); // 사용자 댓글 제거
-    await this.userModel.deleteUser(user.id); // 사용자 제거
+  // 전시회 정보 수정
+  static async modifyExhibition(exhibitionId, data) {
+    const exhibitionRecord = await exhibitionModel.modifyExhibition(exhibitionId, data);
+    
+    return exhibitionRecord;
   }
 
-  // 전시회 작품 리스트 조회 (no)
-  async findUserExhibition(id) {
-    const user = await this.userModel.findById(id);
-  
-    return await user.getComments();
-  }
-
-  // 전시회 코멘트 리스트 조회 (no)
-  async findUserExhibition(id) {
-    const user = await this.userModel.findById(id);
-  
-    return await user.getComments();
+  // 전시회 제거
+  static async deleteExhibition(exhibitionId) {
+    await exhibitionModel.deleteExhibition(exhibitionId);
   }
 
   // 전시회 좋아요 누르기 (no)
-  async findUserExhibition(id) {
-    const user = await this.userModel.findById(id);
-  
-    return await user.getExhibitions();
-  }
+  // async addLike(exhibitionId, userId) {
+  //   const { exhibition, isLikeExist} = await this.exhibitionModel.addLike(exhibitionId, userId);
+  //       if(!isLikeExist) {
+  //          await this.userModel.addLikeStudy(exhibitionId, userId);
+  //       }
+  //       return exhibition;
+  // }
+
+  // 전시회 좋아요 취소 (no)
+  // async deleteLike(exhibitionId, userId) {
+    
+  // }
 
 }
