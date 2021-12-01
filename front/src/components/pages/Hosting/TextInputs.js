@@ -3,6 +3,8 @@ import styled from 'styled-components'
 import Next from '../../../styles/icons/next.png';
 import SelectColor2 from './SelectColor2';
 import SelectColor from './SelectColor';
+import { useExhibitions } from '../../use';
+import { useNavigate } from 'react-router';
 
 const Inputs = styled.div`
 width: 560px;
@@ -58,8 +60,36 @@ width: 45px;
 height: 45px;
 cursor: pointer;
 `
+const Submit = styled.div`
+margin-top: 70px;
+background-color: #ffffff;
+font: normal normal normal 18px/27px Noto Sans CJK KR;
+letter-spacing: 0px;
+color: #191919;
+opacity: 1;
+width: 181px;
+height: 48px;
+border: 1px solid #999999;
+opacity: 1;
+border-radius: 5px;
+text-align: center;
+padding-top: 10px;
+cursor: pointer;
+float: right;
+margin-right: 120px;
+`
+const Box = styled.div`
+display: flex;
+width: 1280px;
+height: 600px;
+margin:0 auto;
+`
 
 const TextInputs = () => {
+
+    const { createExhibitionApi } = useExhibitions();
+
+    const navigate = useNavigate();
     
     const [data, setData] = useState({
         exhibition_name: "",
@@ -70,7 +100,7 @@ const TextInputs = () => {
         main_image: "",
       });
 
-    const {exhibition_name, description, start_date, end_date} = data;
+    const {exhibition_name, description, start_date, end_date, main_image} = data;
     
     const handleChange = (e) => {
     setData({
@@ -80,8 +110,8 @@ const TextInputs = () => {
     };
 
     const [pamp, setPamp] = useState({
-        exhibition_name: "",
-        description: "",
+        title: "",
+        subtitle: "",
         start_date: "",
         end_date: ""
     })
@@ -93,7 +123,8 @@ const TextInputs = () => {
             exhibition_name,
             description,
             start_date,
-            end_date
+            end_date,
+            main_image,
         }
         setPamp(exhibition_data)
 
@@ -101,10 +132,27 @@ const TextInputs = () => {
         setSample(true)
     }
 
+    const createHandler = async () => { 
+        const ExhibitionFormData = new FormData();
+        ExhibitionFormData.append("exhibition_name", data.exhibition_name);
+        ExhibitionFormData.append("description", data.description);
+        ExhibitionFormData.append("start_date", data.start_date);
+        ExhibitionFormData.append("end_date", data.end_date);
+        ExhibitionFormData.append("main_image", main_image);
+    
+        try {
+          createExhibitionApi(ExhibitionFormData);
+          navigate('/user/main');
+          alert('등록이 완료되었습니다. 마이페이지에서 세부내용을 작성해주세요!')
+        } catch (e) {
+          alert(e);
+        }
+      };
 
     
     return (
         <>
+        <Box>
         <Inputs>
         <LabelwithInput>
             <Label>전시명</Label> 
@@ -143,12 +191,20 @@ const TextInputs = () => {
             ></Input>
         </LabelwithInput>
         <LabelwithInput>
-            <Label>대표사진</Label> <InputBig></InputBig>
+            <Label>대표사진</Label> 
+            <InputBig
+                name="main_image"
+                type="file"
+                value={data.main_image}
+                onChange={handleChange}
+            ></InputBig>
         </LabelwithInput>
         </Inputs>
         <NextButton onClick={onCreate} src={Next}/>  
         {(sample==false)?(
         <SelectColor />):(<SelectColor2 info={pamp}/>)}
+        </Box>
+        <Submit onClick={createHandler}>확인</Submit>
         </>
     )
 }

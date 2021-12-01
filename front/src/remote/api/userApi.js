@@ -5,6 +5,6 @@ import httpClient from '../httpClient'
 //     httpClient.post(`${urls.user}/login`, form);
     
 export const signup = (form) => 
-    httpClient.post(`${urls.user}/signup`, form);
+    httpClient.post(`${urls.common}/signup`, form);
 export const login = (form) => 
-    httpClient.post(`${urls.user}/login`, form);   
+    httpClient.post(`${urls.common}/login`, form);   

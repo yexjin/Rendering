@@ -1,5 +1,5 @@
 const urls = {
-    user: "/api"
+    common: "/api"
   };
   
   export default urls;
