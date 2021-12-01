@@ -1,7 +1,7 @@
 import { Router } from 'express'; 
 import { AuthService } from '../../services/index.js';
 import { asyncErrorWrapper } from '../../asyncErrorWrapper.js';
-import { default as userModel} from '../../models/user.js';
+
 const route = Router();
 
 export default (app) => {
@@ -13,8 +13,7 @@ export default (app) => {
     route.post('/', asyncErrorWrapper(async (req, res, next) => {
         const { email, password } = req.body;
 
-        let AuthServiceInstance =new AuthService({ userModel });
-        const { id, name, job, accessToken, refreshToken } = await AuthServiceInstance.SignIn(email, password);
+        const { user, accessToken, refreshToken } = await AuthService.login(email, password);
         res.cookie("R_AUTH", refreshToken, {
             sameSite: 'none',
             httpOnly: true,
@@ -23,10 +22,10 @@ export default (app) => {
         });
         return res.status(200).json({
             loginSuccess: true,
-            id: id,
-            name: name,
-            email: email,
-            job: job,
+            id: user.id,
+            name: user.name,
+            email: user.email,
+            job: user.job,
             accessToken: accessToken,
         });
     }));
