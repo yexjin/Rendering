@@ -5,9 +5,9 @@ import logout from './routes/logout.js';
 import auth from './routes/auth.js';
 import user from './routes/user.js';
 import exhibition from './routes/exhibition.js';
-// import work from './routes/work.js';
-// import commment from './routes/comment.js';
-// import pamphlet from './routes/pamphlet.js';
+import work from './routes/work.js';
+import commment from './routes/comment.js';
+import pamphlet from './routes/pamphlet.js';
 
 export default () => {
     const app = Router();
@@ -17,8 +17,8 @@ export default () => {
     auth(app);
     user(app);
     exhibition(app);
-    // work(app);
-    // commment(app);
-    // pamphlet(app);
+    work(app);
+    commment(app);
+    pamphlet(app);
     return app;
 }

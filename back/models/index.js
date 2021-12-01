@@ -5,7 +5,6 @@ const dbconfig = config.database[env];
 const db = {};
 
 // MySQL 연결 객체
-console.log(`${dbconfig.database} ${dbconfig.username} ${dbconfig.password} ${dbconfig}`);
 const sequelize = new Sequelize(dbconfig.database, dbconfig.username, dbconfig.password, dbconfig);
 db.sequelize = sequelize
 

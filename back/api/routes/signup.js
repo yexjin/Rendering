@@ -1,8 +1,7 @@
-import { Router } from 'express'; 
+import { Router } from 'express';
 import { AuthService, UserService } from '../../services/index.js';
 import { emailDuplicationCheck } from '../middlewares/index.js';
 import { asyncErrorWrapper } from '../../asyncErrorWrapper.js';
-import { default as userModel} from '../../models/user.js';
 import bcrypt from 'bcrypt';
 const route = Router();
 
@@ -13,20 +12,15 @@ export default (app) => {
     app.use('/signup', route);
 
     route.post('/', emailDuplicationCheck, asyncErrorWrapper(async (req, res, next) => {
-        const { name, job, password, email } = req.body;
+        let userDTO = req.body;
+        const { password } = req.body;
         const salt = await bcrypt.genSalt(12); // 기본이 10번이고 숫자가 올라갈수록 연산 시간과 보안이 높아진다.
         const hash = await bcrypt.hash(password, salt);
-        console.log("hash : " + hash);
-        let user = await userModel.create({
-            name,
-            password: hash,
-            job,
-            email,
-        });
+        userDTO.password = hash;
+        const user = await UserService.createUser(userDTO);
         
         // Refresh Token, AccessToken
-        let AuthServiceInstance = new AuthService({ userModel });
-        const { id, accessToken, refreshToken } = await AuthServiceInstance.SignIn(user.email, password);
+        const { accessToken, refreshToken } = await AuthService.login(user.email, password);
 
         res.cookie("R_AUTH", refreshToken, {
             sameSite: 'none',
@@ -37,7 +31,7 @@ export default (app) => {
         
         return res.status(200).json({
             loginSuccess: true,
-            id: id,
+            id: user.id,
             name: user.name,
             email: user.email,
             job: user.job,

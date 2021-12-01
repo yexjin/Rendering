@@ -1,7 +1,9 @@
 import Sequelize from 'sequelize';
+import Exhibition from './exhibition.js';
+import Comment from './comment.js';
+
 import jwt from 'jsonwebtoken'
 import config from '../config/index.js';
-import Exhibition from './exhibition.js';
 
 export default class User extends Sequelize.Model {
     static init(sequelize) {
@@ -40,11 +42,13 @@ export default class User extends Sequelize.Model {
     }
 
     static associate(db) {
-        db.User.hasMany(db.Comment, {foreignKey: 'commenter', sourcekey: 'id'}); // User(1) : Comment(N)
-        db.User.hasMany(db.Exhibition, {foreignKey: 'manager', sourcekey: 'id'}); // User(1) : Exhibition(N)
+        db.User.hasMany(db.Comment, {foreignKey: 'commenter'});   // User(1) : Comment(N)
+        db.User.hasMany(db.Exhibition, {foreignKey: 'manager'});  // User(1) : Exhibition(N)
     }
 
-    // User 관련 데이터 처리 함수
+    /**
+        유저 조회 (Read)
+     */
     static async findById(id) {
         return await User.findOne({where:{id}});
     }
@@ -57,32 +61,36 @@ export default class User extends Sequelize.Model {
         return await User.findOne({where:{token}});
     }
 
-    static async modifyUser(id, data) {
-        const userRecord = await User.update(data, {where:{id}});
-        return userRecord;
-    }
-
-    static async deleteUser(id) {
-        await User.destroy({where:{id}});
-    }
-
-    static async findeUserExhibitions(id) {
+    static async findeUserWithAllData(id) {
         const user = await User.findOne({
-            include: [{
-                model: Exhibition,
-                where: {id}
-            }]
+            include: [{model: Exhibition}, {model: Comment}],
+            where: {id},
         });
-        const exhibitions = await user.getExhibitions();
-        return exhibitions;
+        return user;
     }
 
+    /**
+        유저 수정 (Update)
+     */
+    static async modifyUser(id, data) {
+        return await User.update(data, {where:{id}});;
+    }
+
+    /**
+        유저 삭제 (Delete)
+     */
+    static async deleteUser(id) {
+        return await User.destroy({where:{id}});
+    }
+
+    /**
+        RefreshToken 생성
+     */
     async generateRefreshToken() {
-        console.log("generateRefreshToken() 호출!")
         const user = this;
         const refreshToken = jwt.sign(
           {
-            email: user.email,
+            id: user.id,
           },
           config.jwtSecretKey,
           {
@@ -95,11 +103,14 @@ export default class User extends Sequelize.Model {
         return refreshToken;
     }
 
+    /**
+        AccessToken 생성
+     */
     async generateAccessToken() {
         const user = this;
         const accessToken = jwt.sign(
           {
-            email: user.email,
+            id: user.id,
           },
           config.jwtSecretKey,
           {
