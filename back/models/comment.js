@@ -26,8 +26,36 @@ export default class Comment extends Sequelize.Model {
     }
 
     static associate(db) {
-        db.Comment.belongsTo(db.User, {foreignKey: 'commenter', targetkey: 'id'}) // Comment(N) : User(1)
-        db.Comment.belongsTo(db.Exhibition, {foreignKey: 'exhibition', targetkey: 'id'}) // Comment(N) : Exhibition(1)
+        db.Comment.belongsTo(db.User, { foreignKey: 'commenter',  onDelete: 'CASCADE' }) // Comment(N) : User(1)
+        db.Comment.belongsTo(db.Exhibition, {foreignKey: 'exhibition', onDelete: 'cascade'}) // Comment(N) : Exhibition(1)
     }
 
+    /**
+     * 코멘트 조회 (Read)
+     */
+    static async findCommentById(id) {
+        return await Comment.findOne({where:{id}});
+    }
+
+    static async findByUserId(userId) {
+        return await Comment.findAll({where:{commenter: userId}});
+    }
+
+    static async findByExhibitionId(exhibitionId) {
+        return await Comment.findAll({where:{exhibition: exhibitionId}});
+    }
+        
+    /**
+     *  코멘트 수정 (Update)
+     */
+    static async modifyComment(id, data) {
+        return await Comment.update(data, {where:{id}});
+    }
+    
+    /**
+     *  코멘트 삭제 (Delete)
+     */
+    static async deleteComment(id) {
+        return await Comment.destroy({where:{id}});
+    }
 };
