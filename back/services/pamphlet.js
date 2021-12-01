@@ -1,32 +1,43 @@
+import { default as pamphletModel} from '../models/pamphlet.js';
 import config from "../config/index.js";
-// import AWS from "aws-sdk";
 import { CustomError } from "../CustomError.js";
 
 export class PamphletService {
-  constructor({ exhibitionModel, pamphletModel }) {
-    this.exhibitionModel = exhibitionModel;
-    this.pamphletModel = pamphletModel;
+
+   // 팜플랫 등록!
+   static async createPamphlet(exhibitionId, pamphletDTO) {
+    const { title, subtitle, side_text, emphasis_text, text, color } = pamphletDTO;
+    let pamphlet = await pamphletModel.create({
+      title,
+      subtitle,
+      side_text,
+      emphasis_text,
+      text,
+      color,
+      exhibition: exhibitionId
+    });
+
+    return pamphlet;
   }
 
-  // id를 이용하여 팜플랫 정보 조회 (no)
-  async findById(email) {
-    const user = await this.userModel.findByEmail(email);
-    return user;
+  // id를 이용하여 팜플랫 정보 조회
+  static async findPamphletById(pamphletId) {
+    return await pamphletModel.findPamphletById(pamphletId);
   }
 
-  // 팜플랫 정보 수정 (no)
-  async modifyUser(id, data) {
-    const userRecord = await this.userModel.modifyUser(id, data);
-    return { userRecord };
+  // 진행 중인 전시의 팜플랫 리스트
+  static async findOngoingPamphlets() {
+    return await pamphletModel.findOngoingPamphlets();
   }
 
-  // 팜플랫 제거 (no)
-  async deleteUser(id) {
-    const user = await this.userModel.findById(id);
-  
-    await user.removeExhibitions(); // 사용자 전시회 제거
-    await user.removeComments(); // 사용자 댓글 제거
-    await this.userModel.deleteUser(user.id); // 사용자 제거
+  // 팜플랫 정보 수정
+  static async modifyPamphlet(pamphletId, pamphletDTO) {
+    return await pamphletModel.modifyPamphlet(pamphletId, pamphletDTO);
+  }
+
+  // 팜플랫 제거
+  static async deletePamphlet(pamphletId) {
+    await pamphletModel.deletePamphlet(pamphletId);
   }
 
 }
