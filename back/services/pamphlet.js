@@ -5,8 +5,13 @@ import { CustomError } from "../CustomError.js";
 export class PamphletService {
 
    // 팜플랫 등록!
+<<<<<<< HEAD
    static async createPamphlet(exhibitionId, pamphletDTO) {
     const { title, subtitle, side_text, emphasis_text, text, color } = pamphletDTO;
+=======
+   static async createPamphlet(pamphletDTO) {
+    const { exhibition, title, subtitle, side_text, emphasis_text, text, color } = pamphletDTO;
+>>>>>>> b08a9d333499da63e768eb9112fed75d9011b8ec
     let pamphlet = await pamphletModel.create({
       title,
       subtitle,
@@ -14,7 +19,11 @@ export class PamphletService {
       emphasis_text,
       text,
       color,
+<<<<<<< HEAD
       exhibition: exhibitionId
+=======
+      exhibition
+>>>>>>> b08a9d333499da63e768eb9112fed75d9011b8ec
     });
 
     return pamphlet;

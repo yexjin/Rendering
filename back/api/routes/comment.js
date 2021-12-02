@@ -9,12 +9,20 @@ export default (app) => {
     app.use('/comments', route);
 
     // 코멘트 등록 
+<<<<<<< HEAD
     route.post('/:id', isAccessTokenValid, asyncErrorWrapper(async function(req, res, next) {
         const commentDTO = req.body;
         const exhibitionId = req.params.id;
         const userId = req.user.id;
 
         const comment = await CommentService.createComment(userId, exhibitionId, commentDTO);
+=======
+    route.post('/', isAccessTokenValid, asyncErrorWrapper(async function(req, res, next) {
+        const commentDTO = req.body;
+        const userId = req.user.id;
+
+        const comment = await CommentService.createComment(userId, commentDTO);
+>>>>>>> b08a9d333499da63e768eb9112fed75d9011b8ec
         
         res.status(201).json(comment); 
     }));

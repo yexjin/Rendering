@@ -4,12 +4,21 @@ import { CustomError } from "../CustomError.js";
 export class CommentService {
 
   // 코멘트 생성
+<<<<<<< HEAD
   static async createComment(userId, exhibitionId, commentDTO) {
     const { comment } = commentDTO;
     let _comment = await commentModel.create({
       comment,
       commenter: userId,
       exhibition: exhibitionId
+=======
+  static async createComment(userId, commentDTO) {
+    const { comment, exhibition } = commentDTO;
+    let _comment = await commentModel.create({
+      comment,
+      commenter: userId,
+      exhibition
+>>>>>>> b08a9d333499da63e768eb9112fed75d9011b8ec
     });
 
     return _comment;
