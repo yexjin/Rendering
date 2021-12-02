@@ -9,17 +9,9 @@ export default (app) => {
     app.use('/pamphlets', route);
 
     // 팜플랫 등록 
-<<<<<<< HEAD
-    route.post('/:id', isAccessTokenValid, asyncErrorWrapper(async function(req, res, next) {
-        const pamphletDTO = req.body;
-        const exhibitionId = req.params.id;
-
-        const pamphlet = await PamphletService.createPamphlet(exhibitionId, pamphletDTO);
-=======
     route.post('/', isAccessTokenValid, asyncErrorWrapper(async function(req, res, next) {
         const pamphletDTO = req.body;
         const pamphlet = await PamphletService.createPamphlet(pamphletDTO);
->>>>>>> b08a9d333499da63e768eb9112fed75d9011b8ec
         
         res.status(201).json(pamphlet); 
     }));

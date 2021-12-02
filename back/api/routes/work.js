@@ -9,17 +9,9 @@ export default (app) => {
     app.use('/works', route);
 
     // 작품 등록 
-<<<<<<< HEAD
-    route.post('/:id', isAccessTokenValid, asyncErrorWrapper(async function(req, res, next) {
-        const workDTO = req.body;
-        const exhibitionId = req.params.id;
-
-        const work = await WorkService.registerWork(exhibitionId, workDTO);
-=======
     route.post('/', isAccessTokenValid, asyncErrorWrapper(async function(req, res, next) {
         const workDTO = req.body;
         const work = await WorkService.registerWork(workDTO);
->>>>>>> b08a9d333499da63e768eb9112fed75d9011b8ec
         
         res.status(201).json(work); 
     }));

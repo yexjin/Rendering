@@ -4,21 +4,12 @@ import { CustomError } from "../CustomError.js";
 export class WorkService {
 
   // 작품 등록!
-<<<<<<< HEAD
-  static async registerWork(exhibitionId, workDTO) {
-    const { content, thumbnail } = workDTO;
-    let work = await workModel.create({
-      content,
-      thumbnail,
-      exhibition: exhibitionId
-=======
   static async registerWork(workDTO) {
     const { content, thumbnail, exhibition } = workDTO;
     let work = await workModel.create({
       content,
       thumbnail,
       exhibition
->>>>>>> b08a9d333499da63e768eb9112fed75d9011b8ec
     });
 
     return work;
