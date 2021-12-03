@@ -1,4 +1,5 @@
 import Sequelize from 'sequelize';
+import Pamphlet from './pamphlet.js';
 import Work from './work.js'
 
 const Op = Sequelize.Op;
@@ -75,8 +76,8 @@ export default class Exhibition extends Sequelize.Model {
 
     static async findOngoingExhibitions() {
         const today = new Date(+new Date() + 3240 * 10000).toISOString().split("T")[0];
-        console.log(`오늘은 : ${today}`)
         const exhibitions = await Exhibition.findAll({
+            include: [{ model: Pamphlet }],
             where: {
                 [Op.and]: [
                     {start_date: {[Op.lte]: today}}, // start_date <= today

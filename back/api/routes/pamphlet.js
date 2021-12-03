@@ -16,19 +16,19 @@ export default (app) => {
         res.status(201).json(pamphlet); 
     }));
 
+    // 진행 중인 전시회 팜플랫 조회
+    route.get('/ongoing', asyncErrorWrapper(async (req, res, next) => {
+        const pamphlets = await PamphletService.findOngoingPamphlets();
+
+        res.status(200).json(pamphlets);
+    }));
+
     // 팜플랫 조회
     route.get('/:id', asyncErrorWrapper(async (req, res, next) => {
         const pamphletId = req.params.id;
         const pamphlet = await PamphletService.findPamphletById(pamphletId);
 
         res.status(200).json(pamphlet);
-    }));
-
-    // 진행 중인 전시회 팜플랫 조회
-    route.get('/ongoing', asyncErrorWrapper(async (req, res, next) => {
-        const pamphlets = await PamphletService.findOngoingPamphlets();
-
-        res.status(200).json(pamphlets);
     }));
 
     // 팜플랫 수정
