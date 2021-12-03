@@ -3,8 +3,9 @@ import styled from 'styled-components'
 import Next from '../../../styles/icons/next.png';
 import SelectColor2 from './SelectColor2';
 import SelectColor from './SelectColor';
-import { useExhibitions } from '../../use';
+import { useExhibitions, usePamphlets } from '../../use';
 import { useNavigate } from 'react-router';
+import { PamphletsApi } from '../../../remote';
 
 const Inputs = styled.div`
 width: 560px;
@@ -20,7 +21,6 @@ const LabelwithInput = styled.div`
 margin-bottom: 20px;
 display: flex;
 `
-
 const Label = styled.label`
 padding-top: 10px;
 font-family: Noto Sans Thin;
@@ -32,7 +32,6 @@ height: 60px;
 width: 95px;
 vertical-align: center;
 `
-
 const Input = styled.input`
 background: #FFFFFF 0% 0% no-repeat padding-box;
 border: 1px solid #707070;
@@ -88,6 +87,7 @@ margin:0 auto;
 const TextInputs = () => {
 
     const { createExhibitionApi } = useExhibitions();
+    const { createPamphletApi } = usePamphlets();
 
     const navigate = useNavigate();
     
@@ -137,17 +137,27 @@ const TextInputs = () => {
         ExhibitionFormData.append("exhibition_name", data.exhibition_name);
         ExhibitionFormData.append("description", data.description);
         ExhibitionFormData.append("start_date", data.start_date);
-        ExhibitionFormData.append("end_date", data.end_date);
-        ExhibitionFormData.append("main_image", main_image);
-    
-        try {
-          createExhibitionApi(ExhibitionFormData);
-          navigate('/user/main');
-          alert('등록이 완료되었습니다. 마이페이지에서 세부내용을 작성해주세요!')
-        } catch (e) {
-          alert(e);
-        }
-      };
+       ExhibitionFormData.append("end_date", data.end_date);
+       ExhibitionFormData.append("main_image", data.main_image);
+
+       const PamphletFormData = {
+        title: data.exhibition_name,
+        subtitle: "",
+        side_text: "",
+        emphasis_text: "",
+        text: data.description,
+        color: "",
+       }
+   
+       try {
+            // await createPamphletApi(PamphletFormData);
+           await createExhibitionApi(ExhibitionFormData);
+           alert('등록이 완료되었습니다. 마이페이지에서 세부내용을 작성해주세요!')
+           navigate('/user/main');
+       } catch (e) {
+         alert(e);
+       }
+     };
 
     
     return (

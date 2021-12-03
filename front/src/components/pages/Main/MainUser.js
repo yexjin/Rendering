@@ -4,7 +4,8 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import HoverImg from '../../../styles/icons/back2.png';
 import {getDataFromStorage} from '../../../utils/storage';
-
+const accessToken = getDataFromStorage().accessToken;
+console.log(accessToken)
 const Contents = styled.div`
 display: flex;
 margin-top: 185px;
