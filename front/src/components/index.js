@@ -1,11 +1,11 @@
 import {
     useUser,
     useExhibitions,
-    usePamphlets,
+    usePamphlets
 } from './use';
 
 export {
     useUser,
     useExhibitions,
-    usePamphlets,
+    usePamphlets
 }

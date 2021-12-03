@@ -18,14 +18,14 @@ const initialState = Map({
         text: "",
         color: "",
         exhibition:""
-    }),
-    my_exhibitions: Map({
-      count: 0,
-      results: List([]),
-      })
-  });
+      }),
+      my_pamphlets: Map({
+        count: 0,
+        results: List([]),
+        })
+})
 
-  export default handleActions(
+export default handleActions(
     {
     //   ...pender({
     //     type: LISTALL_EXHIBITIONS,
