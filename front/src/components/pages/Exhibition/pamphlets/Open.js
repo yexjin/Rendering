@@ -157,42 +157,24 @@ cursor: pointer;
 const Contents = styled.div`
 margin-top: 131px;
 `
-const Exams = styled.div`
-display: flex;
-width: 80px;
-margin: 0 auto;
-`
-const Slide = styled.div`
-width: 20px;
-height: 20px;
-background: #74747480 0% 0% no-repeat padding-box;
-border-radius: 15px;
-opacity: 1;
-margin-right: 10px;
-`
-const Tile = styled.div`
-width: 20px;
-height: 20px;
-background: #74747480 0% 0% no-repeat padding-box;
-border-radius: 15px;
-opacity: 1;
-margin-right: 30px;
-`
 
-function Open({exhibition}) {
+const exhibition = {
+    id: 1,
+    title: 'YOSIGO',
+    subtitle1: '요시고 사진전',
+    subtitle2: '따뜻한 휴일의 기록',
+    content1: '"따뜻한 빛과 피사체가 균형을 이루는 순간"',
+    content2: '여행 감성을 자극하는 따뜻한 휴일의 기록',
+    startDate: '06.23',
+    endDate: '12.25',
+}
+
+function Open() {
     
     return (
         <>
         <Header />
         <Contents>
-        <Exams>
-        <Link to='/exhibition'>
-            <Slide/>
-        </Link>
-        <Link to='/exhibition'>
-            <Tile />
-        </Link>
-        </Exams>
         <Box>
             <PampBox>
                 <Title>

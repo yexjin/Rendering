@@ -1,4 +1,4 @@
-import { applyMiddleware, createStore } from "redux";
+import { applyMiddleware, createStore} from "redux";
 import penderMiddleware from "redux-pender";
 import { composeWithDevTools } from "redux-devtools-extension";
 import reducer from "./reducer";
