@@ -140,7 +140,7 @@ const TextInputs = () => {
        ExhibitionFormData.append("end_date", data.end_date);
        ExhibitionFormData.append("main_image", data.main_image);
 
-       const PamphletFormData = {
+       const PamphletBody = {
         title: data.exhibition_name,
         subtitle: "",
         side_text: "",
@@ -150,8 +150,8 @@ const TextInputs = () => {
        }
    
        try {
-            // await createPamphletApi(PamphletFormData);
-           await createExhibitionApi(ExhibitionFormData);
+              await createExhibitionApi(ExhibitionFormData);
+           await createPamphletApi(PamphletBody);
            alert('등록이 완료되었습니다. 마이페이지에서 세부내용을 작성해주세요!')
            navigate('/user/main');
        } catch (e) {
