@@ -1,6 +1,8 @@
 import Sequelize from 'sequelize';
 import Exhibition from './exhibition.js';
 
+const Op = Sequelize.Op;
+
 export default class Pamphlet extends Sequelize.Model {
     static init(sequelize) {
         return super.init({ // 테이블 컬럼 설정
@@ -65,8 +67,8 @@ export default class Pamphlet extends Sequelize.Model {
                         end_date: {[Op.gte]: new Date()}, // end_date >= 오늘
                     }
                 },
-                order: sequelize.col('start_date'), // start_date 기준으로 오름차순 정렬
             }],
+            order: Sequelize.col('start_date'), // start_date 기준으로 오름차순 정렬
         }); // 현재 진행 중인 전시와 연결된 팜플랫을 가져와!
         return pamphlets;
     }
