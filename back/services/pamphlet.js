@@ -40,4 +40,11 @@ export class PamphletService {
     await pamphletModel.deletePamphlet(pamphletId);
   }
 
+  // 랜덤 색상
+  static getColor() {
+    const colors = ['#F5F1EE', '#DDD6CD', '#C3AB99', '#D5BCAC', '#97887D','#DDD6CD'];
+    const random_index = Math.floor(Math.random() * 6); // 0 ~ 5
+    return colors[random_index];
+  }
+
 }
