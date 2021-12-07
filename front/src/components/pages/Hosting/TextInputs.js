@@ -97,10 +97,15 @@ const TextInputs = () => {
         description: "",
         start_date: "",
         end_date: "",
-        main_image: "",
       });
 
-    const {exhibition_name, description, start_date, end_date, main_image} = data;
+    const [image, setImage] = useState(null);
+
+    const imageChange = (e) => {
+        setImage(e.target.files[0]);
+      };
+    
+    const {exhibition_name, description, start_date, end_date} = data;
     
     const handleChange = (e) => {
     setData({
@@ -124,7 +129,6 @@ const TextInputs = () => {
             description,
             start_date,
             end_date,
-            main_image,
         }
         setPamp(exhibition_data)
 
@@ -138,7 +142,7 @@ const TextInputs = () => {
         ExhibitionFormData.append("description", data.description);
         ExhibitionFormData.append("start_date", data.start_date);
        ExhibitionFormData.append("end_date", data.end_date);
-       ExhibitionFormData.append("main_image", data.main_image);
+       ExhibitionFormData.append("main_image", image);
 
        const PamphletBody = {
         title: data.exhibition_name,
@@ -202,12 +206,12 @@ const TextInputs = () => {
         </LabelwithInput>
         <LabelwithInput>
             <Label>대표사진</Label> 
-            <InputBig
+            <Input
                 name="main_image"
                 type="file"
                 value={data.main_image}
-                onChange={handleChange}
-            ></InputBig>
+                onChange={imageChange}
+            ></Input>
         </LabelwithInput>
         </Inputs>
         <NextButton onClick={onCreate} src={Next}/>  
