@@ -1,13 +1,14 @@
 import React from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import Main from './components/pages/Main';
 import Welcome from './components/pages/Main/Welcome';
 import Exhibition from './components/pages/Exhibition';
+import ExhibitionUser from './components/pages/Exhibition/ExhibitionUser';
 import Comment from './components/pages/Exhibition/Comment';
 import Entrance from './components/pages/Exhibition/Entrance';
 import About from './components/pages/Exhibition/Entrance/About';
 import Detail from './components/pages/Exhibition/Entrance/Detail';
-import OpenPage from './components/pages/Exhibition/pamphlets/OpenPage';
+import Open from './components/pages/Exhibition/pamphlets/Open';
 import Login from './components/pages/Login';
 import Register from './components/pages/Register';
 import Hosting from './components/pages/Hosting';
@@ -38,7 +39,8 @@ const App = () => {
           <Route path="/" exact element={<Main/>} />
           <Route path="/welcome" element={<Welcome />} />
           <Route path="/exhibition" element={<Exhibition/>} />
-          <Route path='/exhibition/:id' element={<OpenPage/>} />
+          <Route path="/user/exhibition" element={<ExhibitionUser/>} />
+          <Route path='/exhibition/:id' element={<Open/>} />
           <Route path="/entrance" element={<Entrance/>} />
           <Route path="/detail" element={<Detail />} /> 
           <Route path="/about" element={<About/>} />

@@ -118,7 +118,7 @@ function Header() {
                     <Link to='/user/main' style={{textDecoration: 'none'}}>
                         <Menu>HOME</Menu>
                     </Link>
-                    <Link to='/exhibition' style={{textDecoration: 'none'}}>
+                    <Link to='/user/exhibition' style={{textDecoration: 'none'}}>
                         <Menu>EXHIBITION</Menu>
                     </Link>
                     <Link to='/hosting' style={{textDecoration: 'none'}}>

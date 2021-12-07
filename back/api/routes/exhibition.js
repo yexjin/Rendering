@@ -1,18 +1,21 @@
 import { Router } from 'express';
 import { ExhibitionService } from '../../services/index.js';
-import { isAccessTokenValid } from '../middlewares/index.js';
+import { isAccessTokenValid, upload } from '../middlewares/index.js';
 import { asyncErrorWrapper } from '../../asyncErrorWrapper.js';
 
 const route = Router();
+const uploads = upload.fields([{ name: 'main_image', maxCount: 1 }, { name: 'sub_image', maxCount: 1 }]);
 
 export default (app) => {
     app.use('/exhibitions', route);
 
-    // 전시회 등록 
-    route.post('/', isAccessTokenValid, asyncErrorWrapper(async function(req, res, next) {
-        const exhibitionDTO = req.body;
+    // 전시회 등록
+    route.post('/', isAccessTokenValid, uploads, asyncErrorWrapper(async function(req, res, next) {
         const userId = req.user.id;
-
+        let exhibitionDTO = req.body;
+        if(req.files.main_image!=undefined) exhibitionDTO.main_image = req.files.main_image[0].filename;  // '../../uploads/' + main_image에서 사진쓰려무낭!
+        if(req.files.sub_image!=undefined) exhibitionDTO.sub_image = req.files.sub_image[0].filename;
+        console.log(exhibitionDTO)
         const exhibition = await ExhibitionService.registerExhibition(userId, exhibitionDTO);
         
         res.status(201).json(exhibition); 
@@ -35,9 +38,11 @@ export default (app) => {
     }));
 
     // 전시회 정보 수정
-    route.patch('/:id', isAccessTokenValid, asyncErrorWrapper(async (req, res, next) => {
+    route.patch('/:id', uploads, isAccessTokenValid, asyncErrorWrapper(async (req, res, next) => {
         const exhibitionId = req.params.id;
         const exhibitionDTO = req.body;
+        if(req.files.main_image!=undefined) exhibitionDTO.main_image = req.files.main_image[0].filename;
+        if(req.files.sub_image!=undefined) exhibitionDTO.sub_image = req.files.sub_image[0].filename;
 
         const result = await ExhibitionService.modifyExhibition(exhibitionId, exhibitionDTO);
         

@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import { useSelector, useDispatch } from 'react-redux';
-import { getExhibitions } from '../../../../modules/exhibitions';
 import Card from './Card'
 import { Link } from 'react-router-dom'
 
@@ -32,18 +31,6 @@ margin-bottom: 32px;
 `
 
 function Progress() {
-const { data, loading, error } = useSelector(state => state.exhibitions.exhibitions);
-  const dispatch = useDispatch();
-
-  // 컴포넌트 마운트 후 exhibitions 목록 요청
-  useEffect(() => {
-    if (data) return;
-    dispatch(getExhibitions());
-  }, [data, dispatch]);
-
-  if (loading) return <div>로딩중...</div>;
-  if (error) return <div>에러 발생!</div>;
-  if (!data) return null;
 
     return (
         <>
@@ -51,7 +38,7 @@ const { data, loading, error } = useSelector(state => state.exhibitions.exhibiti
         <Link to="/hosting">
         <NewButton>New Project</NewButton>
         </Link>
-        <Card projects={data} />
+        {/* <Card projects={data} /> */}
         </>
     )
 }

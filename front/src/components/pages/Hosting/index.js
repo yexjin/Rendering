@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import MakeBox from './MakeBox';
+import {getDataFromStorage} from  '../../../utils/storage';
 
 const BackButton = styled.div`
 float: right;
@@ -25,6 +26,10 @@ animation: fadein 1s;
 `
 
 function Hosting() {
+
+    const token = getDataFromStorage().accessToken;
+
+    console.log(token);
     return (
         <Page>
         <Link to='/user/main'>

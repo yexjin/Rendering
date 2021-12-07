@@ -133,7 +133,7 @@ const TextInputs = () => {
     }
 
     const createHandler = async () => { 
-        const ExhibitionFormData = new URLSearchParams();
+        const ExhibitionFormData = new FormData();
         ExhibitionFormData.append("exhibition_name", data.exhibition_name);
         ExhibitionFormData.append("description", data.description);
         ExhibitionFormData.append("start_date", data.start_date);

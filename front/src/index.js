@@ -4,14 +4,9 @@ import './index.css';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
-import { createStore, applyMiddleware  } from 'redux';
 import { Provider } from 'react-redux';
 import store from './modules';
-import logger from 'redux-logger';
-import { composeWithDevTools } from 'redux-devtools-extension';
-import ReduxThunk from 'redux-thunk';
 import 'bootstrap/dist/css/bootstrap.css'
-import promiseMiddlerware from "redux-promise";
 
 ReactDOM.render(
   <React.StrictMode>

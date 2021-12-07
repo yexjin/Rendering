@@ -10,10 +10,19 @@ export default (app) => {
 
     // 팜플랫 등록 
     route.post('/', isAccessTokenValid, asyncErrorWrapper(async function(req, res, next) {
-        const pamphletDTO = req.body;
+        let pamphletDTO = req.body;
+        const color = PamphletService.getColor();
+        pamphletDTO.color = color;
         const pamphlet = await PamphletService.createPamphlet(pamphletDTO);
         
         res.status(201).json(pamphlet); 
+    }));
+
+    // 진행 중인 전시회 팜플랫 조회
+    route.get('/ongoing', asyncErrorWrapper(async (req, res, next) => {
+        const pamphlets = await PamphletService.findOngoingPamphlets();
+
+        res.status(200).json(pamphlets);
     }));
 
     // 팜플랫 조회
@@ -22,13 +31,6 @@ export default (app) => {
         const pamphlet = await PamphletService.findPamphletById(pamphletId);
 
         res.status(200).json(pamphlet);
-    }));
-
-    // 진행 중인 전시회 팜플랫 조회
-    route.get('/ongoing', asyncErrorWrapper(async (req, res, next) => {
-        const pamphlets = await PamphletService.findOngoingPamphlets();
-
-        res.status(200).json(pamphlets);
     }));
 
     // 팜플랫 수정
