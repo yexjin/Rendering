@@ -6,17 +6,13 @@ import cors from 'cors';
 import routes from '../api/index.js';
 
 export default (app) => {
-    // const whitelist = ['http://localhost:3000', 'http://holaworld.io', 'https://holaworld.io', 'http://www.holaworld.io', 'https://www.holaworld.io'];
-    // const corsOptions = {
-    //     origin: function(origin, callback){
-    //     const isWhitelisted = whitelist.indexOf(origin) !== -1;
-    //     callback(null, isWhitelisted); 
-    //   },
-    //   credentials:true
-    // };
+    const corsOptions = {
+      origin: true,
+      credentials:true
+    };
+    app.use(cors(corsOptions)); // config 추가
+    app.use(cors());
 
-    // // Cors Whitelist 관리
-    // app.use(cors(corsOptions));
     app.set('port', process.env.PORT || 3000);
 
     app.use(express.json()); 

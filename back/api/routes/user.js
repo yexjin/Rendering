@@ -20,6 +20,7 @@ export default (app) => {
         const userId = req.params.id;
         const user = await UserService.findUserById(userId);
         user.token = undefined; // 'delete user.token'이 왜 안될까?
+        user.password = undefined;
         
         res.status(200).json(user);
     }));
