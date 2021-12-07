@@ -10,17 +10,18 @@ export default (app) => {
 
     // 코멘트 등록 
     route.post('/', isAccessTokenValid, asyncErrorWrapper(async function(req, res, next) {
-        const commentDTO = req.body;
+        let commentDTO = req.body;
         const userId = req.user.id;
-
+        const now = new Date(+new Date() + 3240 * 10000).toISOString();
+        commentDTO.created_at = now;
         const comment = await CommentService.createComment(userId, commentDTO);
         
         res.status(201).json(comment); 
     }));
 
     // 해당 전시회의 코멘트 리스트
-    route.get('/:id', asyncErrorWrapper(async (req, res, next) => {
-        const exhibitionId = req.params.id;
+    route.get('/', asyncErrorWrapper(async (req, res, next) => {
+        const exhibitionId = req.body.exhibition;
         const comments = await CommentService.findByExhibitionId(exhibitionId);
 
         res.status(200).json(comments);

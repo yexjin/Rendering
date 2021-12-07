@@ -42,7 +42,11 @@ export default class Comment extends Sequelize.Model {
     }
 
     static async findByExhibitionId(exhibitionId) {
-        return await Comment.findAll({where:{exhibition: exhibitionId}});
+        return await Comment.findAll({
+            where:{exhibition: exhibitionId},
+            order : [['created_at','DESC']], // created_at 기준으로 최신순 정렬
+        
+        });
     }
         
     /**
