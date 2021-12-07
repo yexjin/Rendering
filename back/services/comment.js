@@ -5,10 +5,11 @@ export class CommentService {
 
   // 코멘트 생성
   static async createComment(userId, commentDTO) {
-    const { comment, exhibition } = commentDTO;
+    const { comment, exhibition, created_at } = commentDTO;
     let _comment = await commentModel.create({
       comment,
       commenter: userId,
+      created_at,
       exhibition
     });
 

@@ -10,7 +10,9 @@ export default (app) => {
 
     // 팜플랫 등록 
     route.post('/', isAccessTokenValid, asyncErrorWrapper(async function(req, res, next) {
-        const pamphletDTO = req.body;
+        let pamphletDTO = req.body;
+        const color = PamphletService.getColor();
+        pamphletDTO.color = color;
         const pamphlet = await PamphletService.createPamphlet(pamphletDTO);
         
         res.status(201).json(pamphlet); 

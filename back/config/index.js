@@ -1,4 +1,5 @@
 import dotenv from 'dotenv';
+import multer from 'multer';
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'development'; // .env에 NODE_ENV가 없으면 development
 
@@ -44,9 +45,4 @@ export default {
   logs: {
     level: process.env.LOG_LEVEL || 'silly',
   },
-  /* S3 */
-  S3AccessKeyId: process.env.S3_ACCESS_KEY_ID,
-  S3SecretAccessKey: process.env.S3_SECRET_ACCESS_KEY,
-  S3BucketName: process.env.S3_BUCKET_NAME,
-  S3BucketRegion: process.env.S3_BUCKET_REGION,
 };
