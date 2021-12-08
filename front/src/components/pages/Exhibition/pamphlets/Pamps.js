@@ -1,8 +1,9 @@
 import React from 'react'
 import styled from 'styled-components';
+import {DateChange} from '../../../../utils/dateChange';
 
 const Pamp = styled.div`
-background-color: #C3AB99;
+background-color: ${(props) => props.color};
 width: 200px;
 height: 600px;
 &:hover{
@@ -23,7 +24,7 @@ font-size: 60px;
 letter-spacing: 2px;
 color: #FFFFFF;
 opacity: 1;
-margin-top: 30px;
+padding-top: 30px;
 margin-left: 25px;
 margin-bottom: 70px;
 `
@@ -66,19 +67,16 @@ opacity: 1;
 function Pamps({ pamp }) {
     return(
     <>
-        <Pamp>
+        <Pamp color={pamp.color}>
             <Title>
                 {pamp.title}
             </Title>
             <SubTitle1>
-                {pamp.subtitle1}
+                {pamp.subtitle}
             </SubTitle1>
-            <SubTitle2>
-                {pamp.subtitle2}
-            </SubTitle2>
             <DateBox>
-                <Date>{pamp.startDate}</Date>
-                <Date>{pamp.endDate}</Date>
+            <Date>{DateChange(pamp.Exhibition.start_date)} - </Date> 
+                <Date>{DateChange(pamp.Exhibition.end_date)}</Date>
             </DateBox>
         </Pamp>     
         </>

@@ -4,6 +4,12 @@ import { Map, List, fromJS } from "immutable";
 import { ExhibitionsApi } from "../../remote";
 
 export const createExhibitionApi = ExhibitionsApi.create;
+export const LISTEXHIBITIONS_ONGOING = "exhibitions/ONGOING";
+
+export const listExhibitionsOngoing = createAction(
+  LISTEXHIBITIONS_ONGOING,
+  ExhibitionsApi.ongoingExhibitionsList
+)
 
 const initialState = Map({
     list: Map({
@@ -30,12 +36,12 @@ const initialState = Map({
 
   export default handleActions(
     {
-    //   ...pender({
-    //     type: LISTALL_EXHIBITIONS,
-    //     onSuccess: (state, action) => {
-    //       return state.set("list", fromJS(action.payload.data));
-    //     },
-    //   }),
+      ...pender({
+        type: LISTEXHIBITIONS_ONGOING,
+        onSuccess: (state, action) => {
+          return state.set("list", fromJS(action.payload.data));
+        },
+      }),
     //   ...pender({
     //     type: GET_EXHIBITIONS,
     //     onSuccess: (state, action) => {

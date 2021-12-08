@@ -1,12 +1,20 @@
 import * as reducer from '../../modules/reducer/pamphlets';
-import { useActions, useShallowEqualSelectorToJS } from './components';
+import { useActions, useShallowEqualSelector, useShallowEqualSelectorToJS } from './components';
 
 const usePamphlets = () =>{
-    // const actions = useActions(reducer);
+    const pamphletsList = useShallowEqualSelectorToJS((state) =>
+      state.pamphlets.get("list")
+  );
 
-    return {
-        createPamphletApi: reducer.createPamphletApi
-    }
+  const actions = useActions(reducer);
+
+  return {
+      pamphletsList,
+
+      listAllOngoing: actions.listAllOngoing,
+
+      createPamphletApi: reducer.createPamphletApi
+  }
 }
 
 export default usePamphlets;

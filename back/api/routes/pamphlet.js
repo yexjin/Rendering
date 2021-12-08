@@ -21,7 +21,7 @@ export default (app) => {
     // 진행 중인 전시회 팜플랫 조회
     route.get('/ongoing', asyncErrorWrapper(async (req, res, next) => {
         const pamphlets = await PamphletService.findOngoingPamphlets();
-
+        console.log(pamphlets)
         res.status(200).json(pamphlets);
     }));
 

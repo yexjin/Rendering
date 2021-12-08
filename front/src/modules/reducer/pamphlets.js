@@ -4,47 +4,48 @@ import { Map, List, fromJS } from "immutable";
 import { PamphletsApi } from "../../remote";
 
 export const createPamphletApi = PamphletsApi.create;
+export const LISTALL_ONGOING = "pamphlets/ONGOING";
+
+export const listAllOngoing = createAction(
+  LISTALL_ONGOING,
+  PamphletsApi.ongoingList
+);
 
 const initialState = Map({
-    list: Map({
-      count: 0,
-      results: List([]),
-    }),
-    pamphlets: Map({
-        title: "",
-        subtitle: "",
-        side_text: "",
-        emphasis_text: "",
-        text: "",
-        color: "",
-        exhibition:""
-      }),
-      my_pamphlets: Map({
-        count: 0,
-        results: List([]),
-        })
+    list: List([]),
+    // pamphlets: Map({
+    //     id: "",
+    //     title: "",
+    //     subtitle: "",
+    //     side_text: "",
+    //     emphasis_text: "",
+    //     text: "",
+    //     color: "",
+    //     exhibition:"",
+    //     Exhibition: Map({
+    //       id: "",
+    //       exhibition_name: "",
+    //       description: "",
+    //       host_name: "",
+    //       start_date: "",
+    //       end_date: "",
+    //       main_image: "",
+    //       sub_image: "",
+    //       likes: "",
+    //       manager: ""
+    //     })
+    //   }),
 })
 
 export default handleActions(
     {
-    //   ...pender({
-    //     type: LISTALL_EXHIBITIONS,
-    //     onSuccess: (state, action) => {
-    //       return state.set("list", fromJS(action.payload.data));
-    //     },
-    //   }),
-    //   ...pender({
-    //     type: GET_EXHIBITIONS,
-    //     onSuccess: (state, action) => {
-    //       return state.set("exhibitions", fromJS(action.payload.data));
-    //     },
-    //   }),
-    //   ...pender({
-    //     type: LISTTOTAL_EXHIBITIONS,
-    //     onSuccess: (state, action) => {
-    //       return state.set("my_exhibitions", fromJS(action.payload.data));
-    //     }
-    //   })
+      ...pender({
+        type: LISTALL_ONGOING,
+        onSuccess: (state, action) => {
+          const data = action.payload.data;
+          return state.set("list", fromJS(data));
+        },
+      }),
     },
     initialState
   );
