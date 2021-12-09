@@ -23,11 +23,11 @@ function PamphlRow() {
   const navigate = useNavigate();
 
   const { pamphletsList, listAllOngoing } = usePamphlets();
-  const { exhibitionsList, listExhibitionsOngoing} = useExhibitions();
+  // const { exhibitionsList, listExhibitionsOngoing} = useExhibitions();
   useEffect(() => {
     const fetch = async () => {
       try {
-        await listExhibitionsOngoing();
+        // await listExhibitionsOngoing();
         await listAllOngoing();
       } catch(err){
         console.log(err);

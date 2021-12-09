@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import styled from 'styled-components';
 import { Link, useParams } from 'react-router-dom';
 import Header from '../../../common/Header';
-import { usePamphlets } from '../../../use';
+import { usePamphlets, useExhibitions } from '../../../use';
 import {DateChange} from '../../../../utils/dateChange';
 
 const Box = styled.div`
@@ -10,7 +10,6 @@ width: 1244px;
 height: 600px;
 background-color: #C3AB99;
 position: absolute;
-margin-top: 32px;
 overflow: hidden;
 display: flex;
 padding-left: 40px;
@@ -165,10 +164,17 @@ function Open() {
     
     const { pamphletInfo, getPamphlet } = usePamphlets();
 
+    const { exhibition, getExhibition } = useExhibitions();
+
+    const exhibitionId = pamphletInfo.exhibition;
+
+    console.log(exhibitionId)
+
     useEffect(() => {
         const fetch = async () => {
           try {
             await getPamphlet(id);
+            await getExhibition(exhibitionId);
           } catch(err){
             console.log(err);
           }
@@ -211,7 +217,7 @@ function Open() {
                                 전시기간
                             </DateTitle>
                             <Dates>
-                                {DateChange(pamphletInfo.start_date)} ~ {DateChange(pamphletInfo.end_date)}
+                                {DateChange(exhibition.start_date)} ~ {DateChange(exhibition.end_date)}
                             </Dates>
                         </ContentBox>
                         <EntranceDiv>

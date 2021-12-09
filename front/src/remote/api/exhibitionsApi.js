@@ -12,3 +12,5 @@ export const create = (form) =>
     httpClient.post(`${urls.common}/exhibitions`, form,{headers});
 
 export const ongoingExhibitionsList = () => httpClient.get(`${urls.common}/exhibitions/ongoing`);
+
+export const exhibitionById = (id) => httpClient.get(`${urls.common}/exhibitions/${id}`);

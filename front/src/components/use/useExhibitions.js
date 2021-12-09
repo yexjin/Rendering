@@ -2,16 +2,22 @@ import * as reducer from '../../modules/reducer/exhibitions';
 import { useActions, useShallowEqualSelector, useShallowEqualSelectorToJS } from './components';
 
 const useExhibitions = () => {
-    const exhibitionsList = useShallowEqualSelectorToJS((state) =>
-    state.pamphlets.get("list")
-);
+    // const exhibitionsList = useShallowEqualSelectorToJS((state) =>
+    // state.exhibitions.get("list")
+    // );
 
-const actions = useActions(reducer);
+    const exhibition = useShallowEqualSelectorToJS((state) =>
+        state.exhibitions.get("exhibition")
+    );
+
+    const actions = useActions(reducer);
 
     return {
-        exhibitionsList,
+        // exhibitionsList,
+        exhibition,
 
-        listExhibitionsOngoing: actions.listExhibitionsOngoing,
+        // listExhibitionsOngoing: actions.listExhibitionsOngoing,
+        getExhibition: actions.getExhibition,
         createExhibitionApi: reducer.createExhibitionApi,
     }
 }
