@@ -193,7 +193,7 @@ function Open() {
                                 {pamphletInfo.title}
                             </Title>
                             <EngTitle>
-                            Photograph by YOSIGO
+                            {pamphletInfo.side_text}
                             </EngTitle>
                             <SubTitle1>
                                 {pamphletInfo.subtitle}
@@ -204,15 +204,15 @@ function Open() {
                             </DateBox>
                         </PampBox>
                         <ContentBox>
-                            {/* <ContentTitle>
-                                {exhibition.subtitle1}:{exhibition.subtitle2}
+                            <ContentTitle>
+                                {exhibition.exhibition_name}
                             </ContentTitle>
                             <Content1>
-                                {exhibition.content1}
+                                {pamphletInfo.emphasis_text}
                             </Content1>
                             <Content2>
-                                {exhibition.content2}
-                            </Content2> */}
+                                {pamphletInfo.text}
+                            </Content2>
                             <DateTitle>
                                 전시기간
                             </DateTitle>
