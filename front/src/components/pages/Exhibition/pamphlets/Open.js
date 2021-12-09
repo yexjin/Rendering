@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import Header from '../../../common/Header';
+import { usePamphlets } from '../../../use';
+import {DateChange} from '../../../../utils/dateChange';
 
 const Box = styled.div`
 width: 1244px;
@@ -131,7 +133,6 @@ letter-spacing: -0.24px;
 color: #FFFFFF;
 opacity: 1;
 `
-
 const EntranceDiv = styled.div`
 vertical-align: bottom;
 margin-top: 30px;
@@ -158,68 +159,71 @@ const Contents = styled.div`
 margin-top: 131px;
 `
 
-const exhibition = {
-    id: 1,
-    title: 'YOSIGO',
-    subtitle1: '요시고 사진전',
-    subtitle2: '따뜻한 휴일의 기록',
-    content1: '"따뜻한 빛과 피사체가 균형을 이루는 순간"',
-    content2: '여행 감성을 자극하는 따뜻한 휴일의 기록',
-    startDate: '06.23',
-    endDate: '12.25',
-}
-
 function Open() {
+
+    const { id } = useParams(); // URL 파라미터 조회하기
     
+    const { pamphletInfo, getPamphlet } = usePamphlets();
+
+    useEffect(() => {
+        const fetch = async () => {
+          try {
+            await getPamphlet(id);
+          } catch(err){
+            console.log(err);
+          }
+        };
+        fetch();
+      }, [])
+
     return (
         <>
-        <Header />
-        <Contents>
-        <Box>
-            <PampBox>
-                <Title>
-                    {exhibition.title}
-                </Title>
-                <EngTitle>
-                Photograph by YOSIGO
-                </EngTitle>
-                <SubTitle1>
-                    {exhibition.subtitle1}
-                </SubTitle1>
-                <SubTitle2>
-                    {exhibition.subtitle2}
-                </SubTitle2>
-                <DateBox>
-                    <Date>{exhibition.startDate}</Date>
-                    <Date>{exhibition.endDate}</Date>
-                </DateBox>
-            </PampBox>
-            <ContentBox>
-                <ContentTitle>
-                    {exhibition.subtitle1}:{exhibition.subtitle2}
-                </ContentTitle>
-                <Content1>
-                    {exhibition.content1}
-                </Content1>
-                <Content2>
-                    {exhibition.content2}
-                </Content2>
-                <DateTitle>
-                    전시기간
-                </DateTitle>
-                <Dates>
-                    {exhibition.startDate} ~ {exhibition.endDate}
-                </Dates>
-            </ContentBox>
-            <EntranceDiv>
-                <Link to='/entrance'>
-                    <Entrance>Entrance</Entrance>
-                </Link>
-            </EntranceDiv>
-        </Box>
-        </Contents>
+                <>
+                    <Header />
+                    <Contents>
+                    <Box>
+                        <PampBox>
+                            <Title>
+                                {pamphletInfo.title}
+                            </Title>
+                            <EngTitle>
+                            Photograph by YOSIGO
+                            </EngTitle>
+                            <SubTitle1>
+                                {pamphletInfo.subtitle}
+                            </SubTitle1>
+                            <DateBox>
+                                <Date>{pamphletInfo.start_date}</Date>
+                                <Date>{pamphletInfo.end_date}</Date>
+                            </DateBox>
+                        </PampBox>
+                        <ContentBox>
+                            {/* <ContentTitle>
+                                {exhibition.subtitle1}:{exhibition.subtitle2}
+                            </ContentTitle>
+                            <Content1>
+                                {exhibition.content1}
+                            </Content1>
+                            <Content2>
+                                {exhibition.content2}
+                            </Content2> */}
+                            <DateTitle>
+                                전시기간
+                            </DateTitle>
+                            <Dates>
+                                {DateChange(pamphletInfo.start_date)} ~ {DateChange(pamphletInfo.end_date)}
+                            </Dates>
+                        </ContentBox>
+                        <EntranceDiv>
+                            <Link to='/entrance'>
+                                <Entrance>Entrance</Entrance>
+                            </Link>
+                        </EntranceDiv>
+                    </Box>
+                    </Contents></>
+
         </>
-    )
+        )
 }
 
 export default Open

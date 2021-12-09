@@ -6,12 +6,18 @@ const usePamphlets = () =>{
       state.pamphlets.get("list")
   );
 
+    const pamphletInfo = useShallowEqualSelectorToJS((state)=>
+      state.pamphlets.get("pamphlet")
+    );
+
   const actions = useActions(reducer);
 
   return {
       pamphletsList,
+      pamphletInfo,
 
       listAllOngoing: actions.listAllOngoing,
+      getPamphlet: actions.getPamphlet,
 
       createPamphletApi: reducer.createPamphletApi
   }

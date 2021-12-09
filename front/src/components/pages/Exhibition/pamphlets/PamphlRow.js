@@ -1,10 +1,10 @@
 import React,{ useEffect } from 'react'
 import Pamps from './Pamps';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { usePamphlets, useExhibitions } from '../../../use';
 
-const StyledLink = styled(Link)`
+const StyledLink = styled.div`
 width: 200px;
 height: 600px;
 text-decoration: none;
@@ -20,6 +20,8 @@ text-decoration: none;
 
 function PamphlRow() {
 
+  const navigate = useNavigate();
+
   const { pamphletsList, listAllOngoing } = usePamphlets();
   const { exhibitionsList, listExhibitionsOngoing} = useExhibitions();
   useEffect(() => {
@@ -34,12 +36,19 @@ function PamphlRow() {
     fetch();
   }, [])
 
+  const moveHandler = async(id) =>{
+    try {
+      navigate(`${id}`);
+    } catch (e) {
+      alert(e);
+    }
+  }
     return (
         
             <>
             {pamphletsList.map((data)=>(
               <>
-              <StyledLink to={`/exhibition`}>
+              <StyledLink onClick={()=>{moveHandler(data.id)}}>
                 <Pamps 
                     pamp={data} 
                     key={data.id}
