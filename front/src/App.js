@@ -16,6 +16,7 @@ import Mypage from './components/pages/Mypage';
 import styled from 'styled-components';
 import PrivateRoute from './utils/privateRoute';
 import MainUser from './components/pages/Main/MainUser';
+import OpenUser from './components/pages/Exhibition/pamphlets/OpenUser';
 
 const Box = styled.div`
 margin: 0 auto;
@@ -40,6 +41,7 @@ const App = () => {
           <Route path="/welcome" element={<Welcome />} />
           <Route path="/exhibition" element={<Exhibition/>} />
           <Route path="/user/exhibition" element={<ExhibitionUser/>} />
+          <Route path="/user/exhibition/:id" element={<OpenUser />} />
           <Route path='/exhibition/:id' element={<Open/>} />
           <Route path="/entrance" element={<Entrance/>} />
           <Route path="/detail" element={<Detail />} /> 
