@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import LogoImg from '../../styles/icons/Logo.png'
 import SearchImg from '../../styles/icons/search.png'
 import UserImg from '../../styles/icons/user.png'
 import CancelIcon from '../../styles/icons/back.png'
+import { removeDataFromStorage } from "../../utils/storage";
+
 
 const Head = styled.div`
     display: flex;
@@ -39,6 +41,7 @@ color: #363636;
 opacity: 1;
 margin-right: 30px;
 padding-top: 8px;
+cursor: pointer;
 `
 
 const Search = styled.img`
@@ -62,7 +65,9 @@ opacity: 1;
 
 const Buttons = styled.div`
 float: right;
+margin-left: 480px;
 display: flex;
+margin-top: 7px;
 `
 
 const SearchBox = styled.div`
@@ -94,21 +99,26 @@ function Header() {
         setToggle((toggle)=>!toggle);
     }
 
-    console.log(toggle)
+    const navigate = useNavigate();
+
+    const logoutHandler = () => {
+        removeDataFromStorage();
+        navigate(`/`);
+      };
 
     return (
         <Head>
             {(toggle==false)?(
             <>
                 <Menus>
-                    <Link to='/' style={{textDecoration: 'none'}}>
+                    <Link to='/user/main' style={{textDecoration: 'none'}}>
                         <Logo src={LogoImg}>
                         </Logo>
                     </Link>
-                    <Link to='/' style={{textDecoration: 'none'}}>
+                    <Link to='/user/main' style={{textDecoration: 'none'}}>
                         <Menu>HOME</Menu>
                     </Link>
-                    <Link to='/exhibition' style={{textDecoration: 'none'}}>
+                    <Link to='/user/exhibition' style={{textDecoration: 'none'}}>
                         <Menu>EXHIBITION</Menu>
                     </Link>
                     <Link to='/hosting' style={{textDecoration: 'none'}}>
@@ -118,10 +128,11 @@ function Header() {
                 </Menus>
                 <Buttons>
                     <Search src={SearchImg} onClick={onClick}/>
-                    <Link to='/login' style={{textDecoration: 'none', color: 'black'}}>
+                    <Link to='/mypage' style={{textDecoration: 'none', color: 'black'}}>
                         <Mypage src={UserImg}/>  
                     </Link>
                 </Buttons>
+                <Menu onClick={logoutHandler}>LOGOUT</Menu>
             </>
             ):(
                 <SearchBox>

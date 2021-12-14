@@ -110,9 +110,11 @@ function Entrance() {
         <Heart>
             <img src={LoveW}/>
         </Heart>
-        <Comment>
-            <img src={CommentW}/>
-        </Comment>
+        <Link to='/comment'>
+            <Comment>
+                <img src={CommentW}/>
+            </Comment>
+        </Link>
         <Exhibits>
             <Link to='/About'>
             <AboutText>About</AboutText>

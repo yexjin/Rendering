@@ -1,14 +1,14 @@
 import React from 'react'
-import Header from '../../common/Header';
+import HeaderLogin from '../../common/HeaderLogin';
 import Pamphlets from './pamphlets/Pamphlets';
 
-function Exhibition() {
+function ExhibitionUser() {
     return (
         <>
-            <Header />
+            <HeaderLogin />
             <Pamphlets />
         </>
     )
 }
 
-export default Exhibition
+export default ExhibitionUser

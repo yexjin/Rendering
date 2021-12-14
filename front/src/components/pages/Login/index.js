@@ -1,16 +1,17 @@
 import React, { useState } from 'react'
 import Header from '../../common/Header';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, useNavigationType } from 'react-router-dom';
+import { useUser } from '../../../components';
+import { useNavigate } from 'react-router-dom';
+import { saveDataToStorage } from '../../../utils/storage';
 
 const LoginBox = styled.div`
     margin: 0 auto;
     margin-top: 167px;
     width: 473px;
     height: 471px;
-    background-color: #F9F9F9;
 `
-
 const LoginText = styled.div`
 text-align: center;
 font: normal normal bold 40px/48px Roboto;
@@ -26,9 +27,7 @@ letter-spacing: 0px;
 color: #767676;
 opacity: 1;
 `
-
 const Input = styled.input`
-background-color: #F9F9F9;
 width: 473px;
 border:0;
 border-bottom: 1px solid #000000;
@@ -38,12 +37,10 @@ letter-spacing: -0.29px;
 margin-top: 24px;
 margin-bottom: 40px;
 `
-
 const Flex = styled.div`
 display: flex;
 justify-content: space-between;
 `
-
 const AccountButton = styled.div`
 margin-top: 42px;
 height: 27px;
@@ -55,9 +52,8 @@ letter-spacing: 0px;
 color: #767676;
 opacity: 1;
 `
-
 const LoginButton = styled.button`
-background-color: #F9F9F9;
+background-color: white;
 margin-top: 30px;
 font: normal normal normal 18px/27px Noto Sans CJK KR;
 letter-spacing: 0px;
@@ -71,6 +67,9 @@ opacity: 1;
 
 function Login() {
 
+    const navigate = useNavigate();
+    const { loginApi } = useUser();
+
     const [data, setData] = useState({
         email: "",
         pw: "",
@@ -83,24 +82,24 @@ function Login() {
     });
     };
 
-    // const submitHandler = async () => {
-    //     try {
-    //       const request = {
-    //         email: data.email,
-    //         password: data.password,
-    //       };
+    const submitHandler = async () => {
+        try {
+          const request = {
+            email: data.email,
+            password: data.pw,
+          };
     
-    //       const response = await loginApi(request);
+          const response = await loginApi(request);
     
-    //       if (response.data) {
-    //         saveDataToStorage(response.data);
-    //       }
+          if (response.data) {
+            saveDataToStorage(response.data);
+          }
     
-    //       history.push("/professor/main");
-    //     } catch (e) {
-    //       alert("로그인 실패");
-    //     }
-    //   };
+          navigate("/user/main");
+        } catch (e) {
+          alert(e);
+        }
+      };
     
 
     return (
@@ -136,7 +135,7 @@ function Login() {
                         Create Account
                     </AccountButton>
                 </Link>
-                <LoginButton>확인</LoginButton>
+                <LoginButton onClick={submitHandler}>확인</LoginButton>
             </Flex>
         </LoginBox>
         </>

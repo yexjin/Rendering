@@ -1,9 +1,8 @@
 import React from 'react'
-import Header from '../../common/Header';
+import HeaderLogin from '../../common/HeaderLogin';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import HoverImg from '../../../styles/icons/back2.png';
-
 const Contents = styled.div`
 display: flex;
 margin-top: 185px;
@@ -83,12 +82,11 @@ const Button = styled.button`
     }
 `
 
-function Main() {
-
-
+function MainUser() {
+    
     return (
         <>
-        <Header />
+        <HeaderLogin />
         <Contents>
             <div>
                 <BigText>
@@ -119,4 +117,4 @@ function Main() {
     )
 }
 
-export default Main
+export default MainUser

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import styled from 'styled-components';
 import { Link, useParams } from 'react-router-dom';
-import Header from '../../../common/Header';
+import HeaderLogin from '../../../common/HeaderLogin';
 import { usePamphlets, useExhibitions } from '../../../use';
 import {DateChange} from '../../../../utils/dateChange';
 
@@ -158,7 +158,7 @@ const Contents = styled.div`
 margin-top: 131px;
 `
 
-function Open() {
+function OpenUser() {
 
     const { id } = useParams(); // URL 파라미터 조회하기
     
@@ -185,7 +185,7 @@ function Open() {
     return (
         <>
                 <>
-                    <Header />
+                    <HeaderLogin />
                     <Contents>
                     <Box>
                         <PampBox>
@@ -232,4 +232,4 @@ function Open() {
         )
 }
 
-export default Open
+export default OpenUser

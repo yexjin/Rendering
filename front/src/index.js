@@ -4,18 +4,9 @@ import './index.css';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
-import { createStore, applyMiddleware  } from 'redux';
 import { Provider } from 'react-redux';
-import rootReducer from './modules';
-import logger from 'redux-logger';
-import { composeWithDevTools } from 'redux-devtools-extension';
-import ReduxThunk from 'redux-thunk';
+import store from './modules';
 import 'bootstrap/dist/css/bootstrap.css'
-
-
-const store = createStore(
-  rootReducer,
-  composeWithDevTools(applyMiddleware(ReduxThunk, logger))); // 스토어를 만듭니다.
 
 ReactDOM.render(
   <React.StrictMode>

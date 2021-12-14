@@ -5,9 +5,10 @@ import CommentImg from '../../../../styles/icons/comment.png'
 
 const Box = styled.div`
 width: 100%;
-margin-bottom: 34px;
-margin-left:83px;
-margin-right: 83px;
+padding-bottom: 34px;
+padding-left:83px;
+padding-right: 83px;
+background-color: #F9F9F9;
 `
 
 const Title = styled.div`
@@ -18,7 +19,7 @@ font-weight: 700;
 font-size: 28px/41px;
 color: #191919;
 opacity: 1;
-margin-top: 113px;
+padding-top: 113px;
 `
 
 const Comments = styled.div`

@@ -1,6 +1,6 @@
 import React,{ useState } from 'react'
 import styled from 'styled-components'
-import Sample from './Sample'
+import MakedSample from './MakedSample'
 
 const Colors = styled.div`
 margin-left: 28px;
@@ -62,7 +62,7 @@ cursor: pointer;
 border: ${props => props.click == true ? "1px solid #707070" : "0"};
 `
 
-function SelectColor() {
+function SelectColor2({info}) {
 
     const [color, setColor] = useState("#C3AB99");
     const [toggle, setToggle] = useState({
@@ -143,7 +143,7 @@ function SelectColor() {
 
     return (
         <>
-        <Sample color={color}/>
+        <MakedSample color={color} info={info}/>
         <Colors>
             <Dot1 onClick={onClick1} click={toggle['1']} />
             <Dot2 onClick={onClick2} click={toggle['2']}/>
@@ -156,4 +156,4 @@ function SelectColor() {
     )
 }
 
-export default SelectColor
+export default SelectColor2
