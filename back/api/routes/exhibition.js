@@ -37,6 +37,16 @@ export default (app) => {
         res.status(200).json(exhibition);
     }));
 
+    // 전시회 정보 조회(by User)
+    route.get('/', isAccessTokenValid, asyncErrorWrapper(async (req, res, next) => {
+        const userId = req.user.id;
+        const exhibitions = await ExhibitionService.findExhibitionByUser(userId);
+
+        console.log(exhibitions.progress);
+
+        res.status(200).json(exhibitions);
+    }));
+
     // 전시회 정보 수정
     route.patch('/:id', uploads, isAccessTokenValid, asyncErrorWrapper(async (req, res, next) => {
         const exhibitionId = req.params.id;
