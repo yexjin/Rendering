@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import SideBar from './SideBar/index'
-import Contents from './Contents/index'
+import NullContents from './Contents/NullContents'
 
 const Box = styled.div`
 display: flex;
@@ -10,14 +10,14 @@ overflow-y: hidden;
 `
 
 
-function Mypage() {
+function Null() {
 
     return (
         <Box>
             <SideBar />
-            <Contents />
+            <NullContents />
         </Box>
     )
 }
 
-export default Mypage
+export default Null

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import Card from './Card'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { usePamphlets } from '../../../use';
 
 const Title = styled.div`
@@ -29,6 +29,9 @@ border-radius: 5px;
 background-color: #A5988F;
 margin-bottom: 32px;
 `
+const CardDiv = styled.div`
+cursor: pointer;
+`
 
 function Progress() {
 
@@ -44,6 +47,17 @@ function Progress() {
     fetch();
   }, [])
 
+  const navigate = useNavigate();
+
+  const moveHandler = async(id) =>{
+    try {
+      navigate(`/mypage/${id}`);
+      window.location.reload(false);
+    } catch (e) {
+      alert(e);
+    }
+  }
+
     return (
         <>
         <Title>In progress</Title>
@@ -51,9 +65,12 @@ function Progress() {
         <NewButton>New Project</NewButton>
         </Link>
         {pamphletsList.map((data)=>(
-            <Link to='/mypage/exhibition'>
-                <Card project={data} key={data.id}/>
-            </Link>
+            <CardDiv onClick={()=>{moveHandler(data.id)}}>
+                <Card 
+                    project={data} 
+                    key={data.id}
+                />
+            </CardDiv>
         ))}
         </>
     )

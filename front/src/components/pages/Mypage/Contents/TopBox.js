@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import HeartImg from '../../../../styles/icons/love.png'
 import CommentImg from '../../../../styles/icons/comment.png'
+import { useParams } from 'react-router-dom'
+import { usePamphlets, useExhibitions } from '../../../use';
 
 const Box = styled.div`
 width: 100%;
@@ -68,9 +70,31 @@ img{
 `
 
 function TopBox() {
+
+    const { id } = useParams();
+
+    const { pamphletInfo, getPamphlet } = usePamphlets();
+
+    const { exhibition, getExhibition } = useExhibitions();
+
+    const exhibitionId = pamphletInfo.exhibition;
+
+    useEffect(() => {
+        const fetch = async () => {
+          try {
+            await getPamphlet(id);
+            await getExhibition(exhibitionId);
+          } catch(err){
+            console.log(err);
+          }
+        };
+        fetch();
+      }, [])
+
+
     return (
         <Box>
-             <Title>요시고 사진전: 따뜻한 휴일의 기록</Title>
+             <Title>{pamphletInfo.title}</Title>
              <Comments>
                 <Heart><img src={HeartImg}/>275</Heart>
                 <Comment><img src={CommentImg} />21</Comment>

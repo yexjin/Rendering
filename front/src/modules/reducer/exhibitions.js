@@ -17,6 +17,8 @@ export const getExhibition = createAction(
   ExhibitionsApi.exhibitionById
 )
 
+export const exhibitpatchApi = ExhibitionsApi.exhibitionModify;
+
 const initialState = Map({
     list: List([]),
     exhibition: Map({

@@ -1,5 +1,6 @@
-import React from 'react'
+import React,{useState} from 'react'
 import styled from 'styled-components'
+import { useExhibitions } from '../../../../../components'
 
 const Inputs = styled.div`
 width: 696px;
@@ -94,6 +95,13 @@ margin-bottom: 130px;
 
 
 function Introduce() {
+
+    const { modifyExhibitApi } = useExhibitions();
+
+    const [data, setData] = useState({
+
+    })
+
     return (
        <>
        <Inputs>

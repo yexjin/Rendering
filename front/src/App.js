@@ -17,7 +17,7 @@ import styled from 'styled-components';
 import PrivateRoute from './utils/privateRoute';
 import MainUser from './components/pages/Main/MainUser';
 import OpenUser from './components/pages/Exhibition/pamphlets/OpenUser';
-import MypageContents from './components/pages/Mypage/Contents';
+import NullMypage from './components/pages/Mypage/Null';
 
 const Box = styled.div`
 margin: 0 auto;
@@ -52,9 +52,9 @@ const App = () => {
           <Route path="/comment" element={<Comment />} />
           <Route path='/' element={<PrivateRoute />}>
             <Route path='/user/main' element={<MainUser />} />
-            <Route path='/mypage/exhibition' element={<MypageContents />} />
+            <Route path='/mypage/:id' element={<Mypage />} />
             <Route path='/hosting' element={<Hosting/>} />
-            <Route path="/mypage" element={<Mypage />} /> 
+            <Route path="/mypage" element={<NullMypage />} /> 
           </Route>
         </Routes>
       </Box>
