@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react'
 import styled from 'styled-components'
-import { useSelector, useDispatch } from 'react-redux';
-import { getExhibitions } from '../../../../modules/exhibitions';
 import Card from './Card'
+import { Link } from 'react-router-dom'
+import { usePamphlets } from '../../../use';
 
 const Title = styled.div`
 text-align: left;
@@ -31,24 +31,30 @@ margin-bottom: 32px;
 `
 
 function Progress() {
-const { data, loading, error } = useSelector(state => state.exhibitions.exhibitions);
-  const dispatch = useDispatch();
 
-  // 컴포넌트 마운트 후 exhibitions 목록 요청
-  useEffect(() => {
-    if (data) return;
-    dispatch(getExhibitions());
-  }, [data, dispatch]);
-
-  if (loading) return <div>로딩중...</div>;
-  if (error) return <div>에러 발생!</div>;
-  if (!data) return null;
+    const { pamphletsList, listAllOngoing } = usePamphlets();
+    useEffect(() => {
+        const fetch = async () => {
+        try {
+            await listAllOngoing();
+        } catch(err){
+            console.log(err);
+        }
+    };
+    fetch();
+  }, [])
 
     return (
         <>
         <Title>In progress</Title>
+        <Link to="/hosting">
         <NewButton>New Project</NewButton>
-        <Card projects={data} />
+        </Link>
+        {pamphletsList.map((data)=>(
+            <Link to='/mypage/exhibition'>
+                <Card project={data} key={data.id}/>
+            </Link>
+        ))}
         </>
     )
 }

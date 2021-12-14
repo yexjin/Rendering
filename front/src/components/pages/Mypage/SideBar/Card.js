@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import ExImg from '../../../../styles/images/yosigo.jpg'
-
+import {DateChange} from '../../../../utils/dateChange';
 
 const Box = styled.div`
 width: 302px;
@@ -48,20 +48,18 @@ margin-top: 17.87px;
 margin-right: 16px;
 `
 
-function Card({ projects }) {
+function Card({ project }) {
     return (
         <>
-        {projects.map(project =>
-            <Box key={project.id}>
+            <Box>
                 <SubBox>
-                    <Title>{project.subtitle1}</Title>
-                    <Dates>{project.startDate} ~ {project.endDate}</Dates>
+                    <Title>{project.title}</Title>
+                    <Dates>{DateChange(project.Exhibition.start_date)} ~ {DateChange(project.Exhibition.end_date)}</Dates>
                 </SubBox>
                 <SubBox>
                     <Img src={ExImg} />
                 </SubBox>
             </Box>    
-        )}
         </>
     )
 }

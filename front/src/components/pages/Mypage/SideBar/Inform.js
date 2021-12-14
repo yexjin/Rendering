@@ -1,5 +1,8 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import styled from 'styled-components'
+import {getDataFromStorage} from '../../../../utils/storage';
+import {usePamphlets} from '../../../use';
+
 
 const Profile = styled.div`
 display: flex;
@@ -68,13 +71,31 @@ margin-top: 11px;
 `
 
 function Inform() {
+
+    const name = getDataFromStorage().name;
+    const nickName = getDataFromStorage().nickName;
+    const { pamphletsList, listAllOngoing } = usePamphlets();
+
+    useEffect(() => {
+        const fetch = async () => {
+          try {
+            await listAllOngoing();
+          } catch(err){
+            console.log(err);
+          }
+        };
+        fetch();
+      }, [])
+
+    const onGoing = pamphletsList.length;
+
     return (
         <>
             <Profile>
                 <MyImg />
                 <NameBox>
-                    <Name>uijin_j</Name>
-                    <NickName>Exhibition Manager</NickName>
+                    <Name>{name}</Name>
+                    <NickName>{nickName}</NickName>
                 </NameBox>
             </Profile>
             <Items>
@@ -90,7 +111,7 @@ function Inform() {
             <Items>
                 <Item>
                     <Title>In progress</Title>
-                    <Number>| 3</Number>
+                    <Number>| {onGoing}</Number>
                 </Item>
                 <Item>
                     <Title>Schedule</Title>
