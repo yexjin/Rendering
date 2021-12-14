@@ -25,6 +25,46 @@ export class ExhibitionService {
     return await exhibitionModel.findExhibitionById(id);
   }
 
+  // userId를 이용하여 전시회 정보 조회
+  static async findExhibitionByUser(id) {
+    const exhibitions = await exhibitionModel.findExhibitionByUserId(id);
+
+    const total_project = (await exhibitions).length;
+    let completed = 0, progress = 0, schedule = 0;
+
+    (await exhibitions).forEach((exhibit, index, array)=> {
+      const state = this.checkExhibitionState(exhibit);
+      switch(state) {
+        case 0:  // 종료된 전시
+          completed += 1;
+          break
+
+        case 1:  // 진행 중 전시
+          progress += 1;
+          break;
+
+        case 2:  // 예정된 전시
+          schedule += 1;
+          break;
+      
+        default: break;
+      }
+    })
+
+    console.log(`total_project: ${total_project}, completed: ${completed}, progress: ${progress}, schedule: ${schedule}`);
+    const userExhibitionInfo = { total_project, completed, progress, schedule, exhibitions}
+
+    return userExhibitionInfo;
+  }
+
+  // 전시회 상태 조회(0: 전시 종료, 1: 전시 중, 2:전시 예정)
+  static checkExhibitionState(exhibition) {
+    const today = new Date(+new Date() + 3240 * 10000).toISOString().split("T")[0];
+    if(exhibition.start_date > today) return 2;
+    else if(exhibition.end_date < today) return 0;
+    else return 1;
+  }
+
   // 진행 중인 전시회 조회
   static async findOngoingExhibitions() {
     return await exhibitionModel.findOngoingExhibitions();

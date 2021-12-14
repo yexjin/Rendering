@@ -6,7 +6,7 @@ const db = {};
 
 // MySQL 연결 객체
 const sequelize = new Sequelize(dbconfig.database, dbconfig.username, dbconfig.password, dbconfig);
-db.sequelize = sequelize
+db.sequelize = sequelize;
 
 import User from './user.js';
 import Comment from './comment.js';
