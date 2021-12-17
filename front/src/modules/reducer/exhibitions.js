@@ -45,14 +45,7 @@ const initialState = Map({
       sub_image: "",
       likes: "",
       manager: "",
-      Works: List([
-        {
-          id: "",
-          thumbnail: "",
-          content: "",
-          exhibition: "",
-        }
-      ])
+      Works: List([])
     }),
   });
 
@@ -67,7 +60,8 @@ const initialState = Map({
       ...pender({
         type: GET_EXHIBITION,
         onSuccess: (state, action) => {
-          return state.set("exhibition", fromJS(action.payload.data));
+          const data = action.payload.data;
+          return state.set("exhibition", fromJS(data));
         },
       }),
       ...pender({
@@ -76,12 +70,6 @@ const initialState = Map({
           return state.set("inform", fromJS(action.payload.data));
         },
       }),
-    //   ...pender({
-    //     type: LISTTOTAL_EXHIBITIONS,
-    //     onSuccess: (state, action) => {
-    //       return state.set("my_exhibitions", fromJS(action.payload.data));
-    //     }
-    //   })
     },
     initialState
   );

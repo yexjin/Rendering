@@ -3,6 +3,10 @@ import { useActions, useShallowEqualSelector, useShallowEqualSelectorToJS } from
 
 const useExhibitions = () => {
 
+    const ongoing = useShallowEqualSelectorToJS((state) => 
+        state.exhibitions.get("list")
+    )
+
     const exhibition = useShallowEqualSelectorToJS((state) =>
         state.exhibitions.get("exhibition")
     );
@@ -14,9 +18,11 @@ const useExhibitions = () => {
     const actions = useActions(reducer);
 
     return {
+        ongoing,
         exhibition,
         exhibitionInfo,
 
+        listExhibitionsOngoing : actions.listExhibitionsOngoing,
         getInfo : actions.getInfo,
         getExhibition: actions.getExhibition,
         createExhibitionApi: reducer.createExhibitionApi,

@@ -53,8 +53,8 @@ function Card({ project }) {
         <>
             <Box>
                 <SubBox>
-                    <Title>{project.title}</Title>
-                    <Dates>{DateChange(project.Exhibition.start_date)} ~ {DateChange(project.Exhibition.end_date)}</Dates>
+                    <Title>{project.exhibition_name}</Title>
+                    <Dates>{DateChange(project.start_date)} ~ {DateChange(project.end_date)}</Dates>
                 </SubBox>
                 <SubBox>
                     <Img src={ExImg} />

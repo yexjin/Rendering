@@ -1,6 +1,7 @@
-import React,{useState} from 'react'
+import React,{useState, useEffect} from 'react'
 import styled from 'styled-components'
-import { useExhibitions } from '../../../../../components'
+import { Link, useParams } from 'react-router-dom';
+import { usePamphlets, useExhibitions } from '../../../../../components'
 
 const Inputs = styled.div`
 width: 696px;
@@ -96,17 +97,39 @@ margin-bottom: 130px;
 
 function Introduce() {
 
-    const { modifyExhibitApi } = useExhibitions();
+    const { id } = useParams(); // URL 파라미터 조회하기
+
+    const { pamphletInfo, getPamphlet } = usePamphlets();
+
+    const { modifyExhibitApi, exhibition, getExhibition } = useExhibitions();
+    
+    const exhibitionId = pamphletInfo.exhibition;
+
 
     const [data, setData] = useState({
 
     })
 
+    useEffect(() => {
+        const fetch = async () => {
+          try {
+            await getPamphlet(id);
+            await getExhibition(exhibitionId);
+          } catch(err){
+            console.log(err);
+          }
+        };
+        fetch();
+      }, [])
+
     return (
        <>
        <Inputs>
        <LabelwithInput>
-            <Label>전시명</Label> <Input></Input>
+            <Label>전시명</Label> 
+            <Input
+                value={exhibition.exhibition_name}
+            ></Input>
         </LabelwithInput>
         <LabelwithInput>
             <Label>주관</Label> <InputBig></InputBig>

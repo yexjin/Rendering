@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import Card from './Card'
 import { Link, useNavigate } from 'react-router-dom'
-import { usePamphlets } from '../../../use';
+import { usePamphlets, useExhibitions } from '../../../use';
 
 const Title = styled.div`
 text-align: left;
@@ -35,11 +35,14 @@ cursor: pointer;
 
 function Progress() {
 
-    const { pamphletsList, listAllOngoing } = usePamphlets();
+    const { ongoing, listExhibitionsOngoing } = useExhibitions();
+    // const { pamphletsList, listAllOngoing } = usePamphlets();
+
     useEffect(() => {
         const fetch = async () => {
         try {
-            await listAllOngoing();
+            // await listAllOngoing();
+            await listExhibitionsOngoing();
         } catch(err){
             console.log(err);
         }
@@ -64,7 +67,7 @@ function Progress() {
         <Link to="/hosting">
         <NewButton>New Project</NewButton>
         </Link>
-        {pamphletsList.map((data)=>(
+        {ongoing.map((data)=>(
             <CardDiv onClick={()=>{moveHandler(data.id)}}>
                 <Card 
                     project={data} 
