@@ -7,11 +7,17 @@ const useExhibitions = () => {
         state.exhibitions.get("exhibition")
     );
 
+    const exhibitionInfo = useShallowEqualSelector((state)=>
+        state.exhibitions.get("inform")
+    )
+
     const actions = useActions(reducer);
 
     return {
         exhibition,
+        exhibitionInfo,
 
+        getInfo : actions.getInfo,
         getExhibition: actions.getExhibition,
         createExhibitionApi: reducer.createExhibitionApi,
         modifyExhibitApi: reducer.exhibitpatchApi

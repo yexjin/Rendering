@@ -1,7 +1,8 @@
 import React,{useEffect} from 'react'
 import styled from 'styled-components'
+import exhibitions from '../../../../modules/reducer/exhibitions';
 import {getDataFromStorage} from '../../../../utils/storage';
-import {usePamphlets} from '../../../use';
+import {usePamphlets, useExhibitions} from '../../../use';
 
 
 const Profile = styled.div`
@@ -75,11 +76,13 @@ function Inform() {
     const name = getDataFromStorage().name;
     const nickName = getDataFromStorage().nickName;
     const { pamphletsList, listAllOngoing } = usePamphlets();
+    const { exhibitionInfo, getInfo} = useExhibitions();
 
     useEffect(() => {
         const fetch = async () => {
           try {
             await listAllOngoing();
+            await getInfo();
           } catch(err){
             console.log(err);
           }
@@ -101,11 +104,11 @@ function Inform() {
             <Items>
                 <Item>
                     <Title>Total projects</Title>
-                    <Number>| 3</Number>
+                    <Number>| {exhibitions.total_project}</Number>
                 </Item>
                 <Item>
                     <Title>Completed</Title>
-                    <Number>| 3</Number>
+                    <Number>| {exhibitionInfo.completed}</Number>
                 </Item>
             </Items>
             <Items>
@@ -115,10 +118,12 @@ function Inform() {
                 </Item>
                 <Item>
                     <Title>Schedule</Title>
-                    <Number>| 3</Number>
+                    <Number>| {exhibitionInfo.schedule}</Number>
                 </Item>
             </Items>
+
         </>
+    
     )
 }
 

@@ -6,6 +6,7 @@ import { ExhibitionsApi } from "../../remote";
 export const createExhibitionApi = ExhibitionsApi.create;
 export const LISTEXHIBITIONS_ONGOING = "exhibitions/ONGOING";
 export const GET_EXHIBITION = "exhibitions/GET";
+export const GET_INFO = "exhibitions/INFO";
 
 export const listExhibitionsOngoing = createAction(
   LISTEXHIBITIONS_ONGOING,
@@ -17,10 +18,22 @@ export const getExhibition = createAction(
   ExhibitionsApi.exhibitionById
 )
 
+export const getInfo = createAction(
+  GET_INFO,
+  ExhibitionsApi.exhibitionInfo
+)
+
 export const exhibitpatchApi = ExhibitionsApi.exhibitionModify;
 
 const initialState = Map({
     list: List([]),
+    inform: Map({
+      total_project: "",
+      completed: "",
+      progress: "",
+      schedule : "",
+      exhibitions: List([]),
+    }),
     exhibition: Map({
       id: "",
       exhibition_name: "",
@@ -41,10 +54,6 @@ const initialState = Map({
         }
       ])
     }),
-    my_exhibitions: Map({
-      count: 0,
-      results: List([]),
-      })
   });
 
   export default handleActions(
@@ -59,6 +68,12 @@ const initialState = Map({
         type: GET_EXHIBITION,
         onSuccess: (state, action) => {
           return state.set("exhibition", fromJS(action.payload.data));
+        },
+      }),
+      ...pender({
+        type: GET_INFO,
+        onSuccess: (state, action) => {
+          return state.set("inform", fromJS(action.payload.data));
         },
       }),
     //   ...pender({

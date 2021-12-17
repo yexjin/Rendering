@@ -21,3 +21,5 @@ export const ongoingExhibitionsList = () => httpClient.get(`${urls.common}/exhib
 export const exhibitionById = (id) => httpClient.get(`${urls.common}/exhibitions/${id}`);
 
 export const exhibitionModify = (id, form) => httpClient.patch(`${urls.common}/exhibitions/${id}`, form, {headers_encode});
+
+export const exhibitionInfo = () => httpClient.get(`${urls.common}/exhibitions/`, {headers});
