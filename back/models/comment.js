@@ -34,18 +34,22 @@ export default class Comment extends Sequelize.Model {
      * 코멘트 조회 (Read)
      */
     static async findCommentById(id) {
-        return await Comment.findOne({where:{id}});
+        return await Comment.findOne({
+            include:[{ model: User }],
+            where:{id}});
     }
 
     static async findByUserId(userId) {
-        return await Comment.findAll({where:{commenter: userId}});
+        return await Comment.findAll({
+            include:[{ model: User }],
+            where:{commenter: userId}});
     }
 
     static async findByExhibitionId(exhibitionId) {
         return await Comment.findAll({
+            include:[{ model: User }],
             where:{exhibition: exhibitionId},
             order : [['created_at','DESC']], // created_at 기준으로 최신순 정렬
-        
         });
     }
         
