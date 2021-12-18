@@ -1,5 +1,5 @@
 import Sequelize from 'sequelize';
-import User from './user';
+import User from './user.js';
 
 export default class Comment extends Sequelize.Model {
     static init(sequelize) {
