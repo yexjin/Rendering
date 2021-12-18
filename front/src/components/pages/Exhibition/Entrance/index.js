@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components';
 import ExamImg1 from '../../../../styles/images/yosigo.jpg';
 import Architectures from './Architectures';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import LoveW from '../../../../styles/icons/love(w).png';
 import CommentW from '../../../../styles/icons/comment(w).png';
 
@@ -64,7 +64,7 @@ const TopImg = styled.div`
 
 const Heart = styled.div`
 position: fixed;
-top: 11%;
+top: 13%;
 left: 80%;
 width: 45px;
 height: 45px;
@@ -82,7 +82,7 @@ cursor: pointer;
 
 const Comment = styled.div`
 position: fixed;
-top: 16%;
+top: 20%;
 left: 80%;
 width: 45px;
 height: 45px;
@@ -104,17 +104,27 @@ margin-top: 50px;
 
 
 function Entrance() {
+    
+    const navigate = useNavigate();
+
+    const { id } = useParams();
+
+    const moveHandler = async(id) => {
+        try {
+            navigate(`/comment/${id}`);
+        } catch (e) {
+            alert(e);
+        }
+    }
 
     return (
         <>
         <Heart>
             <img src={LoveW}/>
         </Heart>
-        <Link to='/comment'>
-            <Comment>
-                <img src={CommentW}/>
-            </Comment>
-        </Link>
+        <Comment onClick={()=>moveHandler(id)}>
+            <img src={CommentW}/>
+        </Comment>
         <Exhibits>
             <Link to='/About'>
             <AboutText>About</AboutText>

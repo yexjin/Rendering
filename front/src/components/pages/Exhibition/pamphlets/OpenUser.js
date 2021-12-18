@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import styled from 'styled-components';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import HeaderLogin from '../../../common/HeaderLogin';
 import { usePamphlets, useExhibitions } from '../../../use';
 import {DateChange} from '../../../../utils/dateChange';
@@ -160,6 +160,8 @@ margin-top: 131px;
 
 function OpenUser() {
 
+    const navigate = useNavigate();
+
     const { id } = useParams(); // URL 파라미터 조회하기
     
     const { pamphletInfo, getPamphlet } = usePamphlets();
@@ -181,6 +183,16 @@ function OpenUser() {
         };
         fetch();
       }, [])
+
+
+    const moveHandler = async(id) => {
+    try {
+        navigate(`/entrance/${id}`);
+    } catch (e) {
+        alert(e);
+    }
+    }
+    
 
     return (
         <>
@@ -221,9 +233,9 @@ function OpenUser() {
                             </Dates>
                         </ContentBox>
                         <EntranceDiv>
-                            <Link to='/entrance'>
-                                <Entrance>Entrance</Entrance>
-                            </Link>
+                            <Entrance onClick={()=>moveHandler(exhibitionId)}>
+                                        Entrance
+                            </Entrance>
                         </EntranceDiv>
                     </Box>
                     </Contents></>

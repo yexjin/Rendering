@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import BackIcon from '../../../../styles/icons/back.png'
-import { Link } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import Comments from './Comments'
 
 const PageBox = styled.div`
@@ -40,12 +40,23 @@ margin-top: -9px;
 `
 
 function Comment() {
+
+    const navigate = useNavigate();
+
+    const { id } = useParams();
+
+    const moveHandler = async(id) => {
+        try {
+            navigate(`/entrance/${id}`);
+        } catch (e) {
+            alert(e);
+        }
+    }
+
     return (
         <PageBox>
             <Top>
-                <Link to='/entrance'>
-                    <BackButton src={BackIcon} />
-                </Link>
+                <BackButton src={BackIcon} onClick={()=>moveHandler(id)}/>
                 <Title>요시고 사진전 : 따뜻한 휴일의 기록</Title>
             </Top>
             <Comments />

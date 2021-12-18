@@ -3,7 +3,6 @@ import styled from 'styled-components'
 import ExImg from '../../../../styles/images/yosigo.jpg'
 import {DateChange} from '../../../../utils/dateChange';
 
-
 const Box = styled.div`
 width: 302px;
 height: 110px;
@@ -58,13 +57,13 @@ function Card({ project }) {
                     <Dates>{DateChange(project.start_date)} ~ {DateChange(project.end_date)}</Dates>
                 </SubBox>
                 {console.log(project.main_image)}
-                <SubBox>
-                    { project.main_image ? (
+                <SubBox src={project.main_image}>
+                    { project.main_image !== "null"? (
                     <img
-                        src={project.main_image}
+                        src={"/img/" + project.main_image}
                         alt="사진이미지"
                         /> ) : (<img
-                        src={require("../../../../styles/images/yosigo.jpg").default}
+                        src={"/img/1638893349813_고앵.jpeg"}
                         alt="이미지"
                     />)}
                 </SubBox>

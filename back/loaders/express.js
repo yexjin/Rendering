@@ -4,6 +4,7 @@ import cookieParser from 'cookie-parser';
 import config from '../config/index.js';
 import cors from 'cors';
 import routes from '../api/index.js';
+const __dirname = path.resolve();
 
 export default (app) => {
     const corsOptions = {
@@ -22,4 +23,13 @@ export default (app) => {
 
     // API Route 설정
     app.use(config.api.prefix, routes());
+
+    const buildDirectory = path.resolve(__dirname, "../front/build");
+    console.log(buildDirectory);
+    app.use(express.static(buildDirectory));
+    app.use((req, res, next) => {
+        if (req.path.indexOf("/api") === -1) {
+            return res.sendFile("index.html", { root: buildDirectory });
+        }
+    });
 }
