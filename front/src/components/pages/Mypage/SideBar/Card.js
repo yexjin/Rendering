@@ -59,11 +59,11 @@ function Card({ project }) {
                 {console.log(project.main_image)}
                 <SubBox src={project.main_image}>
                     { project.main_image !== "null"? (
-                    <img
+                    <Img
                         src={"/img/" + project.main_image}
                         alt="사진이미지"
-                        /> ) : (<img
-                        src={"/img/1638893349813_고앵.jpeg"}
+                        /> ) : (<Img
+                        src={ExImg}
                         alt="이미지"
                     />)}
                 </SubBox>
