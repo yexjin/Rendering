@@ -8,10 +8,6 @@ const headers = {
     'Authorization' : `Bearer ${token}`,
 }
 
-const headers_encode = {
-  'Authorization' : `Bearer ${token}`,
-  'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-}
    
 export const create = (form) => 
     httpClient.post(`${urls.common}/exhibitions`, form,{headers});
@@ -22,4 +18,4 @@ export const exhibitionById = (id) => httpClient.get(`${urls.common}/exhibitions
 
 export const exhibitionInfo = () => httpClient.get(`${urls.common}/exhibitions`, {headers});
 
-export const exhibitionModify = (id, form) => httpClient.patch(`${urls.common}/exhibitions/${id}`, form, {headers_encode}); 
+export const exhibitionModify = (id, form) => httpClient.patch(`${urls.common}/exhibitions/${id}`, form, {headers}); 
