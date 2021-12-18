@@ -1,11 +1,12 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import ExImg1 from '../../../../../styles/images/yosigo.jpg'
 import ExImg2 from '../../../../../styles/images/yosigo2.jpg'
 import ExImg3 from '../../../../../styles/images/e1.jpg'
 import ExImg4 from '../../../../../styles/images/e2.jpg'
 import ExImg5 from '../../../../../styles/images/backgroundImg.png'
-
+import { useWorks, useExhibitions } from '../../../../../components'
+import { useParams } from 'react-router-dom';
 
 const Box = styled.div`
 display: flex;
@@ -42,7 +43,7 @@ letter-spacing: -0.24px;
 color: #191919;
 opacity: 1;
 `
-const InputImg = styled.div`
+const InputImg = styled.input`
 margin-top: 21px;
 width: 285px;
 height: 225px;
@@ -104,11 +105,47 @@ margin-bottom: 33px;
 
 function Arts() {
 
-    const [image, setImage] = useState(null);
+    const { createWorksApi } = useWorks();
 
-    const imageChange = (e) => {
-        setImage(e.target.files[0]);
+    const { exhibition, getExhibition } = useExhibitions();
+
+    const [thumbnail, setThumbnail] = useState(null);
+
+    const [file, setFile] = useState(null);
+
+    const thumbnailChange = (e) => {
+        setThumbnail(e.target.files[0]);
       };
+    
+    const fileChange = (e) => {
+        setFile(e.target.files[0])
+    }
+
+    const { id } = useParams();
+    useEffect(()=>{
+        const fetch = async () => {
+            try{
+                await getExhibition(id);
+            } catch(err){
+                console.log(err);
+            }
+        }
+        fetch();
+    },[])
+
+    const saveHandler = async() => {
+        const FileData = new FormData();
+        FileData.append('thumbnail', thumbnail);
+        FileData.append('content', file);
+
+        try{
+            await createWorksApi(FileData);
+            alert('작품 등록이 완료되었습니다.');
+            window.location.reload(false);
+        } catch(err){
+            console.log(err);
+        }
+    }
 
     return (
         <Box>
@@ -116,15 +153,15 @@ function Arts() {
             <FileBox>
             <InputBox>
                 <InputLabel>썸네일</InputLabel>
-                <InputImg type="file" onChange={imageChange}>파일 찾기</InputImg>
+                <InputImg name="thumbnail" type="file" onChange={thumbnailChange}/>
             </InputBox>
             <InputBox>
                 <InputLabel>PDF 또는 이미지 파일</InputLabel>
-                <InputImg type="file" onChange={imageChange}>파일 찾기</InputImg>
+                <InputImg name="content" type="file" onChange={fileChange}/>
             </InputBox>
             </FileBox>
             <Buttons>
-                <Submit>저장</Submit>
+                <Submit onClick={saveHandler}>저장</Submit>
             </Buttons>
             </FileUpload>
             <ImgBox>

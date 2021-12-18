@@ -125,7 +125,7 @@ function Introduce() {
     };
 
     const [sub_image, setSubImage] = useState(null);
-    
+
     useEffect(() => {
         setData({
             exhibition_name: exhibition.exhibition_name,
