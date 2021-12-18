@@ -95,7 +95,7 @@ function CommentBox() {
                 <BQuotes src={QuotesIcon}/>
                 <WhoBox>
                     <WhoImg />
-                    <Nickname>{data.commenter}</Nickname>
+                    <Nickname>{data.User.name}</Nickname>
                 </WhoBox>
             </Box>
         ))
