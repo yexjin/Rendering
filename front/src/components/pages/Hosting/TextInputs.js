@@ -103,7 +103,7 @@ const TextInputs = () => {
 
     const imageChange = (e) => {
         setImage(e.target.files[0]);
-      };
+    };
     
     const {exhibition_name, description, start_date, end_date} = data;
     
@@ -154,7 +154,7 @@ const TextInputs = () => {
        }
    
        try {
-              await createExhibitionApi(ExhibitionFormData);
+            await createExhibitionApi(ExhibitionFormData);
            await createPamphletApi(PamphletBody);
            alert('등록이 완료되었습니다. 마이페이지에서 세부내용을 작성해주세요!')
            navigate('/user/main');

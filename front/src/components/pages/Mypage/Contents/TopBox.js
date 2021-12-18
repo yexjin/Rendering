@@ -73,17 +73,12 @@ function TopBox() {
 
     const { id } = useParams();
 
-    const { pamphletInfo, getPamphlet } = usePamphlets();
-
     const { exhibition, getExhibition } = useExhibitions();
-
-    const exhibitionId = pamphletInfo.exhibition;
 
     useEffect(() => {
         const fetch = async () => {
           try {
-            await getPamphlet(id);
-            await getExhibition(exhibitionId);
+            await getExhibition(id);
           } catch(err){
             console.log(err);
           }
@@ -94,7 +89,7 @@ function TopBox() {
 
     return (
         <Box>
-             <Title>{pamphletInfo.title}</Title>
+             <Title>{exhibition.exhibition_name}</Title>
              <Comments>
                 <Heart><img src={HeartImg}/>275</Heart>
                 <Comment><img src={CommentImg} />21</Comment>

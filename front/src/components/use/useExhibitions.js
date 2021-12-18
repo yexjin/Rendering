@@ -26,7 +26,7 @@ const useExhibitions = () => {
         getInfo : actions.getInfo,
         getExhibition: actions.getExhibition,
         createExhibitionApi: reducer.createExhibitionApi,
-        modifyExhibitApi: reducer.exhibitpatchApi
+        exhibitpatchApi: reducer.exhibitpatchApi
     }
 }
 

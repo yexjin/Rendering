@@ -1,6 +1,6 @@
 import React,{useState, useEffect} from 'react'
 import styled from 'styled-components'
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import { usePamphlets, useExhibitions } from '../../../../../components'
 
 const Inputs = styled.div`
@@ -101,26 +101,84 @@ function Introduce() {
 
     const { pamphletInfo, getPamphlet } = usePamphlets();
 
-    const { modifyExhibitApi, exhibition, getExhibition } = useExhibitions();
+    const { exhibitpatchApi, exhibition, getExhibition } = useExhibitions();
     
-    const exhibitionId = pamphletInfo.exhibition;
-
+    const exhibitionId = exhibition.id;
+    
+    const navigate = useNavigate();
 
     const [data, setData] = useState({
-
+        exhibition_name: exhibition.exhibition_name,
+        host_name: exhibition.host_name,
+        description: exhibition.description,
+        start_date: exhibition.start_date,
+        end_date: exhibition.end_date,
+        main_image: exhibition.main_image,
+        sub_image: exhibition.sub_image
     })
 
+    const [main_image, setMainImage] = useState(null);
+
+    const imageChange1 = (e) => {
+        setMainImage(e.target.files[0]);
+    };
+    const imageChange2 = (e) => {
+        setSubImage(e.target.files[0]);
+    };
+
+    const [sub_image, setSubImage] = useState(null);
+    
     useEffect(() => {
+        setData({
+            exhibition_name: exhibition.exhibition_name,
+            host_name : exhibition.host_name,
+            description: exhibition.description,
+            start_date: exhibition.start_date,
+            end_date: exhibition.end_date
+          });
+        },[]);
+
+    useEffect(()=>{
         const fetch = async () => {
-          try {
+            try {
             await getPamphlet(id);
             await getExhibition(exhibitionId);
-          } catch(err){
+            } catch(err){
             console.log(err);
-          }
+            }
         };
         fetch();
-      }, [])
+    },[])
+
+     
+    // const {exhibition_name, host_name, description, start_date, end_date} = data;
+    
+    const handleChange = (e) => {
+        setData({
+            ...data,
+            [e.target.name]: e.target.value,
+        });
+    };
+
+    const createHandler = async () => { 
+        const changeData = new FormData();
+        changeData.append('exhibition_name', data.exhibition_name);
+        changeData.append('host_name', data.host_name);
+        changeData.append('description', data.description);
+        changeData.append('start_date', data.start_date);
+        changeData.append('end_date', data.end_date);
+        changeData.append("main_image", main_image);
+        changeData.append("sub_image", sub_image);
+
+        try {
+         await exhibitpatchApi(exhibitionId, changeData);
+         alert('내용 수정이 완료되었습니다.')
+         navigate(`/mypage/${id}`);
+     } catch (e) {
+       alert(e);
+     }
+   };  
+    
 
     return (
        <>
@@ -128,32 +186,77 @@ function Introduce() {
        <LabelwithInput>
             <Label>전시명</Label> 
             <Input
-                value={exhibition.exhibition_name}
+                name="exhibition_name"
+                type="text"
+                placeholder={exhibition.exhibition_name}
+                value={data.exhibition_name}
+                onChange={handleChange}
             ></Input>
         </LabelwithInput>
         <LabelwithInput>
-            <Label>주관</Label> <InputBig></InputBig>
+            <Label>주관</Label> 
+            <Input
+                name="host_name"
+                type="text"
+                placeholder={exhibition.host_name}
+                value={data.host_name}
+                onChange={handleChange}
+            ></Input>
         </LabelwithInput>
         <LabelwithInput>
-            <Label>전시 설명</Label> <Input></Input>
+            <Label>전시 설명</Label>
+            <InputBig
+                name="description"
+                type="text"
+                placeholder={exhibition.description}
+                value={data.description}
+                onChange={handleChange}
+            >
+            </InputBig>
         </LabelwithInput>
         <LabelwithInput>
-            <Label>시작 날짜</Label> <Input></Input>
+            <Label>시작 날짜</Label> 
+            <Input
+                name="start_date"
+                type="date"
+                placeholder={exhibition.start_date}
+                value={data.start_date}
+                onChange={handleChange}
+            ></Input>
         </LabelwithInput>
         <LabelwithInput>
-            <Label>종료 날짜</Label> <InputBig></InputBig>
+            <Label>종료 날짜</Label>
+            <Input
+                name="end_date"
+                type="date"
+                placeholder={exhibition.end_date}
+                value={data.end_date}
+                onChange={handleChange}
+            ></Input>
         </LabelwithInput>
         <LabelwithInput>
-            <Label>대표 사진</Label> <InputBig></InputBig>
+            <Label>대표 사진</Label>             
+            <Input
+                name="main_image"
+                type="file"
+                value={data.main_image}
+                onChange={imageChange1}
+            ></Input>
         </LabelwithInput>
         <LabelwithInput>
-            <Label>추가 사진</Label> <InputBig></InputBig>
+            <Label>추가 사진</Label>
+            <Input
+                name="main_image"
+                type="file"
+                value={data.sub_image}
+                onChange={imageChange2}
+            ></Input>
         </LabelwithInput>
        <FloatBox>
             <Comment>추가 사진은 온리인 전시 페이지 〉'About' 페이지에 들어갈 전시 소개에 추가 됩니다.</Comment>
        </FloatBox>
             <Preview>소개 페이지 미리보기</Preview>
-            <Submit>저장</Submit>
+            <Submit onClick={createHandler}>저장</Submit>
        </Inputs>
        </>
     )

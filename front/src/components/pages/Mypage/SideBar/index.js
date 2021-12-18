@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import LogoImg from '../../../../styles/icons/Logo2.png'
 import Inform from './Inform'
 import Progress from './Progress'
+import { Link } from 'react-router-dom';
 
 const Bar = styled.div`
 background-color: #A5988F;
@@ -27,7 +28,9 @@ opacity: 1;
 function SideBar() {
     return (
         <Bar>
-            <Logo src={LogoImg} width="50px"/>
+            <Link to='/user/main'>
+                <Logo src={LogoImg} width="50px"/>
+            </Link>
             <Inform />
             <Hr />
             <Progress />

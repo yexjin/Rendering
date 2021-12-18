@@ -1,6 +1,5 @@
 import React,{useEffect} from 'react'
 import styled from 'styled-components'
-import exhibitions from '../../../../modules/reducer/exhibitions';
 import {getDataFromStorage} from '../../../../utils/storage';
 import {usePamphlets, useExhibitions} from '../../../use';
 
@@ -77,7 +76,7 @@ function Inform() {
     const nickName = getDataFromStorage().nickName;
     const { pamphletsList, listAllOngoing } = usePamphlets();
     const { exhibitionInfo, getInfo} = useExhibitions();
-
+    console.log(exhibitionInfo.getIn(["total_project"]));
     useEffect(() => {
         const fetch = async () => {
           try {
@@ -104,21 +103,21 @@ function Inform() {
             <Items>
                 <Item>
                     <Title>Total projects</Title>
-                    <Number>| {exhibitions.total_project}</Number>
+                    <Number>| {exhibitionInfo.getIn(["total_project"])}</Number>
                 </Item>
                 <Item>
                     <Title>Completed</Title>
-                    <Number>| {exhibitionInfo.completed}</Number>
+                    <Number>| {exhibitionInfo.getIn(["completed"])}</Number>
                 </Item>
             </Items>
             <Items>
                 <Item>
                     <Title>In progress</Title>
-                    <Number>| {onGoing}</Number>
+                    <Number>| {exhibitionInfo.getIn(["progress"])}</Number>
                 </Item>
                 <Item>
                     <Title>Schedule</Title>
-                    <Number>| {exhibitionInfo.schedule}</Number>
+                    <Number>| {exhibitionInfo.getIn(["schedule"])}</Number>
                 </Item>
             </Items>
 
