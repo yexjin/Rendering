@@ -170,7 +170,6 @@ function OpenUser() {
 
     const exhibitionId = pamphletInfo.exhibition;
 
-    console.log(exhibitionId)
 
     useEffect(() => {
         const fetch = async () => {

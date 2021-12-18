@@ -185,7 +185,7 @@ function Open() {
 
     const moveHandler = async(id) => {
     try {
-        navigate(`/entrance/${id}`);
+        navigate(`/visitor/${id}`);
     } catch (e) {
         alert(e);
     }

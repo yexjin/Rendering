@@ -18,6 +18,8 @@ import PrivateRoute from './utils/privateRoute';
 import MainUser from './components/pages/Main/MainUser';
 import OpenUser from './components/pages/Exhibition/pamphlets/OpenUser';
 import NullMypage from './components/pages/Mypage/Null';
+import Visitor from './components/pages/Exhibition/Entrance/Visitor';
+import VisitorComment from './components/pages/Exhibition/Comment/VisitorComment';
 
 const Box = styled.div`
 margin: 0 auto;
@@ -45,11 +47,13 @@ const App = () => {
           <Route path="/user/exhibition/:id" element={<OpenUser />} />
           <Route path='/exhibition/:id' element={<Open/>} />
           <Route path="/entrance/:id" element={<Entrance/>} />
+          <Route path="/visitor/:id" element={<Visitor />} />
           <Route path="/detail" element={<Detail />} /> 
           <Route path="/about" element={<About/>} />
           <Route path="/login" element={<Login/>} />
           <Route path="/register" element={<Register/>} />
           <Route path="/comment/:id" element={<Comment />} />
+          <Route path='/visitor/comment/:id' element={<VisitorComment/>}/>
           <Route path='/' element={<PrivateRoute />}>
             <Route path='/user/main' element={<MainUser />} />
             <Route path='/mypage/:id' element={<Mypage />} />
