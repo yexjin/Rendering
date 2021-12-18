@@ -4,6 +4,7 @@ import {Nav, NavItem, NavLink} from 'reactstrap'
 import Introduce from './Introduce/index'
 import Arts from './Arts/index'
 import Pamphlet from './Pamphlet/index'
+import { useNavigate, useParams } from 'react-router-dom';
 
 
 const Box = styled.div`
@@ -57,6 +58,7 @@ top: 352px;
 
 function BottomBox() {
 
+
     const [toggle, setToggle] = useState({
         '1': true,
         '2': false,
@@ -69,6 +71,7 @@ function BottomBox() {
             '2': false,
             '3': false
         })
+        window.location.reload(false);
     }
 
     const onClick2 = () => {

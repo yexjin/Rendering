@@ -76,8 +76,7 @@ function Inform() {
     const nickName = getDataFromStorage().nickName;
     const { pamphletsList, listAllOngoing } = usePamphlets();
     const { exhibitionInfo, getInfo} = useExhibitions();
-    console.log(exhibitionInfo.getIn(["total_project"]));
-    useEffect(() => {
+   useEffect(() => {
         const fetch = async () => {
           try {
             await listAllOngoing();
@@ -89,7 +88,6 @@ function Inform() {
         fetch();
       }, [])
 
-    const onGoing = pamphletsList.length;
 
     return (
         <>

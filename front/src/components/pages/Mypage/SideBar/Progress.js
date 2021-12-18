@@ -36,12 +36,10 @@ cursor: pointer;
 function Progress() {
 
     const { ongoing, listExhibitionsOngoing } = useExhibitions();
-    // const { pamphletsList, listAllOngoing } = usePamphlets();
 
     useEffect(() => {
         const fetch = async () => {
         try {
-            // await listAllOngoing();
             await listExhibitionsOngoing();
         } catch(err){
             console.log(err);

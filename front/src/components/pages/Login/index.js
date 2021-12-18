@@ -5,6 +5,7 @@ import { Link, useNavigationType } from 'react-router-dom';
 import { useUser } from '../../../components';
 import { useNavigate } from 'react-router-dom';
 import { saveDataToStorage } from '../../../utils/storage';
+import { httpClient } from '../../../remote';
 
 const LoginBox = styled.div`
     margin: 0 auto;
@@ -90,7 +91,8 @@ function Login() {
           };
     
           const response = await loginApi(request);
-    
+          const accessToken = response.data.accessToken;
+          httpClient.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`
           if (response.data) {
             saveDataToStorage(response.data);
           }

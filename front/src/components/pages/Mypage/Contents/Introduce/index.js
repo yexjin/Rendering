@@ -1,7 +1,7 @@
 import React,{useState, useEffect} from 'react'
 import styled from 'styled-components'
-import { Link, useParams, useNavigate } from 'react-router-dom';
-import { usePamphlets, useExhibitions } from '../../../../../components'
+import { useParams, useNavigate } from 'react-router-dom';
+import { useExhibitions } from '../../../../../components'
 
 const Inputs = styled.div`
 width: 696px;
@@ -99,8 +99,6 @@ function Introduce() {
 
     const { id } = useParams(); // URL 파라미터 조회하기
 
-    const { pamphletInfo, getPamphlet } = usePamphlets();
-
     const { exhibitpatchApi, exhibition, getExhibition } = useExhibitions();
     
     const exhibitionId = exhibition.id;
@@ -141,7 +139,6 @@ function Introduce() {
     useEffect(()=>{
         const fetch = async () => {
             try {
-            await getPamphlet(id);
             await getExhibition(exhibitionId);
             } catch(err){
             console.log(err);
@@ -174,6 +171,7 @@ function Introduce() {
          await exhibitpatchApi(exhibitionId, changeData);
          alert('내용 수정이 완료되었습니다.')
          navigate(`/mypage/${id}`);
+         window.location.reload(false);
      } catch (e) {
        alert(e);
      }
