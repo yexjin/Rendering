@@ -1,7 +1,7 @@
 import React,{ useEffect, useState } from 'react'
 import styled from 'styled-components'
 import QuotesIcon from '../../../../styles/icons/에셋1.png'
-import { useComments, useUser } from '../../../use'
+import { useComments } from '../../../use'
 import { useParams } from 'react-router-dom'
 
 const Box = styled.div`
@@ -74,9 +74,6 @@ function CommentBox() {
     const { id } = useParams();
 
     const { comments, getComments } = useComments();
-
-    const { user, getUser } = useUser();
-
 
     useEffect(()=>{
         const fetch = async () =>{
