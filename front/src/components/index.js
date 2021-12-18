@@ -2,12 +2,14 @@ import {
     useUser,
     useExhibitions,
     usePamphlets,
-    useWorks
+    useWorks,
+    useComments
 } from './use';
 
 export {
     useUser,
     useExhibitions,
     usePamphlets,
-    useWorks
+    useWorks,
+    useComments
 }

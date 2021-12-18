@@ -1,6 +1,8 @@
-import React from 'react'
+import React,{ useEffect, useState } from 'react'
 import styled from 'styled-components'
 import QuotesIcon from '../../../../styles/icons/에셋1.png'
+import { useComments, useUser } from '../../../use'
+import { useParams } from 'react-router-dom'
 
 const Box = styled.div`
 width: 280px;
@@ -68,13 +70,39 @@ margin-left: -18px;
 `
 
 function CommentBox() {
+
+    const { id } = useParams();
+
+    const { comments, getComments } = useComments();
+
+    const { user, getUser } = useUser();
+
+
+    useEffect(()=>{
+        const fetch = async () =>{
+            try{
+                await getComments(id);
+            }catch(err){
+                console.log(err);
+            }
+        }
+        fetch();
+    },[])
+
     return (
         <>
-        <Box><TQuotes src={QuotesIcon}/><Text>온라인으로 즐길 수 있게되서 너무 좋아요:) 믿고보는 요시고!</Text><BQuotes src={QuotesIcon}/><WhoBox><WhoImg /><Nickname>uijin0***</Nickname></WhoBox></Box>
-        <Box><TQuotes src={QuotesIcon}/><Text>온라인으로 즐길 수 있게되서 너무 좋아요:) 믿고보는 요시고!</Text><BQuotes src={QuotesIcon}/><WhoBox><WhoImg /><Nickname>uijin0***</Nickname></WhoBox></Box>
-        <Box><TQuotes src={QuotesIcon}/><Text>온라인으로 즐길 수 있게되서 너무 좋아요:) 믿고보는 요시고!</Text><BQuotes src={QuotesIcon}/><WhoBox><WhoImg /><Nickname>uijin0***</Nickname></WhoBox></Box>
-        <Box><TQuotes src={QuotesIcon}/><Text>온라인으로 즐길 수 있게되서 너무 좋아요:) 믿고보는 요시고!</Text><BQuotes src={QuotesIcon}/><WhoBox><WhoImg /><Nickname>uijin0***</Nickname></WhoBox></Box>
-        <Box><TQuotes src={QuotesIcon}/><Text>온라인으로 즐길 수 있게되서 너무 좋아요:) 믿고보는 요시고!</Text><BQuotes src={QuotesIcon}/><WhoBox><WhoImg /><Nickname>uijin0***</Nickname></WhoBox></Box>
+        {comments.map((data)=>(
+            <Box>
+                <TQuotes src={QuotesIcon}/>
+                <Text>{data.comment}</Text>
+                <BQuotes src={QuotesIcon}/>
+                <WhoBox>
+                    <WhoImg />
+                    <Nickname>{data.commenter}</Nickname>
+                </WhoBox>
+            </Box>
+        ))
+        }
         </>
     )
 }

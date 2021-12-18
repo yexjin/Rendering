@@ -20,8 +20,8 @@ export default (app) => {
     }));
 
     // 해당 전시회의 코멘트 리스트
-    route.get('/', asyncErrorWrapper(async (req, res, next) => {
-        const exhibitionId = req.body.exhibition;
+    route.get('/:id', asyncErrorWrapper(async (req, res, next) => {
+        const exhibitionId = req.params.id;
         const comments = await CommentService.findByExhibitionId(exhibitionId);
 
         res.status(200).json(comments);

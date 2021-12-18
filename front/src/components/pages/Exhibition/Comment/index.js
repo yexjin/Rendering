@@ -1,8 +1,9 @@
-import React from 'react'
+import React,{ useEffect } from 'react'
 import styled from 'styled-components'
 import BackIcon from '../../../../styles/icons/back.png'
 import { useParams, useNavigate } from 'react-router-dom'
 import Comments from './Comments'
+import { useExhibitions } from '../../../use'
 
 const PageBox = styled.div`
 background-color: #E1DCD1;
@@ -41,6 +42,8 @@ margin-top: -9px;
 
 function Comment() {
 
+    const { exhibition, getExhibition } = useExhibitions()
+
     const navigate = useNavigate();
 
     const { id } = useParams();
@@ -53,11 +56,22 @@ function Comment() {
         }
     }
 
+    useEffect(()=>{
+    const fetch = async () => {
+        try{
+            await getExhibition(id);
+        } catch(err){
+            console.log(err)
+        }
+    }
+    fetch();
+    },[])
+
     return (
         <PageBox>
             <Top>
                 <BackButton src={BackIcon} onClick={()=>moveHandler(id)}/>
-                <Title>요시고 사진전 : 따뜻한 휴일의 기록</Title>
+                <Title>{exhibition.exhibition_name}</Title>
             </Top>
             <Comments />
         </PageBox>

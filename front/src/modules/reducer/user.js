@@ -5,13 +5,16 @@ import { UserApi } from "../../remote";
 
 export const signupApi = UserApi.signup;
 export const loginApi = UserApi.login;
+export const GET_USER = 'users/GET';
+
+export const getUser = createAction(
+  GET_USER,
+  UserApi.getUser
+)
+
 
 const initialState = Map({
-  list: Map({
-    count:0,
-    results: List([])
-  }),
-  info: Map({
+  user: Map({
     name: "",
     email: "",
     job: "",
@@ -20,5 +23,11 @@ const initialState = Map({
 })
 
 export default handleActions({
+  ...pender({
+    type: GET_USER,
+    onSuccess: (state, action)=>{
+      return state.set('user', fromJS(action.payload.data));
+    }
+  })
   
 }, initialState)

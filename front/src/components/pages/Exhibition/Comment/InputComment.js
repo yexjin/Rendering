@@ -1,5 +1,8 @@
-import React from 'react'
+import React,{ useState, useEffect } from 'react'
 import styled from 'styled-components'
+import { useParams } from 'react-router-dom';
+import { useComments } from '../../../use';
+import { getDataFromStorage } from "../../../../utils/storage"
 
 const Box = styled.div`
 width: 280px;
@@ -55,14 +58,54 @@ margin-top: 123px;
 `
 
 function InputComment() {
+
+    const userInfo = getDataFromStorage();
+    const { id } = useParams();
+
+    const { createCommentApi } = useComments();
+    const [data, setData] = useState({
+        comment: "",
+      });
+
+    const handleChange = (e) => {
+    setData({
+        ...data,
+        [e.target.name]: e.target.value,
+    });
+    };
+
+    const onSubmitHandler = async (e) => {
+        const body = {
+            comment: data.comment,
+            exhibition: id
+        }
+        try{
+            await createCommentApi(body)
+            alert('댓글입력이 완료되었습니다.');
+            window.location.reload(false);
+        } catch(e) {
+            alert(e);
+        }
+    }
+
+    const onKeyPress = (e) => {
+        if(e.key=="Enter"){
+            onSubmitHandler();
+        }
+    }
+
     return (
         <Box>
             <Input 
+                name="comment"
+                type="text"
                 placeholder="댓글을 달아보세요!"
+                onChange={handleChange}
+                onKeyPress={onKeyPress}
             />
             <WhoBox>
                 <WhoImg/>
-                <Nickname>uijin0***</Nickname>
+                <Nickname>{userInfo.name}</Nickname>
             </WhoBox>
         </Box>
     )
