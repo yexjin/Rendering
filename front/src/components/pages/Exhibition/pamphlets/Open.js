@@ -168,14 +168,12 @@ function Open() {
 
     const { exhibition, getExhibition } = useExhibitions();
 
-    const exhibitionId = pamphletInfo.exhibition;
-
 
     useEffect(() => {
         const fetch = async () => {
           try {
             await getPamphlet(id);
-            await getExhibition(exhibitionId);
+            await getExhibition(id);
           } catch(err){
             console.log(err);
           }
@@ -185,7 +183,7 @@ function Open() {
 
     const moveHandler = async(id) => {
     try {
-        navigate(`/visitor/${id}`);
+        navigate(`/entrance/${id}`);
     } catch (e) {
         alert(e);
     }
@@ -231,7 +229,7 @@ function Open() {
                             </Dates>
                         </ContentBox>
                         <EntranceDiv>
-                                <Entrance onClick={()=>moveHandler(exhibitionId)}>
+                                <Entrance onClick={()=>moveHandler(id)}>
                                     Entrance
                                 </Entrance>
                         </EntranceDiv>

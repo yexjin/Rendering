@@ -168,14 +168,14 @@ function OpenUser() {
 
     const { exhibition, getExhibition } = useExhibitions();
 
-    const exhibitionId = pamphletInfo.exhibition;
+    // const exhibitionId = pamphletInfo.exhibition;
 
 
     useEffect(() => {
         const fetch = async () => {
           try {
             await getPamphlet(id);
-            await getExhibition(exhibitionId);
+            await getExhibition(id);
           } catch(err){
             console.log(err);
           }
@@ -232,7 +232,7 @@ function OpenUser() {
                             </Dates>
                         </ContentBox>
                         <EntranceDiv>
-                            <Entrance onClick={()=>moveHandler(exhibitionId)}>
+                            <Entrance onClick={()=>moveHandler(id)}>
                                         Entrance
                             </Entrance>
                         </EntranceDiv>
