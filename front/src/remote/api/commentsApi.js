@@ -13,3 +13,6 @@ export const create = (form) =>
 
 export const getByExhibitionId = (id) => 
     httpClient.get(`${urls.common}/comments/${id}`);
+
+export const remove = (id) => 
+    httpClient.delete(`${urls.common}/comments/${id}`, {headers});

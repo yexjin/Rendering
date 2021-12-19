@@ -5,6 +5,7 @@ import { CommentsApi } from '../../remote';
 
 export const createCommentApi = CommentsApi.create;
 export const GET_COMMENTS = "comments/GET";
+export const deleteCommentApi = CommentsApi.remove;
 
 export const getComments = createAction(
     GET_COMMENTS,

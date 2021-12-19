@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import QuotesIcon from '../../../../styles/icons/에셋1.png'
 import { useComments } from '../../../use'
 import { useParams } from 'react-router-dom'
+import {getDataFromStorage} from '../../../../utils/storage';
 
 const Box = styled.div`
 width: 280px;
@@ -69,11 +70,32 @@ float: left;
 margin-left: -18px;
 `
 
+const DeleteButton = styled.div`
+/* UI Properties */
+font-family: Noto Sans Bold;
+font-size: 16px/24px;
+letter-spacing: -0.19px;
+color: #EE8A8A;
+font-weight: 300;
+margin-top: -55px;
+margin-left: 110px;
+cursor: pointer;
+`
+
+const Flex = styled.div`
+display: flex;
+`
+
 function CommentBox() {
 
     const { id } = useParams();
 
-    const { comments, getComments } = useComments();
+    const userInfo = getDataFromStorage();
+
+    const userId = userInfo.id;
+    console.log(userId);
+
+    const { comments, getComments, deleteCommentApi } = useComments();
 
     useEffect(()=>{
         const fetch = async () =>{
@@ -86,6 +108,15 @@ function CommentBox() {
         fetch();
     },[])
 
+    const deleteHandler = async (commentId) => {
+        try {
+          await deleteCommentApi(commentId);
+          window.location.reload(false);
+        } catch (e) {
+          alert(e);
+        }
+      };
+
     return (
         <>
         {comments.map((data)=>(
@@ -94,8 +125,15 @@ function CommentBox() {
                 <Text>{data.comment}</Text>
                 <BQuotes src={QuotesIcon}/>
                 <WhoBox>
+                    <Flex>
                     <WhoImg />
                     <Nickname>{data.User.name}</Nickname>
+                    {data.commenter === userId && (
+                        <DeleteButton onClick={()=>deleteHandler(data.id)}>
+                            삭제
+                        </DeleteButton>
+                    )}
+                    </Flex>
                 </WhoBox>
             </Box>
         ))

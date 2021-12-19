@@ -12,7 +12,8 @@ const useComments = () => {
         comments,
 
         createCommentApi: reducer.createCommentApi,
-        getComments: actions.getComments
+        getComments: actions.getComments,
+        deleteCommentApi: reducer.deleteCommentApi
 
     }
 }
