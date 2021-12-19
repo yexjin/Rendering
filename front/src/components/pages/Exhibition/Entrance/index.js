@@ -105,12 +105,13 @@ margin-top: 50px;
 const Back = styled.div`
 font: normal normal normal 18px/30px Roboto;
 letter-spacing: 0px;
-color: #191919;
+color: #767676;
 opacity: 1;
 position: absolute;
 margin-top: -40px;
 cursor: pointer;
 margin-left: 10px;
+font-weight: 900;
 `
 
 
