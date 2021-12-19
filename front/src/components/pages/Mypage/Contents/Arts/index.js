@@ -164,14 +164,16 @@ function Arts() {
                 <Submit onClick={saveHandler}>저장</Submit>
             </Buttons>
             </FileUpload>
+            {console.log(exhibition.Works)}
+            {/* <ImgUpload>+</ImgUpload> */}
             <ImgBox>
-                <ImgUpload>+</ImgUpload>
-                <Imgs><img src={ExImg1} /></Imgs>
-                <Imgs><img src={ExImg2} /></Imgs>
-                <Imgs><img src={ExImg3} /></Imgs>
-                <Imgs><img src={ExImg4} /></Imgs>
-                <Imgs><img src={ExImg5} /></Imgs>
+            {exhibition.Works.map((image)=>(
+                <Imgs>
+                    <img src={"/img/"+ image.thumbnail} alt="작품사진" />
+                </Imgs>
+            ))}
             </ImgBox>
+                
         </Box>
     )
 }

@@ -56,7 +56,6 @@ function Card({ project }) {
                     <Title>{project.getIn(["exhibition_name"])}</Title>
                     <Dates>{DateChange(project.getIn(["start_date"]))} ~ {DateChange(project.getIn(["end_date"]))}</Dates>
                 </SubBox>
-                {console.log(project.getIn(["main_image"]))}
                 <SubBox src={project.getIn(["main_image"])}>
                     { project.getIn(["main_image"]) !== "null" ? (
                     <Img
