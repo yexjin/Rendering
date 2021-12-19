@@ -53,18 +53,18 @@ function Card({ project }) {
         <>
             <Box>
                 <SubBox>
-                    <Title>{project.exhibition_name}</Title>
-                    <Dates>{DateChange(project.start_date)} ~ {DateChange(project.end_date)}</Dates>
+                    <Title>{project.getIn(["exhibition_name"])}</Title>
+                    <Dates>{DateChange(project.getIn(["start_date"]))} ~ {DateChange(project.getIn(["end_date"]))}</Dates>
                 </SubBox>
-                {console.log(project.main_image)}
-                <SubBox src={project.main_image}>
-                    { project.main_image !== "null"? (
+                {console.log(project.getIn(["main_image"]))}
+                <SubBox src={project.getIn(["main_image"])}>
+                    { project.getIn(["main_image"]) !== "null" ? (
                     <Img
-                        src={"/img/" + project.main_image}
-                        alt="사진이미지"
+                        src={"/img/" + project.getIn(["main_image"])}
+                        alt="메인 사진"
                         /> ) : (<Img
                         src={ExImg}
-                        alt="이미지"
+                        alt="사진 없음"
                     />)}
                 </SubBox>
             </Box>    

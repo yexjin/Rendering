@@ -209,7 +209,6 @@ const TextInputs = () => {
             <Input
                 name="main_image"
                 type="file"
-                value={data.main_image}
                 onChange={imageChange}
             ></Input>
         </LabelwithInput>

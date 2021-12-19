@@ -35,21 +35,18 @@ cursor: pointer;
 
 function Progress() {
 
-    const { ongoing, listExhibitionsOngoing } = useExhibitions();
-
+  const { exhibitionInfo, getInfo} = useExhibitions();
     useEffect(() => {
         const fetch = async () => {
         try {
-            await listExhibitionsOngoing();
+            await getInfo();
         } catch(err){
             console.log(err);
         }
-    };
-    fetch();
-  }, [])
-
+      };
+      fetch();
+    }, [])
   const navigate = useNavigate();
-
   const moveHandler = async(id) =>{
     try {
       navigate(`/mypage/${id}`);
@@ -61,18 +58,19 @@ function Progress() {
 
     return (
         <>
-        <Title>In progress</Title>
-        <Link to="/hosting">
-        <NewButton>New Project</NewButton>
-        </Link>
-        {ongoing.map((data)=>(
-            <CardDiv onClick={()=>{moveHandler(data.id)}}>
-                <Card 
-                    project={data} 
-                    key={data.id}
-                />
-            </CardDiv>
-        ))}
+          <Title>In progress</Title>
+          <Link to="/hosting">
+          <NewButton>New Project</NewButton>
+          </Link>
+          {exhibitionInfo.getIn(["exhibitions"]).map((data)=>(
+            
+              <CardDiv onClick={()=>{moveHandler(data.getIn(["id"]))}}>
+                  <Card 
+                      project={data} 
+                      key={data.id}
+                  />
+              </CardDiv>
+          ))}
         </>
     )
 }

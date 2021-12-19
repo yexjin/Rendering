@@ -3,7 +3,6 @@ import styled from 'styled-components'
 import {Nav, NavItem, NavLink} from 'reactstrap'
 import Introduce from './Introduce/index'
 import Arts from './Arts/index'
-import Pamphlet from './Pamphlet/index'
 import { useNavigate, useParams } from 'react-router-dom';
 
 
@@ -61,15 +60,13 @@ function BottomBox() {
 
     const [toggle, setToggle] = useState({
         '1': true,
-        '2': false,
-        '3': false
+        '2': false
     })
 
     const onClick1 = () => {
         setToggle({
             '1': true,
-            '2': false,
-            '3': false
+            '2': false
         })
         window.location.reload(false);
     }
@@ -77,18 +74,11 @@ function BottomBox() {
     const onClick2 = () => {
         setToggle({
             '1': false,
-            '2': true,
-            '3': false
+            '2': true
         })
     }
 
-    const onClick3 = () => {
-        setToggle({
-            '1': false,
-            '2': false,
-            '3': true
-        })
-    }
+    
 
     return (
         <Box>
@@ -104,11 +94,6 @@ function BottomBox() {
                             {(toggle['2']==true)?(<><Clicked>전시 작품</Clicked><ClickHr /></>):(<NoClick>전시 작품</NoClick>)}
                         </NavLink>
                     </NavItem>
-                    <NavItem>
-                        <NavLink onClick={onClick3}>
-                            {(toggle['3']==true)?(<><Clicked>팜플랫</Clicked><ClickHr /></>):(<NoClick>팜플랫</NoClick>)}
-                        </NavLink>
-                    </NavItem>
                 </Nav>
             </Navigation>
             <NavHr />
@@ -119,9 +104,6 @@ function BottomBox() {
             
             {(toggle['2']==true) ? (
                 <Arts />
-            ): (<></>)}
-             {(toggle['3']==true) ? (
-                <Pamphlet />
             ): (<></>)}
         </Box>
     )

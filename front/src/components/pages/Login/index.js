@@ -102,6 +102,12 @@ function Login() {
           alert(e);
         }
       };
+
+      const onKeyPress = (e) => {
+        if(e.key=="Enter"){
+            submitHandler();
+        }
+    }
     
 
     return (
@@ -137,7 +143,7 @@ function Login() {
                         Create Account
                     </AccountButton>
                 </Link>
-                <LoginButton onClick={submitHandler}>확인</LoginButton>
+                <LoginButton onClick={submitHandler} onKeyPress={onKeyPress}>확인</LoginButton>
             </Flex>
         </LoginBox>
         </>
