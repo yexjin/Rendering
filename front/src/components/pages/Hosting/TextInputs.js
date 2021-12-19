@@ -104,7 +104,6 @@ const TextInputs = () => {
     const imageChange = (e) => {
         setImage(e.target.files[0]);
     };
-    
     const {exhibition_name, description, start_date, end_date} = data;
     
     const handleChange = (e) => {
@@ -141,8 +140,8 @@ const TextInputs = () => {
         ExhibitionFormData.append("exhibition_name", data.exhibition_name);
         ExhibitionFormData.append("description", data.description);
         ExhibitionFormData.append("start_date", data.start_date);
-       ExhibitionFormData.append("end_date", data.end_date);
-       ExhibitionFormData.append("main_image", image);
+        ExhibitionFormData.append("end_date", data.end_date);
+        ExhibitionFormData.append("main_image", image);
 
        const PamphletBody = {
         title: data.exhibition_name,

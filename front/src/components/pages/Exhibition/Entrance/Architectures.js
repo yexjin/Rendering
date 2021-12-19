@@ -3,7 +3,7 @@ import img1 from '../../../../styles/images/e1.jpg';
 import img2 from '../../../../styles/images/e2.jpg';
 import styled from 'styled-components';
 import ExamImg2 from '../../../../styles/images/backgroundImg.png';
-import { Link } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 
 const Things = styled.div`
 position: absolute;
@@ -23,6 +23,8 @@ img{
 
 }
 
+
+
 `;
 
 const RowImgs = styled.div`
@@ -37,8 +39,10 @@ const RowImgs = styled.div`
     }
     :hover {
     img {
-        opacity: 0.5;
+        /* opacity: 0.5; */
         transition: all 0.5s;
+        transform: scale(1.3);
+
     }
     }
 `
@@ -57,26 +61,28 @@ img{
 }
 :hover {
   img {
-    opacity: 0.5;
     transition: all 0.5s;
+    transform: scale(1.3);
   }
 }
 `
 
 function Architectures({exhibition}) {
 
-    const random = Math.floor(Math.random() * 2);
-    console.log(random)
+    // const navigate = useNavigate();
+    
+    // const detailHanlder = async(img) =>{
+    //     try{
+    //         navigate(`/detail/${img}`);
+    //     } catch(e) {
+    //         alert(e);
+    //     }
+    // }
+
     return (
         <>
         <Things>
             <img src={"/img/" + exhibition.sub_image}/>
-
-            {/* <Link to='/detail'>
-            <RowImgs>
-                <img src={img1}/>
-            </RowImgs>
-            </Link> */}
             { exhibition.Works.map((image)=>(
                 <>
                     <ColImgs>

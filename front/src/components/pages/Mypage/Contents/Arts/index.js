@@ -137,6 +137,7 @@ function Arts() {
         const FileData = new FormData();
         FileData.append('thumbnail', thumbnail);
         FileData.append('content', file);
+        FileData.append('exhibition', id);
 
         try{
             await createWorksApi(FileData);

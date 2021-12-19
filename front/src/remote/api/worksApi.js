@@ -8,6 +8,6 @@ const headers = {
     'Authorization' : `Bearer ${token}`,
 }
 
-export const create = (form) => httpClient.post(`${urls.common}/works`, {headers}, form);
+export const create = (form) => httpClient.post(`${urls.common}/works`, form, {headers});
 
 export const worksById = (id) => httpClient.get(`${urls.common}/works/${id}`);

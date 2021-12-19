@@ -103,6 +103,17 @@ const Arts = styled.div`
 margin-top: 50px;
 `
 
+const Back = styled.div`
+font: normal normal normal 18px/30px Roboto;
+letter-spacing: 0px;
+color: #191919;
+opacity: 1;
+position: absolute;
+margin-top: -40px;
+cursor: pointer;
+margin-left: 10px;
+`
+
 
 function Visitor() {
     
@@ -142,6 +153,11 @@ function Visitor() {
 
     return (
         <>
+        <Link to='/exhibition'>
+        <Back>
+            뒤로가기
+        </Back>
+        </Link>
         <Heart>
             <img src={LoveW}/>
         </Heart>
