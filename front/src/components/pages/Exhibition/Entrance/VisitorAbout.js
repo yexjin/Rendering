@@ -1,7 +1,7 @@
 import React from 'react' 
 import styled from 'styled-components';
 import Img from '../../../../styles/images/yosigo3.png';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import BackImg from '../../../../styles/icons/back.png';
 
 const AboutBox = styled.div`
@@ -100,16 +100,16 @@ overflow-x: hidden;
 `
 
 
-function About() {
-
-    const { id } = useParams();
+function VisitorAbout() {
 
     const navigate = useNavigate();
 
-    const backHandler = async(id)=>{
+    const { id } = useParams();
+
+    const backHandler = async(id) => {
         try{
-            navigate(`/entrance/${id}`);
-        } catch(e){
+            navigate(`/visitor/${id}`);
+        } catch (e) {
             alert(e);
         }
     }
@@ -159,4 +159,4 @@ function About() {
     )
 }
 
-export default About
+export default VisitorAbout

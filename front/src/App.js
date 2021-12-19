@@ -20,6 +20,7 @@ import OpenUser from './components/pages/Exhibition/pamphlets/OpenUser';
 import NullMypage from './components/pages/Mypage/Null';
 import Visitor from './components/pages/Exhibition/Entrance/Visitor';
 import VisitorComment from './components/pages/Exhibition/Comment/VisitorComment';
+import VisitorAbout from './components/pages/Exhibition/Entrance/VisitorAbout';
 
 const Box = styled.div`
 margin: 0 auto;
@@ -49,7 +50,8 @@ const App = () => {
           <Route path="/entrance/:id" element={<Entrance/>} />
           <Route path="/visitor/:id" element={<Visitor />} />
           <Route path="/detail" element={<Detail />} /> 
-          <Route path="/about" element={<About/>} />
+          <Route path="/about/:id" element={<About/>} />
+          <Route path='/visitor/about/:id' element={<VisitorAbout />} />
           <Route path="/login" element={<Login/>} />
           <Route path="/register" element={<Register/>} />
           <Route path="/comment/:id" element={<Comment />} />

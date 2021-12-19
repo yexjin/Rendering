@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components';
 import ExamImg1 from '../../../../styles/images/yosigo.jpg';
 import Architectures from './Architectures';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import LoveW from '../../../../styles/icons/love(w).png';
 import CommentW from '../../../../styles/icons/comment(w).png';
+import { useExhibitions } from '../../../use'; 
 
 const Exhibits = styled.div`
 margin-top: 70px;
@@ -117,6 +118,27 @@ function Entrance() {
         }
     }
 
+    const aboutHandler = async(id) => {
+        try{
+            navigate(`/about/${id}`);
+        } catch(e){
+            alert(e);
+        }
+    }
+    const { exhibition, getExhibition } = useExhibitions();
+
+    useEffect(() => {
+        const fetch = async () => {
+          try {
+            await getExhibition(id);
+          } catch(err){
+            console.log(err);
+          }
+        };
+        fetch();
+      }, [])
+
+
     return (
         <>
         <Heart>
@@ -126,17 +148,15 @@ function Entrance() {
             <img src={CommentW}/>
         </Comment>
         <Exhibits>
-            <Link to='/About'>
-            <AboutText>About</AboutText>
-            </Link>
+            <AboutText onClick={()=>aboutHandler(id)}>About</AboutText>
 
         <TopImg>
-            <img src={ExamImg1}/>
-            <TopText>YOSIGO</TopText>
+            <img src={"/img/"+exhibition.main_image}/>
+            <TopText>{exhibition.exhibition_name}</TopText>
         </TopImg>
 
         <Arts>
-            <Architectures />
+            <Architectures exhibition={exhibition}/>
         </Arts>
         </Exhibits>
         </>

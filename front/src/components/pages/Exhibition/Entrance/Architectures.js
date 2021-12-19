@@ -26,21 +26,21 @@ img{
 `;
 
 const RowImgs = styled.div`
-z-index:5;
-width: 560px;
-height: 370px;
-margin-top: 60px;
-background: #ffffff;
-img{
-    width: 100%;
-    height: 100%;
-}
-:hover {
-  img {
-    opacity: 0.5;
-    transition: all 0.5s;
-  }
-}
+    z-index:5;
+    width: 560px;
+    height: 370px;
+    margin-top: 60px;
+    background: #ffffff;
+    img{
+        width: 100%;
+        height: 100%;
+    }
+    :hover {
+    img {
+        opacity: 0.5;
+        transition: all 0.5s;
+    }
+    }
 `
 
 const ColImgs = styled.div`
@@ -63,44 +63,31 @@ img{
 }
 `
 
-function Architectures() {
+function Architectures({exhibition}) {
+
+    const random = Math.floor(Math.random() * 2);
+    console.log(random)
     return (
         <>
         <Things>
-            <img src={ExamImg2}/>
+            <img src={"/img/" + exhibition.sub_image}/>
 
-            <Link to='/detail'>
+            {/* <Link to='/detail'>
             <RowImgs>
                 <img src={img1}/>
             </RowImgs>
-            </Link>
-            <ColImgs>
-                <img src={img2}/>
-            </ColImgs>
-            <RowImgs>
-                <img src={img1}/>
-            </RowImgs>
-            <ColImgs>
-                <img src={img2}/>
-            </ColImgs>
-            <RowImgs>
-                <img src={img1}/>
-            </RowImgs>
-            <ColImgs>
-                <img src={img2}/>
-            </ColImgs>
-            <RowImgs>
-                <img src={img1}/>
-            </RowImgs>
-            <ColImgs>
-                <img src={img2}/>
-            </ColImgs>
-            <RowImgs>
-                <img src={img1}/>
-            </RowImgs>
-            <ColImgs>
-                <img src={img2}/>
-            </ColImgs>
+            </Link> */}
+            { exhibition.Works.map((image)=>(
+                <>
+                    <ColImgs>
+                        <img src={"/img/"+image.thumbnail}/>
+                    </ColImgs>
+                    <RowImgs>
+                        <img src={"/img/"+image.thumbnail}/>
+                    </RowImgs>         
+                </>
+            ))
+            }
         </Things>
         </>
     )

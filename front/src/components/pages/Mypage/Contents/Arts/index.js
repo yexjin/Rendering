@@ -164,7 +164,6 @@ function Arts() {
                 <Submit onClick={saveHandler}>저장</Submit>
             </Buttons>
             </FileUpload>
-            {console.log(exhibition.Works)}
             {/* <ImgUpload>+</ImgUpload> */}
             <ImgBox>
             {exhibition.Works.map((image)=>(
